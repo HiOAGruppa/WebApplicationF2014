@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Content/navmenu-reveal.css" rel="stylesheet" type="text/css" />*@
 
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
@@ -44,22 +45,14 @@
                     </div>
                     <div class="navbar-collapse collapse sidebar-navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Tast-En-Tur", "Index", "Home", new { area = "" }, new { @class = "active" })</li>
-                            <li class="active"><a href="#">Menu Item 1</a></li>
+                            <li class="active">@Html.ActionLink("Tast-En-Tur", "Index", "Home", new { area = "" }, new { @class = "active" })</li>
+
+                            @*TODO make list dynamically set Class="active"-tag on active page.*@
+
+                            <li><a href="#">Menu Item 1</a></li>
                             <li><a href="#">Menu Item 2</a></li>
-                            <li class="dropdown">
+                            <li class="dropdown" >
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Action</a></li>
                                     <li><a href="#">Another action</a></li>

@@ -5814,7 +5814,8 @@ body.modal-open,
   border-width: 5px 5px 0;
 }
 
-.tooltip.top-left .tooltip-arrow {
+.tooltip.top-left .tooltip-ar
+ {
   bottom: 0;
   left: 5px;
   border-top-color: #000000;
