@@ -1,0 +1,14 @@
+﻿@model IEnumerable<WebAppH2014.Models.User>
+
+
+@{
+    ViewBag.Title = "DbTest";
+}
+
+<h2>THIS IS A DB-TEST</h2>
+
+@foreach (var user in Model)
+{
+    <h2>User Name: @user.UserName UserID: @user.UserId</h2>
+}
+
