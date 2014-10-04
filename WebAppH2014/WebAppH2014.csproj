@@ -104,9 +104,13 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderSalesItem.cs" />
+    <Compile Include="Models\StoreContext.cs" />
+    <Compile Include="Models\StoreInitializer.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\SalesItem.cs" />
@@ -124,6 +128,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\LoggedIn.cshtml" />
+    <Content Include="Views\Home\DbTest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -133,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
