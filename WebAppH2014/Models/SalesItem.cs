@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using WebAppH2014.Models;
 
-namespace WebApp.Models
+namespace WebAppH2014.Models;
 {
     public class SalesItem
     {
