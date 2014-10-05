@@ -10,7 +10,7 @@
 @foreach (var users in Model)
 {
 
-    <h2>User Name: @users.UserName UserID: @users.UserId</h2>
+    <h2>User Name: @users.UserLogin.UserName UserID: @users.UserId</h2>
     if (users.Orders != null) { 
     foreach (var orders in users.Orders)
     {

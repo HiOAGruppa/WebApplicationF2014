@@ -18,11 +18,11 @@ namespace WebAppH2014.Models
             var users = new List<User>
             {
                 //userId 1
-                new User{UserName = "Tore Tang", UserLogin = new UserLogin{UserName = "Toretang", Password = genHash("GammelMann")}},
+                new User{FirstName = "Tore" ,LastName = "Tang", UserLogin = new UserLogin{UserName = "Toretang", Password = genHash("GammelMann")}},
                 //userid 2
-                new User{UserName = "Martin Hagen", UserLogin = new UserLogin{UserName = "Martinhagen", Password = genHash("BolleMann")}},
+                new User{FirstName = "Martin" ,LastName = "Hagen", UserLogin = new UserLogin{UserName = "Martinhagen", Password = genHash("BolleMann")}},
                 //userid 3
-                new User{UserName = "Sondre Boge", UserLogin = new UserLogin{UserName = "Sondreboge", Password = genHash("WhatWhat")}},
+                new User{FirstName = "Sondre" ,LastName = "Boge", UserLogin = new UserLogin{UserName = "Sondreboge", Password = genHash("WhatWhat")}},
             };
 
             Debug.WriteLine("Users Created");

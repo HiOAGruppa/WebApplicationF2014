@@ -48,7 +48,7 @@ namespace WebAppH2014.Controllers
         private static bool isUserInDB(User inUser)
         {
             Debug.WriteLine(inUser.UserId);
-            Debug.WriteLine(inUser.UserName);
+            Debug.WriteLine(inUser.FirstName + " - " + inUser.LastName);
             Debug.WriteLine(inUser.Password);
 
             using (var db = new StoreContext())
@@ -84,11 +84,13 @@ namespace WebAppH2014.Controllers
             {
                 try
                 {
-                    var newUser = new User();
+                    var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName };
                     byte[] passwordDb = genHash(inUser.Password);
-                    newUser.UserLogin.Password = passwordDb;
-                    newUser.UserName = inUser.UserName;
+                    UserLogin userlogin = new UserLogin { UserId = newUser.UserId, Password = passwordDb, UserName = inUser.UserLogin.UserName };
+                    newUser.UserLogin = userlogin;
+  
                     db.Users.Add(newUser);
+                    db.UserPasswords.Add(userlogin);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

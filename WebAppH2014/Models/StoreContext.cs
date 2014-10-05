@@ -32,6 +32,7 @@ namespace WebAppH2014.Models
             //get user
             User user = Users.Where(it => it.UserId == userId).First();
             getUserOrders(userId);
+            UserLogin userlogin = UserPasswords.Where(it => it.UserId == userId).First();
 
             return user;
         }

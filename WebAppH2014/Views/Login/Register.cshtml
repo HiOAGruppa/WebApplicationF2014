@@ -1,4 +1,4 @@
-﻿@model WebAppH2014.Models.UserLogin
+﻿@model WebAppH2014.Models.User
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,11 +21,27 @@
             <legend>Registrer bruker</legend>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.UserName)
+                @Html.LabelFor(model => model.FirstName)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.UserName)
-                @Html.ValidationMessageFor(model => model.UserName)
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.LastName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UserLogin.UserName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UserLogin.UserName)
+                @Html.ValidationMessageFor(model => model.UserLogin.UserName)
             </div>
 
             <div class="editor-label">
