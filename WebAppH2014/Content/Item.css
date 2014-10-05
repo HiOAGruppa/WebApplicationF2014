@@ -5,12 +5,18 @@ body {
     color:#333
 }
 
+#contet-wrap {
+
+}
+
 #content {
     background: #FFFFFF;
     border-radius: 10px;
     border: 1px solid #ebebeb;
     margin: 5px;
     width: 300px;
+    display: inline-block;
+    float: inherit;
 }
 
 #item-img {
