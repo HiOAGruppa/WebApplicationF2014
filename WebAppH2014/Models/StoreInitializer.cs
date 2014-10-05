@@ -8,7 +8,7 @@ using WebApp.Models;
 
 namespace WebAppH2014.Models
 {
-    public class StoreInitializer :DropCreateDatabaseIfModelChanges<StoreContext>
+    public class StoreInitializer : DropCreateDatabaseIfModelChanges<StoreContext>
     {
 
         protected override void Seed(StoreContext context)
@@ -36,12 +36,13 @@ namespace WebAppH2014.Models
                 orders.Add(new Order { ownerUser = user });
                 Debug.WriteLine("User added");
             }
-            
-            foreach(var order in orders){
+
+            foreach (var order in orders)
+            {
                 context.Orders.Add(order);
                 Debug.WriteLine("Order added");
             }
-            
+
             var salesItems = new List<SalesItem>
             {
                 //id 1
@@ -55,9 +56,9 @@ namespace WebAppH2014.Models
                 context.SalesItems.Add(vare);
             }
 
-
+            context.SaveChanges();
             //This part currently gives an error
-            /*
+
             var orderItems = new List<OrderSalesItem>
             {
                 new OrderSalesItem{OrderId=1, SalesItemId=1, Amount=2 },
@@ -70,8 +71,8 @@ namespace WebAppH2014.Models
             {
                 context.SalesItemInOrder.Add(orderItem);
             }
-             * */
-            
+
+
 
 
             context.SaveChanges();
