@@ -98,11 +98,12 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Item.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LoginController.cs" />
@@ -134,8 +135,8 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\LoggedIn.cshtml" />
-    <Content Include="Views\Home\DbTest.cshtml" />
-    <Content Include="Views\Home\Item.cshtml" />
+    <Content Include="Views\DbTest\Index.cshtml" />
+    <Content Include="Views\DbTest\Stock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

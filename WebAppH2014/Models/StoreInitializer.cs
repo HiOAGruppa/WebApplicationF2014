@@ -46,9 +46,29 @@ namespace WebAppH2014.Models
             var salesItems = new List<SalesItem>
             {
                 //id 1
-                new SalesItem{Name ="Keyboard/Red", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=200, Description="Sykt stilig keyboard", InStock=10},
                 //id 2
-                new SalesItem{Name ="Keyboard/Black", Price=200, Description="Sykt stilig keyboard", InStock=10}
+                new SalesItem{Name ="Keyboard-Black", Price=250, Description="Sykt stilig keyboard", InStock=10},
+                //id 1
+                new SalesItem{Name ="Keyboard-Red", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                //id 2
+                new SalesItem{Name ="Keyboard-Black", Price=300, Description="Sykt stilig keyboard", InStock=10},
+                                //id 1
+                new SalesItem{Name ="Keyboard-Red", Price=150, Description="Sykt billig og stilig keyboard", InStock=10},
+                //id 2
+                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                                //id 1
+                new SalesItem{Name ="Keyboard-Red", Price=700, Description="Sykt stilig keyboard", InStock=10},
+                //id 2
+                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                                //id 1
+                new SalesItem{Name ="Keyboard-Red", Price=300, Description="Sykt stilig keyboard", InStock=10},
+                //id 2
+                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                                //id 1
+                new SalesItem{Name ="Keyboard-Red", Price=1000, Description="Sykt stilig keyboard", InStock=10},
+                //id 2
+                new SalesItem{Name ="Keyboard-Black", Price=2000, Description="Sykt stilig keyboard", InStock=10},
             };
 
             foreach (var vare in salesItems)
