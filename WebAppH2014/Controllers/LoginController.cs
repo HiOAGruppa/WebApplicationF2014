@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,12 +31,14 @@ namespace WebAppH2014.Controllers
         {
             if (isUserInDB(inUser))
             {
+                Debug.WriteLine("Login == true");
                 Session["LoggedIn"] = true;
                 ViewBag.isLoggedIn = true;
                 return View();
             }
             else
             {
+                Debug.WriteLine("Login == false");
                 Session["LoggedIn"] = false;
                 ViewBag.isLoggedIn = false;
                 return View();
@@ -44,10 +47,16 @@ namespace WebAppH2014.Controllers
 
         private static bool isUserInDB(User inUser)
         {
-            using (var db = new UserContext())
+            Debug.WriteLine(inUser.UserId);
+            Debug.WriteLine(inUser.UserName);
+            Debug.WriteLine(inUser.Password);
+
+            using (var db = new StoreContext())
             {
+
+                //these fields are dependent on index.cshtml modelformat used to generate the inUser
                 byte[] passordDb = genHash(inUser.Password);
-                dbUser foundUser = db.Users.FirstOrDefault(b => b.Password == passordDb && b.UserName == inUser.UserName);
+                UserLogin foundUser = db.UserPasswords.Where(b => b.Password == passordDb && b.UserName == inUser.UserLogin.UserName).FirstOrDefault();
                 if (foundUser == null)
                 {
                     return false;
@@ -71,13 +80,13 @@ namespace WebAppH2014.Controllers
             {
                 return View();
             }
-            using (var db = new UserContext())
+            using (var db = new StoreContext())
             {
                 try
                 {
-                    var newUser = new dbUser();
+                    var newUser = new User();
                     byte[] passwordDb = genHash(inUser.Password);
-                    newUser.Password = passwordDb;
+                    newUser.UserLogin.Password = passwordDb;
                     newUser.UserName = inUser.UserName;
                     db.Users.Add(newUser);
                     db.SaveChanges();

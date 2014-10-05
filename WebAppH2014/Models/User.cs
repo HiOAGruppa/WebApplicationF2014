@@ -24,27 +24,8 @@ namespace WebAppH2014.Models
 
         public String UserName { get; set; }
         public String Password { get; set; }
+
+        public UserLogin UserLogin { get; set; }
     }
 
-    public class dbUser
-    {
-        [Key]
-        public String UserName { get; set; }
-        public byte[] Password { get; set; }
-    }
-
-    public class UserContext : DbContext
-    {
-        public UserContext()
-            : base("name=User")
-        {
-            Database.CreateIfNotExists();
-        }
-
-        public DbSet<dbUser> Users { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        }
-    }
 }

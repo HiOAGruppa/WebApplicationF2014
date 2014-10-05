@@ -119,6 +119,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\SalesItem.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

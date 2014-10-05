@@ -18,11 +18,11 @@ namespace WebAppH2014.Models
             var users = new List<User>
             {
                 //userId 1
-                new User{UserName = "Tore Tang", Password = "GammelMann"},
+                new User{UserName = "Tore Tang", UserLogin = new UserLogin{UserName = "Toretang", Password = genHash("GammelMann")}},
                 //userid 2
-                new User{UserName = "Martin Hagen", Password = "BolleMann"},
+                new User{UserName = "Martin Hagen", UserLogin = new UserLogin{UserName = "Martinhagen", Password = genHash("BolleMann")}},
                 //userid 3
-                new User{UserName = "Sondre Boge", Password = "WhatWhat"}
+                new User{UserName = "Sondre Boge", UserLogin = new UserLogin{UserName = "Sondreboge", Password = genHash("WhatWhat")}},
             };
 
             Debug.WriteLine("Users Created");
@@ -76,6 +76,14 @@ namespace WebAppH2014.Models
 
 
             context.SaveChanges();
+        }
+        private static byte[] genHash(string inPassword)
+        {
+            byte[] inData, outData;
+            var algorithm = System.Security.Cryptography.SHA256.Create();
+            inData = System.Text.Encoding.ASCII.GetBytes(inPassword);
+            outData = algorithm.ComputeHash(inData);
+            return outData;
         }
 
     }

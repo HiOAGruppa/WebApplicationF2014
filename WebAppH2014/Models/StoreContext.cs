@@ -17,6 +17,8 @@ namespace WebAppH2014.Models
 
         public DbSet<SalesItem> SalesItems { get; set; }
 
+        public DbSet<UserLogin> UserPasswords { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -24,19 +26,30 @@ namespace WebAppH2014.Models
         }
 
         //gets a user with complete sub-information
+        //could technically return null
         public User getUser(int userId)
         {
+            //get user
             User user = Users.Where(it => it.UserId == userId).First();
+            getUserOrders(userId);
 
+            return user;
+        }
+
+        public List<Order> getUserOrders(int userId)
+        {
+            //get all orders of the user
             List<Order> orders = Orders.Where(it => it.ownerUser.UserId == userId).ToList();
+            //get all SalesItems
             var allSalesItems = getAllSalesItems();
 
+            //add all the salesitems in each order, also couple them with the real SalesItem
             foreach (var order in orders)
             {
                 addOrderSalesItems(order, allSalesItems);
             }
 
-            return user;
+            return orders;
         }
 
         public List<SalesItem> getAllSalesItems()
@@ -49,12 +62,12 @@ namespace WebAppH2014.Models
         private void addOrderSalesItems(Order order, List<SalesItem> allItems)
         {
             var salesItemsInOrder = SalesItemInOrder.Where(it => it.OrderId == order.OrderId).ToList();
-            foreach (var item in salesItemsInOrder)
-            {
-                var salesitem = allItems.Where(it => it.SalesItemId == item.SalesItemId).First();
-                item.SalesItem = salesitem;
-            }
-            order.SalesItems = salesItemsInOrder;
+            //foreach (var item in salesItemsInOrder)
+            //{
+            //    var salesitem = allItems.Where(it => it.SalesItemId == item.SalesItemId).First();
+            //    item.SalesItem = salesitem;
+            //}
+            //order.SalesItems = salesItemsInOrder;
         }
 
 

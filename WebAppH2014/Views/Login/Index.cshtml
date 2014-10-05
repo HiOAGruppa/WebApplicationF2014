@@ -19,19 +19,19 @@
             <legend>Logg inn</legend>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.UserName)
+                @Html.LabelFor(model => model.UserLogin.UserName)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.UserName)
-                @Html.ValidationMessageFor(model => model.UserName)
+                @Html.EditorFor(model => model.UserLogin.UserName)
+                @Html.ValidationMessageFor(model => model.UserLogin.UserName)
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.Password)
+                @Html.LabelFor(model => model.UserLogin.Password)
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.UserLogin.Password)
             </div>
 
             <p>
