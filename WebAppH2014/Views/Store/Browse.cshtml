@@ -3,18 +3,40 @@
 @{
     ViewBag.Title = "Browse Items";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Item.css" />
+    <title>The Stock</title>
+</head>
+<body>
+    <div class="genre">
+        <h3 id="sub-title"><em>@Model.Name</em> Albums</h3>
+        <br>
 
-<div class="genre">
-    <h3><em>@Model.Name</em> Albums</h3>
-
-    <ul>
         @foreach (var item in Model.Items)
         {
-            <li>
-                <a href="@Url.Action("Details", new { id = item.SalesItemId })">
-                    <span>@item.Name</span>
-                </a>
-            </li>
+            <div id="content">
+                <img id="item-img" src="~/Resources/@(item.Name).png" alt="Keyboard" />
+                <h2>@item.Name</h2>
+                @if (item.Description.Length > 60)
+                {
+                    <p>@(item.Description.Substring(0, 60)) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
+                }
+                else
+                {
+                    <p>@item.Description <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
+                    if(item.Description.Length < 30) 
+                    {
+                           <br>
+                    }
+                }
+                <div id="price-wrap"><h3>@(item.Price),-</h3></div>
+                <div id="img-wrap"><a href="~/Home/"><img id="buy-img" src="~/Resources/button.png" alt="Buy Button" /></a></div>
+            </div>
         }
-    </ul>
-</div>
+
+    </div>
+</body>
+</html>

@@ -5,6 +5,13 @@ body {
     color:#333
 }
 
+#sub-title {
+    font-size: 42px;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 #contet-wrap {
 
 }
@@ -54,6 +61,7 @@ h3 {
 }
 
 #price-wrap {
+
     float: left;
 }
 
