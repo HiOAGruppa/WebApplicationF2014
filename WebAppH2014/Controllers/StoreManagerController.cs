@@ -48,6 +48,30 @@ namespace WebAppH2014.Controllers
             return View(item);
         }
 
+
+
+        public ActionResult Edit(int id)
+        {
+            SalesItem item = db.SalesItems.Find(id);
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
+            return View(item);
+        }
+
+        //
+        // POST: /StoreManager/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(SalesItem item)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
+            return View(item);
+        }
         public ActionResult Delete(int id)
         {
             SalesItem item = db.SalesItems.Find(id);

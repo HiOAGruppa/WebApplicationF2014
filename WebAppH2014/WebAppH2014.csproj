@@ -152,6 +152,7 @@
     <Content Include="Views\StoreManager\Details.cshtml" />
     <Content Include="Views\StoreManager\Delete.cshtml" />
     <Content Include="Views\StoreManager\Create.cshtml" />
+    <Content Include="Views\StoreManager\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
