@@ -1,0 +1,19 @@
+﻿@model WebAppH2014.Models.Genre
+
+@{
+    ViewBag.Title = "Browse Albums";
+}
+
+<div class="genre">
+    <h3><em>@Model.Name</em> Albums</h3>
+
+    <ul>
+        @foreach (var item in Model.Items)
+        {
+            <li>
+               
+                    <span>@item.Name</span>
+            </li>
+        }
+    </ul>
+</div>

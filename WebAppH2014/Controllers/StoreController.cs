@@ -3,16 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAppH2014.Models;
 
 namespace WebAppH2014.Controllers
 {
     public class StoreController : Controller
     {
+
+        private StoreContext db = new StoreContext();
         //
         // GET: /Store/
         public ActionResult Index()
         {
-            return View();
+            var genres = db.Genres.ToList();
+
+            return View(genres);
+        }
+
+        public ActionResult Browse(string genre)
+        {
+            // Retrieve Genre and its Associated Albums from database
+            var genreModel = db.Genres.Include("Items")
+                .Single(g => g.Name == genre);
+
+            return View(genreModel);
         }
 	}
 }
