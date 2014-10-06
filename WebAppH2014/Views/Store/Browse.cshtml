@@ -11,8 +11,9 @@
         @foreach (var item in Model.Items)
         {
             <li>
-               
+                <a href="@Url.Action("Details", new { id = item.SalesItemId })">
                     <span>@item.Name</span>
+                </a>
             </li>
         }
     </ul>

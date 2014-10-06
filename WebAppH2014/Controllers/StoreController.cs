@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using WebAppH2014.Models;
@@ -18,6 +19,13 @@ namespace WebAppH2014.Controllers
             var genres = db.Genres.ToList();
 
             return View(genres);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var item = db.SalesItems.Find(id);
+
+            return View(item);
         }
 
         public ActionResult Browse(string genre)
