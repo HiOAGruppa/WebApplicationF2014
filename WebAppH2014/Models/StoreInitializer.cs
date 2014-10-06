@@ -62,7 +62,7 @@ namespace WebAppH2014.Models
                 //id 2
                 new SalesItem{Name ="Keyboard-Black", Price=300, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=150, Description="Sykt billig og stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="TV")},
+                new SalesItem{Name ="Keyboard-Red", Price=150, Description="Sykt billig og stilig keyboard, som bare varer og varer og varer og varer enda lenger. Den snille prisen gjenspeiler hvor awesome denne bedriften er og vi håper å kunne fortsette å holde det slik.", InStock=10,Genre = genres.Single(g=>g.Name=="TV")},
                 //id 2
                 new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                                 //id 1

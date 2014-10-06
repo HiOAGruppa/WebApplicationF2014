@@ -15,7 +15,13 @@
             <div id="content">
                 <img id="item-img" src="~/Resources/@(salesItems.Name).png" alt="Keyboard" />
                 <h2>@salesItems.Name</h2>
-                <p>@salesItems.Description</p>
+                    @if(salesItems.Description.Length > 70){
+                        <p>@(salesItems.Description.Substring(0, 65)) <a href="~/Store/Details/@(salesItems.SalesItemId)"> ...les mer</a></p>
+                    }
+                    else{
+                        <p>@salesItems.Description <a href="~/Store/Details/@(salesItems.SalesItemId)"> ...les mer</a></p><br>
+                    }
+                
                 <div id="price-wrap"><h3>@(salesItems.Price),-</h3></div>
                 <div id="img-wrap"><a href="~/Home/"><img id="buy-img" src="~/Resources/button.png" alt="Buy Button" /></a></div>
             </div>

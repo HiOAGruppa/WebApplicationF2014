@@ -18,7 +18,6 @@ namespace WebAppH2014.Controllers
         // GET: DbTest
         public ActionResult Index()
         {
-
             //Complicated way to get all database-items needed to display our order-history
             //gets all users and salesitems
             var users = db.Users.ToList();
@@ -56,7 +55,6 @@ namespace WebAppH2014.Controllers
             return View(theseusers);
         }
 
-
         public ActionResult Stock()
         {
             var users = db.Users.ToList();
@@ -84,7 +82,6 @@ namespace WebAppH2014.Controllers
                 //adds the orders to the user
                 user.Orders = orders;
             }
-
             return View(salesItems);
         }
     }
