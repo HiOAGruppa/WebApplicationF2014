@@ -18,7 +18,6 @@
 
 <h2>Index</h2>
 
-
 <table>
     <tr>
         <th>
@@ -59,7 +58,9 @@
                 @Html.DisplayFor(modelItem => item.InStock)
             </td>
             <td>
-                
+               |
+                @Html.ActionLink("Details", "Details", new { id = item.SalesItemId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SalesItemId })
             </td>
         </tr>
     }
