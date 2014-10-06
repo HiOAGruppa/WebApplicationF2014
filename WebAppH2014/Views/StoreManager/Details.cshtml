@@ -10,34 +10,37 @@
 
     <div class="row">
 
-        <img src="" alt="Image of @Model.Name" class="img-thumbnail">
+        <div class="col-md-3">
+            <img id="item-img" src="~/Resources/@(@Html.DisplayFor(model => model.Name)).png" alt="Image of @Model.Name" class="img-thumbnail">
+        </div>
+        <div class="col-md-9">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
 
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Price)
-            </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.InStock)
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.InStock)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.InStock)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.InStock)
-            </dd>
-
-        </dl>
+            </dl>
+        </div>
     </div>
 </div>
 <p>

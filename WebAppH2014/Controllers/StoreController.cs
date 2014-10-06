@@ -21,9 +21,12 @@ namespace WebAppH2014.Controllers
             return View(genres);
         }
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int id = 0)
         {
-            var item = db.SalesItems.Find(id);
+            SalesItem item = db.SalesItems.Find(id);
+
+            if (item == null)
+                HttpNotFound();
 
             return View(item);
         }
