@@ -18,7 +18,7 @@
         @foreach (var item in Model.Items)
         {
             <div id="content">
-                <img id="item-img" src="~/Resources/@(item.Name).png" alt="Keyboard" />
+                <a href="~/Store/Details/@(item.SalesItemId)"><img id="item-img" src="~/Resources/@(item.Name).png" alt="Keyboard" /></a>
                 <h2>@item.Name</h2>
                 @if (item.Description.Length > 60)
                 {
