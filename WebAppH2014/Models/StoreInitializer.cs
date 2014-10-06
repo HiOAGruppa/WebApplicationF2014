@@ -43,32 +43,40 @@ namespace WebAppH2014.Models
                 Debug.WriteLine("Order added");
             }
 
+            var genres = new List<Genre>
+            {
+                new Genre{Name="Data", Description="Stuff for data"},
+
+                new Genre{Name="TV", Description="Stuff for tv"}
+
+            };
+
             var salesItems = new List<SalesItem>
             {
                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=200, Description="Sykt stilig keyboard", InStock=10, Genre = genres.Single(g=>g.Name=="Data")},
                 //id 2
-                new SalesItem{Name ="Keyboard-Black", Price=250, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Black", Price=250, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=200, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 2
-                new SalesItem{Name ="Keyboard-Black", Price=300, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Black", Price=300, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=150, Description="Sykt billig og stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=150, Description="Sykt billig og stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="TV")},
                 //id 2
-                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=700, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=700, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 2
-                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="TV")},
                                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=300, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=300, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 2
-                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Black", Price=200, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                                 //id 1
-                new SalesItem{Name ="Keyboard-Red", Price=1000, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Red", Price=1000, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="TV")},
                 //id 2
-                new SalesItem{Name ="Keyboard-Black", Price=2000, Description="Sykt stilig keyboard", InStock=10},
+                new SalesItem{Name ="Keyboard-Black", Price=2000, Description="Sykt stilig keyboard", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
             };
 
             foreach (var vare in salesItems)

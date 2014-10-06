@@ -37,3 +37,15 @@ textarea {
     padding-bottom: 12px;
   }
 }
+/*navlist == navigation in the topbar*/
+#navlist
+{
+	float: right;
+    /*quick fix*/
+    margin-left:45em;
+}
+
+#navlist li
+{
+	display:inline;
+}

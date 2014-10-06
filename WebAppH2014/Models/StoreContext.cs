@@ -16,6 +16,7 @@ namespace WebAppH2014.Models
         public DbSet<OrderSalesItem> SalesItemInOrder { get; set; }
 
         public DbSet<SalesItem> SalesItems { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         public DbSet<UserLogin> UserPasswords { get; set; }
 

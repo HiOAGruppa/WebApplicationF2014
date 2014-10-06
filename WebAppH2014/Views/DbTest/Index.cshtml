@@ -19,7 +19,7 @@
         foreach (var salesitem in orders.SalesItems)
         {
             if (salesitem.SalesItem != null) { 
-            <p>Product: @salesitem.SalesItem.Name Price per unit: @salesitem.SalesItem.Price Amount: @salesitem.Amount</p>
+            <p>Product: @salesitem.SalesItem.Name Price per unit: @salesitem.SalesItem.Price Amount: @salesitem.Amount Genre: @salesitem.SalesItem.Genre.Name</p>
             }
         }
         }

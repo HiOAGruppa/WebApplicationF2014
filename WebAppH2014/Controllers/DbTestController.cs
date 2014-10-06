@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using WebAppH2014.Models;
@@ -21,7 +22,7 @@ namespace WebAppH2014.Controllers
             //Complicated way to get all database-items needed to display our order-history
             //gets all users and salesitems
             var users = db.Users.ToList();
-            var salesItems = db.SalesItems.ToList();
+            var salesItems = db.SalesItems.Include(a => a.Genre).ToList();
             //foreach (var user in users)
             //{
 
