@@ -4,38 +4,43 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Name)</h2>
 
+<div>
 
-<fieldset>
-    <legend>Item</legend>
-    <div class="display-label">Name</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
+    <div class="row">
+
+        <img src="" alt="Image of @Model.Name" class="img-thumbnail">
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.InStock)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.InStock)
+            </dd>
+
+        </dl>
     </div>
-
-    <div class="display-label">Genre</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Genre.Name)
-    </div>
-
-    <div class="display-label">Price</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
-    </div>
-
-    <div class="display-label">Description</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Description)
-    </div>
-
-    <div class="display-label">InStock</div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.InStock)
-    </div>
-</fieldset>
+</div>
 <p>
-   
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Items", "Index")
 </p>
 
