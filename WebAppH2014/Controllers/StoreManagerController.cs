@@ -25,6 +25,29 @@ namespace WebAppH2014.Controllers
             return View(item);
         }
 
+        public ActionResult Create()
+        {
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
+            return View();
+        }
+
+        //
+        // POST: /StoreManager/Create
+
+        [HttpPost]
+        public ActionResult Create(SalesItem item)
+        {
+            if (ModelState.IsValid)
+            {
+                db.SalesItems.Add(item);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
+            return View(item);
+        }
+
         public ActionResult Delete(int id)
         {
             SalesItem item = db.SalesItems.Find(id);
