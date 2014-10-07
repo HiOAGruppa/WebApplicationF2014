@@ -65,7 +65,7 @@ namespace WebAppH2014.Controllers
             int itemCount = cart.RemoveFromCart(id);
 
             // Display the confirmation message
-            var results = new ShoppingCartRemoveViewModel
+           /* var results = new ShoppingCartRemoveViewModel
             {
                 Message = Server.HtmlEncode(albumName) +
                     " has been removed from your shopping cart.",
@@ -75,7 +75,8 @@ namespace WebAppH2014.Controllers
                 DeleteId = id
             };
 
-            return Json(results);
+            return Json(results);*/
+            return RedirectToAction("Index");
         }
 
         //
