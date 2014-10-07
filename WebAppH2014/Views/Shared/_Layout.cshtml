@@ -22,15 +22,12 @@
                 </button>
                 @Html.ActionLink("Tast-En-Tur", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav pull-right">
-                        <li>@Html.ActionLink("Store", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("Register user", "Register", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
-
-                    </ul>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Store", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -39,15 +36,13 @@
     @*SIDE BAR*@
     <div class="row">
         <div class="col-sm-2">
-            <div class="sidebar-nav">
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                        @Html.ActionLink("Genres", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
-                    </div>
-                    <div class="navbar sidebar-navbar">
-                        @{Html.RenderAction("GenreMenu", "Store");}
-                    </div>
+            <div class="navbar navbar-default">
+                <div class ="nav">
+                    @Html.ActionLink("Genres", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
+                <ul class="nav">
+                    @{Html.RenderAction("GenreMenu", "Store");}
+                </ul>
             </div>
         </div>
 
