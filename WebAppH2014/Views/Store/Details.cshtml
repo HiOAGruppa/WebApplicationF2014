@@ -43,6 +43,12 @@
         </div>
     </div>
 </div>
+
+<p class="button">
+    @Html.ActionLink("Add to cart", "AddToCart",
+        "ShoppingCart", new { id = Model.SalesItemId }, "")
+</p>
+
 <p>
     @Html.ActionLink("Back to Items", "Browse", new { genre = "data"})
 </p>

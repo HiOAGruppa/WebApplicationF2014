@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
-using WebApp.Models;
+using WebAppH2014.Models;
 
 namespace WebAppH2014.Models
 {
@@ -20,7 +20,7 @@ namespace WebAppH2014.Models
 
         public DbSet<UserLogin> UserPasswords { get; set; }
 
-
+        public DbSet<Cart> Carts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

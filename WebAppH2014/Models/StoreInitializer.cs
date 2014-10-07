@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
-using WebApp.Models;
+using WebAppH2014.Models;
 
 namespace WebAppH2014.Models
 {

@@ -13,7 +13,7 @@ namespace WebAppH2014.Models
     {
         //TODO Complete class in accordance with what DB+View needs.
         public int SalesItemId { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int InStock { get; set; }
