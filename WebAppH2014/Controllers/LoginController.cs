@@ -32,14 +32,18 @@ namespace WebAppH2014.Controllers
             if (isUserInDB(inUser))
             {
                 Debug.WriteLine("Login == true");
+                //saves userId and loginState
+                Session["UserId"] = inUser.UserId;
                 Session["LoggedIn"] = true;
                 ViewBag.isLoggedIn = true;
+                ViewBag.isUserId = inUser.UserId;
                 return View();
             }
             else
             {
                 Debug.WriteLine("Login == false");
                 Session["LoggedIn"] = false;
+                ViewBag.isUser = 0;
                 ViewBag.isLoggedIn = false;
                 return View();
             }
@@ -53,16 +57,19 @@ namespace WebAppH2014.Controllers
 
             using (var db = new StoreContext())
             {
-
                 //these fields are dependent on index.cshtml modelformat used to generate the inUser
                 byte[] passordDb = genHash(inUser.Password);
                 UserLogin foundUser = db.UserPasswords.Where(b => b.Password == passordDb && b.UserName == inUser.UserLogin.UserName).FirstOrDefault();
                 if (foundUser == null)
                 {
+                    inUser.UserId = foundUser.UserId;
+
+
                     return false;
                 }
                 else
                 {
+                    inUser.UserId = foundUser.UserId;
                     return true;
                 }
             }
@@ -88,7 +95,7 @@ namespace WebAppH2014.Controllers
                     byte[] passwordDb = genHash(inUser.Password);
                     UserLogin userlogin = new UserLogin { UserId = newUser.UserId, Password = passwordDb, UserName = inUser.UserLogin.UserName };
                     newUser.UserLogin = userlogin;
-  
+
                     db.Users.Add(newUser);
                     db.UserPasswords.Add(userlogin);
                     db.SaveChanges();
@@ -113,15 +120,68 @@ namespace WebAppH2014.Controllers
         // FOR TESTVIEW (LoggedIn.cshtml)
         public ActionResult LoggedIn()
         {
-            if (Session["LoggedIn"] != null)
+            if (isLoggedIn())
             {
-                bool loggedIn = (bool)Session["LoggedIn"];
-                if (loggedIn)
-                {
-                    return View();
-                }
+                return View();
             }
+
             return RedirectToAction("Index");
         }
+        public ActionResult ModifyUser(User inUser)
+        {
+            if (isLoggedIn())
+            {
+                using (var db = new StoreContext())
+                {
+                    int userId = (int)Session["UserId"];
+                    modifyUserInfo(inUser, db);
+
+                    Debug.WriteLine(userId);
+
+                    try
+                    {
+                        User currentUser = db.getUser(userId);
+                        Debug.WriteLine(currentUser.toString());
+
+                        return View(currentUser);
+                        // return RedirectToAction("ModifyUser", db.getUser(userId));
+                    }
+                    catch
+                    {
+                        return View();
+                    }
+                }
+            }
+
+
+            return View();
+        }
+
+        //Checks if the user is currently logged in. also checks if userid is valid
+        private Boolean isLoggedIn()
+        {
+            if (Session["LoggedIn"] != null)
+            {
+                if (ViewBag.isUser != 0)
+                    return (bool)Session["LoggedIn"];
+                else
+                    return false;
+            }
+            return false;
+        }
+
+        private void modifyUserInfo(User user, StoreContext db)
+        {
+            if (user.UserId != 0)
+            {
+                User userInDb = db.getUser(user.UserId);
+                if (user.FirstName != userInDb.FirstName)
+                    userInDb.FirstName = user.FirstName;
+                db.SaveChanges();
+            }
+            Debug.WriteLine("modifyUser: \n" + user.toString());
+            return;
+        }
+
     }
 }

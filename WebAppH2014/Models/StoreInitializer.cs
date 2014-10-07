@@ -42,7 +42,7 @@ namespace WebAppH2014.Models
                 context.Orders.Add(order);
                 Debug.WriteLine("Order added");
             }
-
+            context.SaveChanges();
             var genres = new List<Genre>
             {
                 new Genre{Name="Data", Description="Stuff for data"},
