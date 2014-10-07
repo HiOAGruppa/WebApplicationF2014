@@ -58,6 +58,7 @@ namespace WebAppH2014.Controllers
                 storeDB.Orders.Add(order);
                 storeDB.SaveChanges();
             }
+            ShoppingCart.GetCart(this.HttpContext).EmptyCart();
             return View();
         }
 
