@@ -25,9 +25,6 @@ textarea {
   .sidebar-nav .navbar ul {
     float: none;
   }
-  .sidebar-nav .navbar ul:not {
-    display: block;
-  }
   .sidebar-nav .navbar li {
     float: none;
     display: block;
@@ -37,12 +34,13 @@ textarea {
     padding-bottom: 12px;
   }
 }
+
+
 /*navlist == navigation in the topbar*/
 #navlist
 {
-	float: right;
+	/*float: right;*/
     /*quick fix*/
-    margin-left:35em;
 }
 
 #navlist li

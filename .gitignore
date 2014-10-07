@@ -155,3 +155,7 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 /packages
+WebAppH2014/App_Data/StoreDatabase.mdf
+WebAppH2014/App_Data/StoreDatabase.mdf
+WebAppH2014/App_Data/StoreDatabase_log.ldf
+WebAppH2014/App_Data/StoreDatabase.mdf
