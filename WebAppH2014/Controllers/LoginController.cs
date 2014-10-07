@@ -127,6 +127,12 @@ namespace WebAppH2014.Controllers
 
             return RedirectToAction("Index");
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inUser">The user recieved by the controller from .cshtml. Can be partyle empty.</param>
+        /// <returns>The view</returns>
         public ActionResult ModifyUser(User inUser)
         {
             if (isLoggedIn())
@@ -148,13 +154,13 @@ namespace WebAppH2014.Controllers
                     }
                     catch
                     {
-                        return View();
+                        return RedirectToAction("Index");
                     }
                 }
             }
 
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         //Checks if the user is currently logged in. also checks if userid is valid
