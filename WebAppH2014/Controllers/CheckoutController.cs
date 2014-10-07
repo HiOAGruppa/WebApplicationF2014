@@ -16,7 +16,10 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
-            return View();
+            if (!isLoggedIn())
+                return RedirectToAction("Index","Login");
+            else
+                return View();
         }
         //
         // GET: /Checkout/Complete
