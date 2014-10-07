@@ -1,0 +1,15 @@
+﻿@model IEnumerable<WebAppH2014.Models.Genre>
+
+    <ul class="nav navbar-nav" >
+        @foreach (var genre in Model)
+        {
+            <li>
+                @Html.ActionLink(genre.Name,
+                "Browse", "Store",
+                new { Genre = genre.Name }, null)
+        </li>
+        }
+        <li>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "" }, null)</li>
+        <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, null)</li>
+    </ul>
+

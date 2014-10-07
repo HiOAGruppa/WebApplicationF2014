@@ -39,5 +39,11 @@ namespace WebAppH2014.Controllers
 
             return View(genreModel);
         }
+        public ActionResult GenreMenu()
+        {
+            var genres = db.Genres.ToList();
+
+            return PartialView(genres);
+        }
 	}
 }
