@@ -7,7 +7,8 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     @*<link href="~/Content/navmenu-reveal.css" rel="stylesheet" type="text/css" />*@
-
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -20,19 +21,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Tast-En-Tur", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                <div id="navlist">
-                    <ul>
-                        <li>@Html.ActionLink("Store", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("Register user", "Register", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
-                        <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
-
-                    </ul>
-                </div>
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Store", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("Login", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
                 </ul>
             </div>
         </div>
@@ -42,21 +36,13 @@
     @*SIDE BAR*@
     <div class="row">
         <div class="col-sm-2">
-            <div class="sidebar-nav">
-                <div class="navbar navbar-default" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <span class="visible-xs navbar-brand">Sidebar menu</span>
-                    </div>
-                    <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                        @{Html.RenderAction("GenreMenu", "Store");}
-                    </div><!--/.nav-collapse -->
+            <div class="navbar navbar-default">
+                <div class ="nav">
+                    @Html.ActionLink("Genres", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
+                <ul class="nav">
+                    @{Html.RenderAction("GenreMenu", "Store");}
+                </ul>
             </div>
         </div>
 
@@ -75,9 +61,6 @@
                 <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
             </footer>
         </div>*@
-
-        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
     </div>
 </body>
 </html>

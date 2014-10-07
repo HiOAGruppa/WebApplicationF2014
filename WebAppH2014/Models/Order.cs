@@ -5,7 +5,7 @@ using System.Web;
 using System.Collections;
 using WebAppH2014.Models;
 
-namespace WebApp.Models
+namespace WebAppH2014.Models
 {
     public class Order
     {
