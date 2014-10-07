@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using WebAppH2014.Models;
@@ -181,8 +182,17 @@ namespace WebAppH2014.Controllers
             if (user.UserId != 0)
             {
                 User userInDb = db.getUser(user.UserId);
-                if (user.FirstName != userInDb.FirstName)
+                if (user.FirstName != userInDb.FirstName && user.FirstName != "")
                     userInDb.FirstName = user.FirstName;
+                if (user.LastName != userInDb.LastName && user.LastName != "")
+                    userInDb.LastName = user.LastName;
+                if (user.ZipCode != userInDb.ZipCode)
+                    userInDb.ZipCode = user.ZipCode;
+                if (user.Address != userInDb.Address)
+                    userInDb.Address = user.Address;
+                if (user.DateOfBirth != userInDb.DateOfBirth)
+                    userInDb.DateOfBirth = user.DateOfBirth;
+           //         makeDate(user.DateOfBirth);
                 db.SaveChanges();
             }
             Debug.WriteLine("modifyUser: \n" + user.toString());
