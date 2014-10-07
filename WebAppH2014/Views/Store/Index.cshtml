@@ -4,15 +4,34 @@
     ViewBag.Title = "Index";
 }
 
-<h3>Browse Genres</h3>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Item.css" />
+    <title>The Stock</title>
+</head>
+<body>
 
-<p>
-    Select from @Model.Count() genres:
-</p>
-<ul>
-    @foreach (var genre in Model)
-    {
-        <li>@Html.ActionLink(genre.Name, "Browse", new { genre = genre.Name })</li>
-    }
-</ul>
+    <h1>Browse Genres</h1>
 
+    <h2>
+        Select from @Model.Count() genres:
+    </h2>
+    <div id="genre">
+        @foreach (var genre in Model)
+        {
+            <div id="content">
+
+                <a href=@Url.Action(genre.Name, "Store/Browse", new { genre = genre.Name })>
+                    <img id="item-img" src="~/Resources/@(genre.Name).png" />
+                </a>
+                <a href=@Url.Action(genre.Name, "Store/Browse", new { genre = genre.Name })>
+                    <h2>@genre.Name</h2>
+                </a>
+
+            </div>
+        }
+    </div>
+</body>
+</html>
