@@ -27,6 +27,7 @@ namespace WebAppH2014.Models
         {
             return GetCart(controller.HttpContext);
         }
+        
 
         public void AddToCart(SalesItem item)
         {
@@ -145,17 +146,5 @@ namespace WebAppH2014.Models
             return context.Session[CartSessionKey].ToString();
         }
 
-        // When a user has logged in, migrate their shopping cart to
-        // be associated with their username
-        public void MigrateCart(string userName)
-        {
-            var shoppingCart = storeDB.Carts.Where(c => c.CartId == ShoppingCartId);
-
-            foreach (Cart item in shoppingCart)
-            {
-                item.CartId = userName;
-            }
-            storeDB.SaveChanges();
-        }
     }
 }

@@ -36,13 +36,13 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddToCart(int id)
         {
-            var addedAlbum = storeDB.SalesItems
+            var addedItem = storeDB.SalesItems
                 .Single(i => i.SalesItemId == id);
 
             // Add it to the shopping cart
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
-            cart.AddToCart(addedAlbum);
+            cart.AddToCart(addedItem);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
@@ -58,7 +58,7 @@ namespace WebAppH2014.Controllers
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
             // Get the name of the item to display confirmation
-            string albumName = storeDB.Carts
+            string itemName = storeDB.Carts
                 .Single(item => item.CartItemId == id).Item.Name;
 
             // Remove from cart
