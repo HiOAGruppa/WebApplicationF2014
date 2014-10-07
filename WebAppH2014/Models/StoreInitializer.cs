@@ -51,6 +51,12 @@ namespace WebAppH2014.Models
 
             };
 
+            foreach (var genre in genres)
+            {
+                context.Genres.Add(genre);
+            }
+            context.SaveChanges();
+
             var salesItems = new List<SalesItem>
             {
                 //id 1
