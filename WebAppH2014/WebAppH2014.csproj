@@ -164,8 +164,9 @@
     <Content Include="Views\Login\ModifyUser.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
-    <Content Include="Views\Login\User.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Login\UserOrders.cshtml" />
+    <Content Include="Views\Login\UserPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
