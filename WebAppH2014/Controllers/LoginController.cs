@@ -73,13 +73,13 @@ namespace WebAppH2014.Controllers
             }
         }
 
-        public ActionResult User()
+        public ActionResult UserPage()
         {
             StoreContext db = new StoreContext();
             if (isLoggedIn())
             {
                 int id = (int)Session["UserId"];
-                User user = db.Users.Find(id);
+                User user = db.getUser(id);
 
                 if (user == null)
                     HttpNotFound();
@@ -88,6 +88,24 @@ namespace WebAppH2014.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult UserOrders()
+        {
+            StoreContext db = new StoreContext();
+            int id = (int)Session["UserId"];
+            User currentUser = db.getUser(id);
+
+            if (currentUser == null)
+               RedirectToAction("UserPage");
+
+            if (currentUser.Orders != null)
+            {
+                var ordre = currentUser.Orders.ToList<Order>();
+                return View(ordre);
+            }
+            
+            return RedirectToAction("UserPage");
         }
 
 
