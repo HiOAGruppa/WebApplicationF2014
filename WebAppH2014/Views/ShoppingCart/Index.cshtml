@@ -1,7 +1,7 @@
 ﻿@model WebAppH2014.ViewModels.ShoppingCartViewModel
 
 @{
-    ViewBag.Title = "Shopping Cart";
+    ViewBag.Title = "Handlevogn";
 }
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/jquery-1.7.1.js"></script>
@@ -9,20 +9,20 @@
 <br />
 
 <h3>
-    Review your cart:
+    Oversikt over handlevogn:
 </h3>
 <div id="update-message">
 </div>
 <table id="tableStyle">
     <tr>
         <th>
-            Name
+            Navn
         </th>
         <th>
-            Price (each)
+            Pris (per)
         </th>
         <th>
-            Quantity
+            Antall
         </th>
         <th></th>
     </tr>
@@ -41,14 +41,14 @@
             <td>
                 <form action="ShoppingCart/RemoveFromCart/@item.CartItemId" data-ajax="true" data-ajax-mode="replace"
                       data-ajax-update="#update-message" method="post">
-                    <input type="submit" name="rem" value="remove"/>
+                    <input type="submit" name="rem" value="slett"/>
                 </form>
             </td>
         </tr>
     }
     <tr>
         <td>
-            Total
+            Totalt
         </td>
         <td></td>
         <td></td>
@@ -59,8 +59,8 @@
 </table>
 
 <br />
-    <p class="button2">@Html.ActionLink("Continue shopping", "Index", "Store", null, new { @class = "btn btn-default" })</p>
-    <p class="button"> @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout", null, new { @class = "btn btn-success" })</p>
+    <p class="button2">@Html.ActionLink("Fortsett handling", "Index", "Store", null, new { @class = "btn btn-default" })</p>
+    <p class="button"> @Html.ActionLink("Betal >>", "AddressAndPayment", "Checkout", null, new { @class = "btn btn-success" })</p>
 
 <br />
 <br />

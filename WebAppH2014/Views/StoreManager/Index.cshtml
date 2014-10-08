@@ -18,25 +18,25 @@
 
 <h2>Index</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lag Ny", "Create")
 </p>
 <table id="tableStyle">
     <tr>
         <th>
-            Genre
+            Kategori
         </th>
         <th>
-            Name
+            Navn
         </th>
         <th>
-            Description
+            Om
         </th>
         <th>
-            Price
+            Pris
         </th>
 
         <th>
-            InStock
+            I Varebeholdning
         </th>
         <th></th>
     </tr>
@@ -60,9 +60,9 @@
                 @Html.DisplayFor(modelItem => item.InStock)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SalesItemId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SalesItemId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SalesItemId })
+                @Html.ActionLink("Endre", "Edit", new { id = item.SalesItemId }) |
+                @Html.ActionLink("Om", "Details", new { id = item.SalesItemId }) |
+                @Html.ActionLink("Slett", "Delete", new { id = item.SalesItemId })
             </td>
         </tr>
     }

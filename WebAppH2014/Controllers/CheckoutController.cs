@@ -18,7 +18,7 @@ namespace WebAppH2014.Controllers
         {
             if (ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
             {
-                string error ="Your shoppingcart is empty!";
+                string error ="Din handlevogn er tom!";
                 ViewBag.ErrorMessage = error;
                 return View("Error");
             }

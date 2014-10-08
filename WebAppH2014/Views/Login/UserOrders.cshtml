@@ -1,0 +1,45 @@
+﻿@model List<WebAppH2014.Models.Order>
+
+@{
+    ViewBag.Title = "Ordrehistorikk";
+}
+
+<body>
+    <h2>Ordrehistorikk</h2>
+    <table class="table">
+        @foreach (var order in Model)
+        {
+            <tr>
+                <th colspan="3">
+                    <p><h4>Ordernummer: @order.OrderId</h4></p>
+                </th>
+            </tr>
+            <tr>
+                <td> Produkt </td>
+                <td> Pris per enhet </td>
+                <td> Antall </td>
+            </tr>
+
+
+            if (order.SalesItems != null)
+            {
+                foreach (var item in order.SalesItems)
+                {
+                    if (item.SalesItem != null)
+                    {
+                        <tr>
+                            <td> @item.SalesItem.Name </td>
+                            <td> @item.SalesItem.Price </td>
+                            <td> @item.Amount </td>
+                        </tr>
+                    }
+                }
+            }
+        }
+
+    </table>
+    <div>
+        @Html.ActionLink("Tilbake", "UserPage", new { }, new {@class = "btn btn-primary"})
+    </div>
+
+</body>

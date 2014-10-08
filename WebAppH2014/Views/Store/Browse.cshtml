@@ -1,14 +1,14 @@
 ﻿@model WebAppH2014.Models.Genre
 
 @{
-    ViewBag.Title = "Browse Items";
+    ViewBag.Title = "Se Utvalg";
 }
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="~/Content/Item.css" />
-    <title>The Stock</title>
+    <title>Utvalg</title>
 </head>
 <body>
     <div class="genre">
@@ -37,7 +37,7 @@
                   }
                     <div id="price-wrap"><h3>@(item.Price),-</h3></div>
                     <div id="img-wrap">
-                        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.SalesItemId }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Legg til Handlevogn", "AddToCart", "ShoppingCart", new { id = item.SalesItemId }, new { @class = "btn btn-success" })
                     </div>
                 </div>
             </div>
