@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Logg inn</title>
 </head>
 <body>
     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
@@ -17,7 +17,7 @@
 
         if (ViewBag.isLoggedIn)
         {
-            Response.Redirect("~/Login/User");
+            Response.Redirect("~/Login/UserPage");
         }
         <div style="margin-top:20px">
             <fieldset>
@@ -38,7 +38,7 @@
                     @Html.PasswordFor(model => model.Password)
                     @Html.ValidationMessageFor(model => model.UserLogin.Password)
                 </div>
-                <p>New user? @Html.ActionLink("Register here", "Register") </p>
+                <p>Ny bruker? @Html.ActionLink("Registrer deg her", "Register") </p>
                 <p> <input type="submit" value="Logg inn" /> </p>
             </fieldset>
        </div>
