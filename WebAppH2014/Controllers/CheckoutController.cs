@@ -16,6 +16,8 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
+            if(ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
+                return RedirectToAction("Index", "Home");
             if (!isLoggedIn())
                 return RedirectToAction("Index","Login");
             else
