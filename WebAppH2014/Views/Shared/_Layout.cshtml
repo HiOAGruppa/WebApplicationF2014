@@ -38,7 +38,7 @@
         <div class="col-sm-2">
             <div class="navbar navbar-default">
                 <div class ="nav">
-                    @Html.ActionLink("Genres", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <ul class="nav">
                     @{Html.RenderAction("GenreMenu", "Store");}
@@ -50,7 +50,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                <p>&copy; @DateTime.Now.Year - Tast-En-Tur</p>
             </footer>
         </div>
 
