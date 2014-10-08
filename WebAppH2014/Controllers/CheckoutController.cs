@@ -46,13 +46,13 @@ namespace WebAppH2014.Controllers
 
                 foreach(Cart item in cartList )
                 {
-                    SalesItem newItem = item.Item;
+                    SalesItem sItem = storeDB.SalesItems.Find(item.SalesItemId);
                     OrderSalesItem osItem = new OrderSalesItem()
                     {
-                        SalesItemId = newItem.SalesItemId,
+                        SalesItemId = sItem.SalesItemId,
                         OrderId = order.OrderId,
                         Amount = item.Count,
-                        SalesItem = newItem,
+                        SalesItem = sItem,
                         Order = order
                     };
 
