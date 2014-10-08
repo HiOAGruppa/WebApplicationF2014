@@ -16,7 +16,7 @@ body {
     padding-right: 10px;
 }
 
-#contet-wrap {
+#content-wrap {
 
 }
 
@@ -71,4 +71,11 @@ h3 {
 
 #img-wrap {
     text-align: right;
+}
+
+#content-row {
+    
+    margin-left: auto;
+    margin-right: auto;
+    
 }

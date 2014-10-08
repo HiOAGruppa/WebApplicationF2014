@@ -78,7 +78,7 @@ namespace WebAppH2014.Models
                 //id 9
                 new SalesItem{Name ="Keyboard - Half Wierd", Price=300, Description="Et halvveis normalt keyboard, som passer mødre som vil føle seg moderne.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 10
-                new SalesItem{Name ="Keyboard - Modern Rainbow", Price=200, Description="Moderne og fargerikt!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - New Rainbow", Price=200, Description="Moderne og fargerikt!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 11
                 new SalesItem{Name ="Keyboard - No Case", Price=1000, Description="Om du ikke liker plastikk, men elsker elektronikk.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 12
