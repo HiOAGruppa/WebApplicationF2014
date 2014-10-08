@@ -19,38 +19,29 @@
         {
             Response.Redirect("~/Login/User");
         }
+        <div style="margin-top:20px">
+            <fieldset>
+                <legend>Logg inn</legend>
 
-        <fieldset>
-            <legend>Logg inn</legend>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.UserLogin.UserName)
+                </div>
+                <div class="editor-field">
+                    @Html.EditorFor(model => model.UserLogin.UserName)
+                    @Html.ValidationMessageFor(model => model.UserLogin.UserName)
+                </div>
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.UserLogin.UserName)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.UserLogin.UserName)
-                @Html.ValidationMessageFor(model => model.UserLogin.UserName)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.UserLogin.Password)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.UserLogin.Password)
-            </div>
-
-            <br>
-
-            <p>
-                <input type="submit" value="Logg inn" />
-            </p>
-        </fieldset>
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.UserLogin.Password)
+                </div>
+                <div class="editor-field">
+                    @Html.PasswordFor(model => model.Password)
+                    @Html.ValidationMessageFor(model => model.UserLogin.Password)
+                </div>
+                <p>New user? @Html.ActionLink("Register here", "Register") </p>
+                <p> <input type="submit" value="Logg inn" /> </p>
+            </fieldset>
+       </div>
     }
-
-    <div>
-        @Html.ActionLink("Back to Index", "Index") <br />
-        @Html.ActionLink("Register bruker", "Register") <br />
-        @Html.ActionLink("Innlogget side", "User") <br />
-    </div>
 </body>
 </html>
