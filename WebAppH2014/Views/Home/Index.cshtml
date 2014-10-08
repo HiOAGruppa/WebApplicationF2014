@@ -15,16 +15,26 @@
 
     <div class="jumbotron">
         <h1>Tast-En-Tur Tastatur</h1>
+        <img id="img-logo" src="~/Resources/Tast1Tur.png" alt="Logo" />
         <p class="lead">Tast-En-Tur er en nettbutikk som strever for å selge de beste og nyeste keyboard'ene med best mulig service.</p>
+        <p class="lead">Både nye og eksisterende brukere kan logge inn eller registrere seg med å trykke på "Min Side" øverst.</p>
+ 
         <p><a href="~/Store" class="btn btn-primary btn-lg">Se utvalg &raquo;</a></p>
     </div>
 
     <div class="row">
         @{
             var r = new Random();
+            int[] used = { -1, -1, -1 };
             for (int i = 0; i < 3; i++)
-            {            
-                var num = r.Next(@Model.Items.Count);
+            {   
+                var num = -1;
+                while(used.Contains(num))
+                {
+                    num = r.Next(@Model.Items.Count); 
+                }
+                used[i] = num;   
+                
                 var item = Model.Items.ElementAt(num);
                 <div class="col-md-4">
                     <div id="content">

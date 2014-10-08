@@ -3,6 +3,12 @@ body {
     color:#333
 }
 
+#img-logo{
+    float: left;
+    width: 250px;
+    margin-right: 20px;
+}
+
 #sub-title {
     font-size: 42px;
     font-weight: bold;
