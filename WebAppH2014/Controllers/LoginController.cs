@@ -76,6 +76,24 @@ namespace WebAppH2014.Controllers
             }
         }
 
+        public ActionResult User()
+        {
+            StoreContext db = new StoreContext();
+            if (isLoggedIn())
+            {
+                int id = (int)Session["UserId"];
+                User user = db.Users.Find(id);
+
+                if (user == null)
+                    HttpNotFound();
+
+                return View(user);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
         public ActionResult Register()
         {
             return View();
@@ -116,17 +134,6 @@ namespace WebAppH2014.Controllers
             inData = System.Text.Encoding.ASCII.GetBytes(inPassword);
             outData = algorithm.ComputeHash(inData);
             return outData;
-        }
-
-        // FOR TESTVIEW (LoggedIn.cshtml)
-        public ActionResult LoggedIn()
-        {
-            if (isLoggedIn())
-            {
-                return View();
-            }
-
-            return RedirectToAction("Index");
         }
 
         /// <summary>
