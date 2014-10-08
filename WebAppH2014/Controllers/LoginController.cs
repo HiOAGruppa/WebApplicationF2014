@@ -63,9 +63,6 @@ namespace WebAppH2014.Controllers
                 UserLogin foundUser = db.UserPasswords.Where(b => b.Password == passordDb && b.UserName == inUser.UserLogin.UserName).FirstOrDefault();
                 if (foundUser == null)
                 {
-                    inUser.UserId = foundUser.UserId;
-
-
                     return false;
                 }
                 else
@@ -199,6 +196,7 @@ namespace WebAppH2014.Controllers
                     userInDb.Address = user.Address;
                 if (user.DateOfBirth != userInDb.DateOfBirth)
                     userInDb.DateOfBirth = user.DateOfBirth;
+
            //         makeDate(user.DateOfBirth);
                 db.SaveChanges();
             }
