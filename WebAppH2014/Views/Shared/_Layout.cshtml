@@ -24,8 +24,8 @@
             </div>
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Store", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })</li>
                     <li>@Html.ActionLink("Min Side", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
                     <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
                 </ul>
             </div>

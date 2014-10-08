@@ -47,3 +47,31 @@ textarea {
 {
 	display:inline;
 }
+
+/*Styling for the tables (cart and admin)*/
+table#tableStyle
+{
+    border: 1px solid #000;
+	border-collapse: collapse;
+	color: #666666;
+	min-width: 400px;
+	width: 100%;
+}
+tr
+{
+	border: 1px solid #000;
+	line-height: 20px;
+}
+
+th
+{
+	background-color: #808080;
+	color: #000;
+	font-size: 13px;
+	text-align: left;
+}
+
+th, td
+{
+	padding-left: 5px;
+}
