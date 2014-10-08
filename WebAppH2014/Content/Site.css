@@ -75,3 +75,7 @@ th, td
 {
 	padding-left: 5px;
 }
+
+.button {
+    float: right;
+}

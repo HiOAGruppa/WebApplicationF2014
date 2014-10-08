@@ -3,13 +3,11 @@
 @{
     ViewBag.Title = "Shopping Cart";
 }
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/jquery-1.7.1.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <br />
-<br />
-<p class="button">
-    @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout",null, new { @class = "btn btn-success" })
-</p>
+
 <h3>
     <em>Review</em> your cart:
 </h3>
@@ -60,3 +58,9 @@
     </tr>
 </table>
 
+<br />
+
+    <p class="button"> @Html.ActionLink("Checkout >>", "AddressAndPayment", "Checkout", null, new { @class = "btn btn-success" })</p>
+
+<br />
+<br />
