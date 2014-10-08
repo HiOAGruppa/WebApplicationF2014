@@ -60,39 +60,39 @@ namespace WebAppH2014.Models
             var salesItems = new List<SalesItem>
             {
                 //id 1
-                new SalesItem{Name ="Keyboard - Red", Price=200, Description="Sykt rødt og stilig keyboard!", InStock=10, Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Red", ImageUrl ="Keyboard - Red", Price=200, Description="Sykt rødt og stilig keyboard!", InStock=10, Genre = genres.Single(g=>g.Name=="Data")},
                 //id 2
-                new SalesItem{Name ="Keyboard - Black", Price=250, Description="Sykt stilig svart keyboard!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Black", ImageUrl ="Keyboard - Black",  Price=250, Description="Sykt stilig svart keyboard!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 3
-                new SalesItem{Name ="Commandore 64", Price=200, Description="Sykt gammelt, men stilig keyboard!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Commandore 64", ImageUrl ="Commandore 64",  Price=200, Description="Sykt gammelt, men stilig keyboard!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 4
-                new SalesItem{Name ="Keyboard - Android", Price=300, Description="Anroid, what more to say?", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Android", ImageUrl ="Keyboard - Android",  Price=300, Description="Anroid, what more to say?", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 5
-                new SalesItem{Name ="Keyboard - Bended", Price=150, Description="Sykt billig og stilig og ikke minst bøyelig keyboard, som bare varer og varer og varer og varer enda lenger. Den snille prisen gjenspeiler hvor awesome denne bedriften er og vi håper å kunne fortsette å holde det slik.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Bended", ImageUrl ="Keyboard - Bended",  Price=150, Description="Sykt billig og stilig og ikke minst bøyelig keyboard, som bare varer og varer og varer og varer enda lenger. Den snille prisen gjenspeiler hvor awesome denne bedriften er og vi håper å kunne fortsette å holde det slik.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 6
-                new SalesItem{Name ="Keyboard - Drawing", Price=200, Description="Et fint lite tastatur konsept, obs bare tegning er inkl.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Drawing", ImageUrl ="Keyboard - Drawing",  Price=200, Description="Et fint lite tastatur konsept, obs bare tegning er inkl.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 7
-                new SalesItem{Name ="Keyboard - Enthusiast", Price=700, Description="For en som har masse penger og vil at ting skal se dyrt ut. En slags futuristisk look.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Enthusiast", ImageUrl ="Keyboard - Enthusiast",  Price=700, Description="For en som har masse penger og vil at ting skal se dyrt ut. En slags futuristisk look.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 8
-                new SalesItem{Name ="Keyboard - Futuristic", Price=200, Description="Det egentlige futuristiske tastaturet på Tast-En-Tur. Vårt kjære lille barn som vi alltid vil elske.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Futuristic", ImageUrl ="Keyboard - Futuristic", Price=200, Description="Det egentlige futuristiske tastaturet på Tast-En-Tur. Vårt kjære lille barn som vi alltid vil elske.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 9
-                new SalesItem{Name ="Keyboard - Half Wierd", Price=300, Description="Et halvveis normalt keyboard, som passer mødre som vil føle seg moderne.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Half Wierd", ImageUrl ="Keyboard - Half Wierd", Price=300, Description="Et halvveis normalt keyboard, som passer mødre som vil føle seg moderne.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 10
-                new SalesItem{Name ="Keyboard - New Rainbow", Price=200, Description="Moderne og fargerikt!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - New Rainbow", ImageUrl ="Keyboard - New Rainbow", Price=200, Description="Moderne og fargerikt!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 11
-                new SalesItem{Name ="Keyboard - No Case", Price=1000, Description="Om du ikke liker plastikk, men elsker elektronikk.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - No Case", ImageUrl ="Keyboard - No Case", Price=1000, Description="Om du ikke liker plastikk, men elsker elektronikk.", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 12
-                new SalesItem{Name ="Keyboard - Rainbow", Price=2000, Description="Nå slipper du å ta drugs!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Rainbow", ImageUrl ="Keyboard - Rainbow", Price=2000, Description="Nå slipper du å ta drugs!", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 13
-                new SalesItem{Name ="Keyboard - Right Handed", Price=2000, Description="Om venstre hånda di er opptatt...", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Right Handed", ImageUrl ="Keyboard - Right Handed", Price=2000, Description="Om venstre hånda di er opptatt...", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 14
-                new SalesItem{Name ="Keyboard - Virtual", Price=1000, Description="Nå trenger du ikke klunkete tastatur, hvorfor ikke slå ihjel fingrene på bordet ditt?", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
+                new SalesItem{Name ="Keyboard - Virtual", ImageUrl ="Keyboard - Virtual", Price=1000, Description="Nå trenger du ikke klunkete tastatur, hvorfor ikke slå ihjel fingrene på bordet ditt?", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 15
-                new SalesItem{Name ="Musical Keyboard - Retro", Price=1000, Description="Musikk, for de som ikke føler seg like unge lenger, og savner de gode gamle dager.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
+                new SalesItem{Name ="Musical Keyboard - Retro", ImageUrl ="Musical Keyboard - Retro", Price=1000, Description="Musikk, for de som ikke føler seg like unge lenger, og savner de gode gamle dager.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
                 //id 16
-                new SalesItem{Name ="Musical Keyboard with iPad", Price=200, Description="Om du mangler både keyboard og overprisa en iPad.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
+                new SalesItem{Name ="Musical Keyboard with iPad", ImageUrl ="Musical Keyboard with iPad", Price=200, Description="Om du mangler både keyboard og overprisa en iPad.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
                 //id 17
-                new SalesItem{Name ="Musical Keyboard", Price=700, Description="Standard utgaven for musikk keyboardene.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
+                new SalesItem{Name ="Musical Keyboard", ImageUrl ="Musical Keyboard", Price=700, Description="Standard utgaven for musikk keyboardene.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
                 
             };
 

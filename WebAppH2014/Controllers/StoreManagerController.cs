@@ -37,6 +37,7 @@ namespace WebAppH2014.Controllers
         [HttpPost]
         public ActionResult Create(SalesItem item)
         {
+            item.ImageUrl = "placeholder";
             if (ModelState.IsValid)
             {
                 db.SalesItems.Add(item);
