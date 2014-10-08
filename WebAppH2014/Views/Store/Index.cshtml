@@ -21,15 +21,17 @@
     <div id="genre">
         @foreach (var genre in Model)
         {
-            <div id="content">
-
-                <a href=@Url.Action(genre.Name, "Store/Browse", new { genre = genre.Name })>
-                    <img id="item-img" src="~/Resources/@(genre.Name).png" />
-                </a>
-                <a href=@Url.Action(genre.Name, "Store/Browse", new { genre = genre.Name })>
-                    <h2>@genre.Name</h2>
-                </a>
-
+            <div class="panel" id="content">
+                <div class="panel-body">
+                    <a href=@Url.Action(genre.Name, "Store/Browse", new { genre = genre.Name })>
+                        <img id="item-img" src="~/Resources/@(genre.Name).png" />
+                    </a>
+                </div>
+                <div class="panel-footer">
+                    <a href=@Url.Action(genre.Name, "Store/Browse", new { genre = genre.Name })>
+                        <h2>@genre.Name</h2>
+                    </a>
+                </div>
             </div>
         }
     </div>

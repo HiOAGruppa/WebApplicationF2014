@@ -26,33 +26,37 @@
             var r = new Random();
             int[] used = { -1, -1, -1 };
             for (int i = 0; i < 3; i++)
-            {   
+            {
                 var num = -1;
-                while(used.Contains(num))
+                while (used.Contains(num))
                 {
-                    num = r.Next(@Model.Items.Count); 
+                    num = r.Next(@Model.Items.Count);
                 }
-                used[i] = num;   
-                
+                used[i] = num;
+
                 var item = Model.Items.ElementAt(num);
-                <div class="col-md-4">
-                    <div id="content">
+                <div class="panel" id="content">
+
+                    <div class="panel-body">
                         <a href="~/Store/Details/@(item.SalesItemId)"><img id="item-img" src="~/Resources/@(item.Name).png" alt="Keyboard" /></a>
                         <h2>@item.Name</h2>
+
+                    </div>
+                    <div class="panel-footer">
+
                         @if (item.Description.Length > 60)
                         {
-                            <p>@(item.Description.Substring(0, 60)) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
+                            <p style="height:40px">@(item.Description.Substring(0, 60)) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
                         }
                         else
                         {
-                            <p>@item.Description <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
-                            if (item.Description.Length < 30)
-                            {
-                                <br>
-                            }
+                            <p style="height:40px">@(item.Description) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
+
                         }
                         <div id="price-wrap"><h3>@(item.Price),-</h3></div>
-                        <div id="img-wrap"><a href="~/ShoppingCart/AddToCart/@item.SalesItemId"><img id="buy-img" src="~/Resources/button.png" alt="Buy Button" /></a></div>
+                        <div id="img-wrap">
+                            @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.SalesItemId }, new { @class = "btn btn-success" })
+                        </div>
                     </div>
                 </div>
             }
