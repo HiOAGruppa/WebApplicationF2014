@@ -25,7 +25,8 @@
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Min Side", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
-                    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                    <li><div class="nav navbar-brand">@{Html.RenderAction("CartSummary", "ShoppingCart", new { @class = "navbar-brand"});}</div></li>
+                    @*<li>@Html.ActionLink("Handlevogn", "Index", "ShoppingCart", new { area = "" }, new { @class = "navbar-brand" })</li>*@
                     <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
                 </ul>
             </div>
@@ -36,8 +37,8 @@
     @*SIDE BAR*@
     <div class="row">
         <div class="col-sm-2">
-            <div class="navbar navbar-default">
-                <div class ="nav">
+            <div id="sidebar" class="navbar navbar-default" style="height:90vh">
+                <div class=" nav">
                     @Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <ul class="nav">
@@ -53,14 +54,6 @@
                 <p>&copy; @DateTime.Now.Year - Tast-En-Tur</p>
             </footer>
         </div>
-
-
-        @*<div class="container body-content">
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>*@
     </div>
 </body>
 </html>
