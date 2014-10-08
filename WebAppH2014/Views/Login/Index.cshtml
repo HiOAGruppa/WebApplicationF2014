@@ -15,6 +15,11 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
 
+        if (ViewBag.isLoggedIn)
+        {
+            Response.Redirect("~/Login/ModifyUser");
+        }
+
         <fieldset>
             <legend>Logg inn</legend>
 
@@ -33,18 +38,12 @@
                 @Html.PasswordFor(model => model.Password)
                 @Html.ValidationMessageFor(model => model.UserLogin.Password)
             </div>
+
             <br>
+
             <p>
                 <input type="submit" value="Logg inn" />
             </p>
-            @if (ViewBag.isLoggedIn)
-            {
-                <p style="color:blue">Logget inn</p>
-            }
-            else
-            {
-                <p style="color:red">Ikke logget inn</p>
-            }
         </fieldset>
     }
 
