@@ -15,6 +15,7 @@ namespace WebAppH2014.Models
         
         public String FirstName { get; set; }
         public String LastName { get; set; }
+        public bool? Admin { get; set; }
         
         public String Address { get; set; }
         public int? ZipCode { get; set; }

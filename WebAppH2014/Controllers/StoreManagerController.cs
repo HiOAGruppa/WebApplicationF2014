@@ -15,18 +15,39 @@ namespace WebAppH2014.Controllers
         // GET: /StoreManager/
         public ActionResult Index()
         {
+
+            if (!isAdmin())
+            {
+                string error = "Du har ikke rettigheter til dette!";
+                ViewBag.ErrorMessage = error;
+                return View("Error");
+            }
             var items = db.SalesItems.Include(a => a.Genre);
             return View(items.ToList());
         }
 
         public ViewResult Details(int id)
         {
+
+            if (!isAdmin())
+            {
+                string error = "Du har ikke rettigheter til dette!";
+                ViewBag.ErrorMessage = error;
+                return View("Error");
+            }
             SalesItem item = db.SalesItems.Find(id);
             return View(item);
         }
 
         public ActionResult Create()
         {
+
+            if (!isAdmin())
+            {
+                string error = "Du har ikke rettigheter til dette!";
+                ViewBag.ErrorMessage = error;
+                return View("Error");
+            }
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
             return View();
         }
@@ -53,6 +74,12 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (!isAdmin())
+            {
+                string error = "Du har ikke rettigheter til dette!";
+                ViewBag.ErrorMessage = error;
+                return View("Error");
+            }
             SalesItem item = db.SalesItems.Find(id);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
             return View(item);
@@ -95,6 +122,31 @@ namespace WebAppH2014.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+
+        private Boolean isAdmin()
+        {
+            if (isLoggedIn())
+            {
+                int userId = (int)Session["UserId"];
+                User currentUser = db.getUser(userId);
+                if (currentUser.Admin != null && currentUser.Admin == true)
+                    return true;
+            }
+            
+            return false;
+        }
+        private Boolean isLoggedIn()
+        {
+            if (Session["LoggedIn"] != null)
+            {
+                if (ViewBag.isUser != 0)
+                    return (bool)Session["LoggedIn"];
+                else
+                    return false;
+            }
+            return false;
         }
 	}
 }

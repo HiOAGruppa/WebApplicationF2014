@@ -23,6 +23,8 @@ namespace WebAppH2014.Models
                 new User{FirstName = "Martin" ,LastName = "Hagen", UserLogin = new UserLogin{UserName = "Martinhagen", Password = genHash("BolleMann")}},
                 //userid 3
                 new User{FirstName = "Sondre" ,LastName = "Boge", UserLogin = new UserLogin{UserName = "Sondreboge", Password = genHash("WhatWhat")}},
+                //userid 4
+                new User{FirstName ="Store", LastName="Admin", UserLogin = new UserLogin{UserName = "admin", Password = genHash("123")},Admin=true}
             };
 
             Debug.WriteLine("Users Created");
