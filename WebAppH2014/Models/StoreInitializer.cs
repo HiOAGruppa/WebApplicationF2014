@@ -45,9 +45,9 @@ namespace WebAppH2014.Models
             context.SaveChanges();
             var genres = new List<Genre>
             {
-                new Genre{Name="Data", Description="Stuff for data"},
+                new Genre{Name="Data", ImageUrl = "Data", Description="Ting for data"},
 
-                new Genre{Name="Music", Description="Stuff for music"}
+                new Genre{Name="Musikk", ImageUrl = "Musikk",Description="Ting for musikk"}
 
             };
 
@@ -88,11 +88,11 @@ namespace WebAppH2014.Models
                 //id 14
                 new SalesItem{Name ="Keyboard - Virtual", ImageUrl ="Keyboard - Virtual", Price=1000, Description="Nå trenger du ikke klunkete tastatur, hvorfor ikke slå ihjel fingrene på bordet ditt?", InStock=10,Genre = genres.Single(g=>g.Name=="Data")},
                 //id 15
-                new SalesItem{Name ="Musical Keyboard - Retro", ImageUrl ="Musical Keyboard - Retro", Price=1000, Description="Musikk, for de som ikke føler seg like unge lenger, og savner de gode gamle dager.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
+                new SalesItem{Name ="Musical Keyboard - Retro", ImageUrl ="Musical Keyboard - Retro", Price=1000, Description="Musikk, for de som ikke føler seg like unge lenger, og savner de gode gamle dager.", InStock=10,Genre = genres.Single(g=>g.Name=="Musikk")},
                 //id 16
-                new SalesItem{Name ="Musical Keyboard with iPad", ImageUrl ="Musical Keyboard with iPad", Price=200, Description="Om du mangler både keyboard og overprisa en iPad.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
+                new SalesItem{Name ="Musical Keyboard with iPad", ImageUrl ="Musical Keyboard with iPad", Price=200, Description="Om du mangler både keyboard og overprisa en iPad.", InStock=10,Genre = genres.Single(g=>g.Name=="Musikk")},
                 //id 17
-                new SalesItem{Name ="Musical Keyboard", ImageUrl ="Musical Keyboard", Price=700, Description="Standard utgaven for musikk keyboardene.", InStock=10,Genre = genres.Single(g=>g.Name=="Music")},
+                new SalesItem{Name ="Musical Keyboard", ImageUrl ="Musical Keyboard", Price=700, Description="Standard utgaven for musikk keyboardene.", InStock=10,Genre = genres.Single(g=>g.Name=="Musikk")},
                 
             };
 
