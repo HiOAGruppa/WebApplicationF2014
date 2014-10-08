@@ -17,7 +17,7 @@
 
         if (ViewBag.isLoggedIn)
         {
-            Response.Redirect("~/Login/ModifyUser");
+            Response.Redirect("~/Login/User");
         }
 
         <fieldset>
@@ -50,7 +50,7 @@
     <div>
         @Html.ActionLink("Back to Index", "Index") <br />
         @Html.ActionLink("Register bruker", "Register") <br />
-        @Html.ActionLink("Innlogget side", "LoggedIn") <br />
+        @Html.ActionLink("Innlogget side", "User") <br />
     </div>
 </body>
 </html>

@@ -1,0 +1,64 @@
+﻿@model WebAppH2014.Models.User
+
+@{
+    ViewBag.Title = "User";
+}
+
+<h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)'s page</h2>
+
+<body>
+    <div>
+        <h4></h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ZipCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ZipCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateOfBirth)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("My Shopping Cart", "Index", "ShoppingCart", new { tom = "" }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Order History", "Index", new { tom = "" }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Edit Info", "ModifyUser", new { user = User }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Log out", "Index", new { tom = "" }, new { @class = "btn btn-default" })
+    </p>
+
+
+</body>
