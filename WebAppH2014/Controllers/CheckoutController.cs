@@ -16,8 +16,12 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
-            if(ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
+            if (ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
+            {
+                string error ="Your shoppingcart is empty!";
+                ViewBag.ErrorMessage = error;
                 return View("Error");
+            }
             if (!isLoggedIn())
                 return RedirectToAction("Index","Login");
             else
