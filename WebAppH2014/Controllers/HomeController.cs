@@ -9,9 +9,16 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private StoreContext db = new StoreContext();
+
         public ActionResult Index()
         {
-            return View();
+
+            var genreModel = db.Genres.Include("Items")
+                .Single(g => g.Name == "Data");
+
+            return View(genreModel);
+            //return View();
         }
 
         public ActionResult Item()
