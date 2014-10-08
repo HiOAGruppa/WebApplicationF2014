@@ -12,31 +12,36 @@
 </head>
 <body>
     <div class="genre">
-        <h3 id="sub-title"><em>@Model.Name</em> Albums</h3>
+        <h1 id="sub-title">@Model.Name</h1>
         <br>
 
         @foreach (var item in Model.Items)
         {
-            <div id="content">
-                <a href="~/Store/Details/@(item.SalesItemId)"><img id="item-img" src="~/Resources/@(item.Name).png" alt="Keyboard" /></a>
-                <h2>@item.Name</h2>
-                @if (item.Description.Length > 60)
-                {
-                    <p>@(item.Description.Substring(0, 60)) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
-                }
-                else
-                {
-                    <p>@item.Description <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
-                    if(item.Description.Length < 30) 
-                    {
-                           <br>
-                    }
-                }
-                <div id="price-wrap"><h3>@(item.Price),-</h3></div>
-                <div id="img-wrap"><a href="~/ShoppingCart/AddToCart/@item.SalesItemId"><img id="buy-img" src="~/Resources/button.png" alt="Buy Button" /></a></div>
+            <div class="panel" id="content">
+
+                <div class="panel-body">
+                    <a href="~/Store/Details/@(item.SalesItemId)"><img id="item-img" src="~/Resources/@(item.Name).png" alt="Keyboard" /></a>
+                    <h2>@item.Name</h2>
+
+                </div>
+                <div class="panel-footer">
+
+                  @if (item.Description.Length > 60)
+                  {
+                    <p style="height:40px">@(item.Description.Substring(0,60)) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
+                  }
+                  else
+                  {
+                    <p style="height:40px">@(item.Description) <a href="~/Store/Details/@(item.SalesItemId)"> ...les mer</a></p>
+
+                  }
+                    <div id="price-wrap"><h3>@(item.Price),-</h3></div>
+                    <div id="img-wrap">
+                        @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = item.SalesItemId }, new { @class = "btn btn-success" })
+                    </div>
+                </div>
             </div>
         }
-
     </div>
 </body>
 </html>
