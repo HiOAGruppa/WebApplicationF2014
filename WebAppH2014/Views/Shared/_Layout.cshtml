@@ -23,8 +23,8 @@
                 @Html.ActionLink("Tast-En-Tur", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Min Side", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</li>
+                <ul class="nav navbar-nav"
+                    <li>@{Html.RenderAction("LoggedIn", "ShoppingCart", new { @class = "navbar-brand" });}</li>
                     <li>@{Html.RenderAction("CartSummary", "ShoppingCart", new { @class = "navbar-brand"});}</li>
                     @*<li>@Html.ActionLink("Handlevogn", "Index", "ShoppingCart", new { area = "" }, new { @class = "navbar-brand" })</li>*@
                     <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
