@@ -34,19 +34,13 @@ namespace WebAppH2014.Controllers
             if (isUserInDB(inUser))
             {
                 Debug.WriteLine("Login == true");
-                //saves userId and loginState
-                Session["UserId"] = inUser.UserId;
-                Session["LoggedIn"] = true;
-                ViewBag.isLoggedIn = true;
-                ViewBag.isUserId = inUser.UserId;
+                LogIn(inUser);
                 return View();
             }
             else
             {
                 Debug.WriteLine("Login == false");
-                Session["LoggedIn"] = false;
-                ViewBag.isUser = 0;
-                ViewBag.isLoggedIn = false;
+                LogOut();
                 return View();
             }
         }
@@ -272,5 +266,32 @@ namespace WebAppH2014.Controllers
             Debug.WriteLine("modifyUser: \n" + user.toString());
             return null;
         }
+
+        //method for defining user as logged in.
+        private void LogIn(User inUser)
+        {
+            //saves userId and loginState
+            Session["UserId"] = inUser.UserId;
+            Session["LoggedIn"] = true;
+            ViewBag.isLoggedIn = true;
+            ViewBag.isUserId = inUser.UserId;
+           
+        }
+        //method for defining a user as logged out.
+        private void LogOut()
+        {
+            //saves userId and loginState
+            Session["UserId"] = 0;
+            Session["LoggedIn"] = false;
+            ViewBag.isLoggedIn = false;
+            ViewBag.isUserId = 0;
+        }
+
+        public ActionResult LogoutAction()
+        {
+            LogOut();
+            return RedirectToAction("index");
+        }
+
     }
 }
