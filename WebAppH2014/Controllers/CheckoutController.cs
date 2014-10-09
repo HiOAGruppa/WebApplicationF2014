@@ -16,33 +16,37 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
+            if (!isLoggedIn())
+                return RedirectToAction("Index", "Login");
+            
+            string error = "";
             if (ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
             {
-                string error ="Din handlevogn er tom!";
+                error +="Handlevognen er tom!";
+            }
+            
+            int userId = (int)Session["UserId"];
+            User currentUser = storeDB.getUser(userId);
+
+            if(currentUser.Address == null || currentUser.ZipCode == null)
+            {
+                if (!error.Equals("")) 
+                    error += "\n";
+                error += "Adresse ikke registrert!";
+            }
+            if(currentUser.DateOfBirth == null)
+            {
+                if (!error.Equals(""))
+                    error += "\n";
+                error += "Fødselsdato ikke registrert!";
+            }
+
+            if(!error.Equals(""))
+            {
                 ViewBag.ErrorMessage = error;
                 return View("Error");
             }
-            if (!isLoggedIn())
-                return RedirectToAction("Index","Login");
-            else
-            {
-                int userId = (int)Session["UserId"];
-                User currentUser = storeDB.getUser(userId);
-
-                if(currentUser.Address == null || currentUser.ZipCode == null)
-                {
-                    string error = "Du har ikke registrert en adresse!";
-                    ViewBag.ErrorMessage = error;
-                    return View("Error");
-                }
-                if(currentUser.DateOfBirth == null)
-                {
-                    string error = "Du har ikke registrert en fødselsdato!";
-                    ViewBag.ErrorMessage = error;
-                    return View("Error");
-                }
-                return View();
-            }
+            return View();
         }
         //
         // GET: /Checkout/Complete
