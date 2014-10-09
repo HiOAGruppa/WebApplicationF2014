@@ -53,6 +53,8 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Complete()
         {
+            if(ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count==0)
+                return RedirectToAction("UserPage", "Login");
             if (isLoggedIn())
             {
                 int userId = (int)Session["UserId"];
@@ -84,9 +86,13 @@ namespace WebAppH2014.Controllers
 
                 storeDB.Orders.Add(order);
                 storeDB.SaveChanges();
+
+                ShoppingCart.GetCart(this.HttpContext).EmptyCart();
+                return View(order);
             }
-            ShoppingCart.GetCart(this.HttpContext).EmptyCart();
-            return View();
+            
+            ViewBag.ErrorMessage = "Du må være logget inn for å se dette...";
+            return View("Error");
         }
 
         private Boolean isLoggedIn()

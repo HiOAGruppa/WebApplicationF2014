@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Adresse og Betaling";
 }
+<body>
+    <h2>Adresse og Betaling</h2>
 
-<h2>Adresse og Betaling</h2>
-<a href="/Checkout/Complete">Ferdig</a>
+    <dl class="dl-horizontal"></dl>
+    <br />
+    
+    @Html.ActionLink("Avbryt", "Index", "Home", null, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Betal", "Complete", "Checkout", null, new { @class = "btn btn-success" })
+    
+</body>
