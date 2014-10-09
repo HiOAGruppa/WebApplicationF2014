@@ -53,12 +53,11 @@
             <br>
 
             <p>
-                <input type="submit" value="Register" />
+                @Html.ActionLink("Tilbake", "Index", new { tom = "" }, new { @class = "btn btn-primary" })
+                <input type="submit" value="Register" class="btn btn-success" />
             </p>
         </fieldset>
     }
-    <div>
-        @Html.ActionLink("Tilbake", "Index", new { tom = "" }, new { @class = "btn btn-primary" })
-    </div>
+
 </body>
 </html>
