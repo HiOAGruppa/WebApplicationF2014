@@ -29,7 +29,7 @@ namespace WebAppH2014.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(User inUser)
+        public ActionResult Index(UserModifyUser inUser)
         {
             if (isUserInDB(inUser))
             {
@@ -45,16 +45,15 @@ namespace WebAppH2014.Controllers
             }
         }
 
-        private static bool isUserInDB(User inUser)
+        private static bool isUserInDB(UserModifyUser inUser)
         {
-            Debug.WriteLine(inUser.UserId);
-            Debug.WriteLine(inUser.FirstName + " - " + inUser.LastName);
-            Debug.WriteLine(inUser.Password);
 
             using (var db = new StoreContext())
             {
+                if (inUser.OldPassword == null || inUser.UserLogin.UserName == null)
+                    return false;
                 //these fields are dependent on index.cshtml modelformat used to generate the inUser
-                byte[] passordDb = genHash(inUser.Password);
+                byte[] passordDb = genHash(inUser.OldPassword);
                 UserLogin foundUser = db.UserPasswords.Where(b => b.Password == passordDb && b.UserName == inUser.UserLogin.UserName).FirstOrDefault();
                 if (foundUser == null)
                 {
@@ -110,7 +109,7 @@ namespace WebAppH2014.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User inUser)
+        public ActionResult Register(UserModifyUser inUser)
         {
             if (!ModelState.IsValid)
             {
@@ -121,7 +120,7 @@ namespace WebAppH2014.Controllers
                 try
                 {
                     var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName };
-                    byte[] passwordDb = genHash(inUser.Password);
+                    byte[] passwordDb = genHash(inUser.OldPassword);
                     UserLogin userlogin = new UserLogin { UserId = newUser.UserId, Password = passwordDb, UserName = inUser.UserLogin.UserName };
                     newUser.UserLogin = userlogin;
 

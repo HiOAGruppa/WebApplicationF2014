@@ -33,8 +33,6 @@ namespace WebAppH2014.Models
 
         public ICollection<Order> Orders { get; set; }
 
-        public String Password { get; set; }
-
         public UserLogin UserLogin { get; set; }
 
         public String toString()
