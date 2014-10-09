@@ -25,7 +25,24 @@ namespace WebAppH2014.Controllers
             if (!isLoggedIn())
                 return RedirectToAction("Index","Login");
             else
+            {
+                int userId = (int)Session["UserId"];
+                User currentUser = storeDB.getUser(userId);
+
+                if(currentUser.Address == null || currentUser.ZipCode == null)
+                {
+                    string error = "Du har ikke registrert en adresse!";
+                    ViewBag.ErrorMessage = error;
+                    return View("Error");
+                }
+                if(currentUser.DateOfBirth == null)
+                {
+                    string error = "Du har ikke registrert en fødselsdato!";
+                    ViewBag.ErrorMessage = error;
+                    return View("Error");
+                }
                 return View();
+            }
         }
         //
         // GET: /Checkout/Complete

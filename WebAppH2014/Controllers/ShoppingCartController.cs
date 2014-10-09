@@ -61,7 +61,17 @@ namespace WebAppH2014.Controllers
 
             return RedirectToAction("Index");
         }
-
+        private Boolean isLoggedIn()
+        {
+            if (Session["LoggedIn"] != null)
+            {
+                if (ViewBag.isUser != 0)
+                    return (bool)Session["LoggedIn"];
+                else
+                    return false;
+            }
+            return false;
+        }
         //
         // GET: /ShoppingCart/CartSummary
 
@@ -73,6 +83,29 @@ namespace WebAppH2014.Controllers
             ViewData["CartCount"] = cart.GetCount();
 
             return PartialView("CartSummary");
+        }
+
+        [ChildActionOnly]
+        public ActionResult LoggedIn()
+        {
+            string ut = "Logg inn";
+            if (isLoggedIn())
+                ut = "Min Side";
+
+            ViewData["CartCount"] = ut;
+
+            return PartialView("LoggedSummary");
+        }
+        [ChildActionOnly]
+        public ActionResult LoggedInSidenav()
+        {
+            string ut = "Logg inn";
+            if (isLoggedIn())
+                ut = "Min Side";
+
+            ViewData["CartCount"] = ut;
+
+            return PartialView("LoggedSummarySide");
         }
     }
 }
