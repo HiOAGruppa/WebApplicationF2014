@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -154,16 +155,25 @@ namespace WebAppH2014.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="inUser">The user recieved by the controller from .cshtml. Can be partyle empty.</param>
+        /// <param name="inUser">The user recieved by the controller from .cshtml. Can be partly empty.</param>
         /// <returns>The view</returns>
-        public ActionResult ModifyUser(User inUser)
+        public ActionResult ModifyUser(UserModifyUser inUser)
         {
+
+            if (inUser.NewPassword != inUser.ConfirmNewPassword && inUser.NewPassword != null && inUser.ConfirmNewPassword != null)
+            {
+                ModelState.AddModelError("passwordFormatError", "Your new passwords don't match.");
+            }
+
             if (isLoggedIn())
             {
                 using (var db = new StoreContext())
                 {
                     int userId = (int)Session["UserId"];
-                    modifyUserInfo(inUser, db);
+                    UserModifyUser problematicSave = modifyUserInfo(inUser, db);
+
+                    if (problematicSave != null)
+                        return View(problematicSave);
 
                     Debug.WriteLine(userId);
 
@@ -171,9 +181,8 @@ namespace WebAppH2014.Controllers
                     {
                         User currentUser = db.getUser(userId);
                         Debug.WriteLine(currentUser.toString());
-
-                        return View(currentUser);
-                        // return RedirectToAction("ModifyUser", db.getUser(userId));
+                        UserModifyUser editUser = new UserModifyUser(currentUser);
+                        return View(editUser);
                     }
                     catch
                     {
@@ -198,11 +207,13 @@ namespace WebAppH2014.Controllers
             }
             return false;
         }
-
-        private void modifyUserInfo(User user, StoreContext db)
+        //returns null if everything went well.
+        //returns current UsermodifyUser-object for further editing if we didnt save info properly
+        private UserModifyUser modifyUserInfo(UserModifyUser user, StoreContext db)
         {
             if (user.UserId != 0)
             {
+                //changes all user-settings that differ from db-object
                 User userInDb = db.getUser(user.UserId);
                 if (user.FirstName != userInDb.FirstName && user.FirstName != "")
                     userInDb.FirstName = user.FirstName;
@@ -215,11 +226,32 @@ namespace WebAppH2014.Controllers
                 if (user.DateOfBirth != userInDb.DateOfBirth)
                     userInDb.DateOfBirth = user.DateOfBirth;
 
-           //         makeDate(user.DateOfBirth);
+                bool passwordMatchesHash = false;
+                if (user.OldPassword != null)
+                    passwordMatchesHash = StructuralComparisons.StructuralEqualityComparer.Equals(genHash(user.OldPassword), userInDb.UserLogin.Password);
+                else
+                    return user;
+                //validates that new password has been typed twice, and that old password matches old hashed password.
+                if (user.NewPassword == user.ConfirmNewPassword && passwordMatchesHash && user.NewPassword != null)
+                {
+                    Debug.WriteLine("If-clause has been triggered for pw-save");
+                    userInDb.UserLogin.Password = genHash(user.NewPassword);
+                }
+
+                //tells user no settings will be saved if old password is mistyped
+                if (!passwordMatchesHash && user.OldPassword != null)
+            {
+                ModelState.AddModelError("oldPasswordIncorrect", "Du har skrevet feil passord, ingen endringer vil bli lagret.");
+                return user;
+            }
+            else
+            {
+                Debug.WriteLine("settings saved");
                 db.SaveChanges();
             }
+            }
             Debug.WriteLine("modifyUser: \n" + user.toString());
-            return;
+            return null;
         }
     }
 }

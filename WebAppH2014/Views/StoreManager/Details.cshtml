@@ -4,46 +4,58 @@
     ViewBag.Title = "Om";
 }
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
-
-<div>
-
-    <div class="row">
-
-        <div class="col-md-3">
-            <img id="item-img" src="~/Resources/@(@Html.DisplayFor(model => model.ImageUrl)).png" alt="Image of @Model.Name" class="img-thumbnail">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Item.css" />
+    <title>The Stock</title>
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
         </div>
-        <div class="col-md-9">
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Price)
-                </dt>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div>
+                        <img id="item-img" src="~/Resources/@(@Html.DisplayFor(model => model.ImageUrl)).png" alt="Image of @Model.Name" class="img-rounded" style="width: 300px; height:225px;">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Price)
-                </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Price)
+                        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.InStock)
-                </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.InStock)
+                        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.InStock)
-                </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.InStock)
+                        </dd>
 
-            </dl>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            @Html.ActionLink("Tilbake", "Index", new { tom = "" }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Endre", "Edit", new { id = Model.SalesItemId }, new { @class = "btn btn-success" })
+
         </div>
     </div>
-</div>
-<p>
-    @Html.ActionLink("Tilbake", "Index")
-</p>
-
+</body>
