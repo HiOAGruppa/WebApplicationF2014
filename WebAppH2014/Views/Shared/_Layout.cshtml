@@ -4,12 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Tast-En-Tur</title>
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    @*<link href="~/Content/navmenu-reveal.css" rel="stylesheet" type="text/css" />*@
+
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             var url = document.URL;
@@ -47,9 +52,9 @@
 
     @*SIDE BAR*@
     <div class="row">
-        <div class="col-sm-2">
-            <div id="sidebar" class="navbar navbar-default" style="height:90vh">
-                <div class=" nav">
+        <div class="col-md-2">
+            <div id="sidebar" class="navbar-default" style="height:90vh">
+                <div class="nav">
                     @Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
                 </div>
                 <ul class="nav">
@@ -58,7 +63,7 @@
             </div>
         </div>
 
-        <div class="col-sm-9">
+        <div class="col-md-10">
             @RenderBody()
             <hr />
             <footer>
