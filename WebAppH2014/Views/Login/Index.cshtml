@@ -1,4 +1,4 @@
-﻿@model WebAppH2014.Models.User
+﻿@model WebAppH2014.Models.UserModifyUser
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +35,8 @@
                     @Html.LabelFor(model => model.UserLogin.Password)
                 </div>
                 <div class="editor-field">
-                    @Html.PasswordFor(model => model.Password)
-                    @Html.ValidationMessageFor(model => model.UserLogin.Password)
+                    @Html.PasswordFor(model => model.OldPassword)
+                    @Html.ValidationMessageFor(model => model.OldPassword)
                 </div>
                 <p>Ny bruker? @Html.ActionLink("Registrer deg her", "Register") </p>
                 <p> <input type="submit" value="Logg inn" /> </p>
