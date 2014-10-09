@@ -157,6 +157,20 @@ namespace WebAppH2014.Controllers
         /// </summary>
         /// <param name="inUser">The user recieved by the controller from .cshtml. Can be partly empty.</param>
         /// <returns>The view</returns>
+
+        public ActionResult ModifyUser()
+        {
+            if (isLoggedIn())
+            {
+                var db = new StoreContext();
+                User userInDb = db.getUser((int)Session["UserId"]);
+                UserModifyUser displayUser = new UserModifyUser(userInDb);
+                return View(displayUser);
+            }
+            return RedirectToAction("index");
+        
+        }
+        [HttpPost]
         public ActionResult ModifyUser(UserModifyUser inUser)
         {
 
@@ -171,12 +185,12 @@ namespace WebAppH2014.Controllers
                 using (var db = new StoreContext())
                 {
                     int userId = (int)Session["UserId"];
+
                     UserModifyUser problematicSave = modifyUserInfo(inUser, db);
 
+                    //if returned null, method executed without fault
                     if (problematicSave != null)
                         return View(problematicSave);
-
-                    Debug.WriteLine(userId);
 
                     try
                     {
@@ -230,9 +244,10 @@ namespace WebAppH2014.Controllers
         //returns current UsermodifyUser-object for further editing if we didnt save info properly
         private UserModifyUser modifyUserInfo(UserModifyUser user, StoreContext db)
         {
-            if (user.UserId != 0)
+            int userId = (int)Session["UserId"];
+            if (userId != 0)
             {
-                User userInDb = db.getUser(user.UserId);
+                User userInDb = db.getUser(userId);
 
                 //did user type in correct password compared to database entry?
                 bool passwordMatchesHash = false;
@@ -267,9 +282,13 @@ namespace WebAppH2014.Controllers
 
                 Debug.WriteLine("settings saved");
                 db.SaveChanges();
-            
+                Debug.WriteLine("modifyUser: \n" + user.toString());
             }
-            Debug.WriteLine("modifyUser: \n" + user.toString());
+            else
+            {
+                return user;
+            }
+           
             return null;
         }
 
