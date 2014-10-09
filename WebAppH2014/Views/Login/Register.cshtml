@@ -19,7 +19,7 @@
             <legend>Registrer bruker</legend>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.FirstName)
+                @Html.Label("Fornavn")
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.FirstName)
@@ -27,7 +27,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.LastName)
+                @Html.Label("Etternavn")
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.LastName)
@@ -35,7 +35,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.UserLogin.UserName)
+                @Html.Label("Brukernavn")
             </div>
             <div class="editor-field">
                 @Html.EditorFor(model => model.UserLogin.UserName)
@@ -43,7 +43,7 @@
             </div>
 
             <div class="editor-label">
-                @Html.LabelFor(model => model.OldPassword)
+                @Html.Label("Passord")
             </div>
             <div class="editor-field">
                 @Html.PasswordFor(model => model.OldPassword)

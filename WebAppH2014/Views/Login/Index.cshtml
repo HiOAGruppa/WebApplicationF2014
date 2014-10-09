@@ -24,7 +24,7 @@
                 <legend>Logg inn</legend>
 
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.UserLogin.UserName)
+                    @Html.Label("Brukernavn")
                 </div>
                 <div class="editor-field">
                     @Html.EditorFor(model => model.UserLogin.UserName)
@@ -32,14 +32,14 @@
                 </div>
 
                 <div class="editor-label">
-                    @Html.LabelFor(model => model.UserLogin.Password)
+                    @Html.Label("Passord")
                 </div>
                 <div class="editor-field">
                     @Html.PasswordFor(model => model.OldPassword)
                     @Html.ValidationMessageFor(model => model.OldPassword)
                 </div>
                 <p>Ny bruker? @Html.ActionLink("Registrer deg her", "Register") </p>
-                <p> <input type="submit" value="Logg inn" /> </p>
+                <p> <input type="submit" value="Logg inn" class="btn btn-success" /> </p>
             </fieldset>
        </div>
     }
