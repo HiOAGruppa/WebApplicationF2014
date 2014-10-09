@@ -9,6 +9,6 @@
 
 <li class="nav-divider"></li>
 <div class="nav">@Html.ActionLink("Bruker", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })</div>
-<li>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "" }, null)</li>
 <li>@{Html.RenderAction("LoginLink", "Login", null);}</li>
+<li>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "" }, null)</li>
 <li class="nav-divider"></li>
