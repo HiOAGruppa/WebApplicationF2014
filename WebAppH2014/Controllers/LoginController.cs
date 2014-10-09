@@ -226,18 +226,20 @@ namespace WebAppH2014.Controllers
                 if (user.DateOfBirth != userInDb.DateOfBirth)
                     userInDb.DateOfBirth = user.DateOfBirth;
 
-
-
-                bool passwordMatchesHash = StructuralComparisons.StructuralEqualityComparer.Equals(genHash(user.OldPassword), userInDb.UserLogin.Password);
+                bool passwordMatchesHash = false;
+                if (user.OldPassword != null)
+                    passwordMatchesHash = StructuralComparisons.StructuralEqualityComparer.Equals(genHash(user.OldPassword), userInDb.UserLogin.Password);
+                else
+                    return user;
                 //validates that new password has been typed twice, and that old password matches old hashed password.
-                if (user.NewPassword == user.ConfirmNewPassword && passwordMatchesHash)
+                if (user.NewPassword == user.ConfirmNewPassword && passwordMatchesHash && user.NewPassword != null)
                 {
                     Debug.WriteLine("If-clause has been triggered for pw-save");
                     userInDb.UserLogin.Password = genHash(user.NewPassword);
                 }
 
                 //tells user no settings will be saved if old password is mistyped
-                if (!passwordMatchesHash)
+                if (!passwordMatchesHash && user.OldPassword != null)
             {
                 ModelState.AddModelError("oldPasswordIncorrect", "Du har skrevet feil passord, ingen endringer vil bli lagret.");
                 return user;
