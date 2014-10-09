@@ -10,10 +10,22 @@
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = document.URL;
+
+            $(".nav li a").each(function () {
+                if (this.href == url) {
+                    $(this).closest("li").addClass("active");
+                }
+            });
+        });
+    </script>
+
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
@@ -31,7 +43,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
 
     @*SIDE BAR*@
