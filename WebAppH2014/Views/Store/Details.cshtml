@@ -52,8 +52,8 @@
         </div>
 
         <div class="panel-footer">
-            @Html.ActionLink("Legg i Handlevogn", "AddToCart", "ShoppingCart", new { id = Model.SalesItemId }, new { @class = "btn btn-success" })
             @Html.ActionLink("Tilbake", "Browse", "Store", new { genre = "data" }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Legg i Handlevogn", "AddToCart", "ShoppingCart", new { id = Model.SalesItemId }, new { @class = "btn btn-success" })
         </div>
     </div>        
 </body>
