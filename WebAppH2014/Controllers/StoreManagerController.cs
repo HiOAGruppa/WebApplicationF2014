@@ -118,6 +118,15 @@ namespace WebAppH2014.Controllers
             return RedirectToAction("Index");
         }
 
+        public void Slett(int id)
+        {
+            // denne kalles via et Ajax-kall
+            SalesItem item = db.SalesItems.Find(id);
+            db.SalesItems.Remove(item);
+            db.SaveChanges();
+            // kunne returnert en feil dersom slettingen feilet....
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

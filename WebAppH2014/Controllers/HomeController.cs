@@ -13,12 +13,8 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
-
-            var genreModel = db.Genres.Include("Items")
-                .Single(g => g.Name == "Data");
-
-            return View(genreModel);
-            //return View();
+            var salesItems = db.SalesItems.ToList();
+            return View(salesItems);
         }
 
         public ActionResult Item()
