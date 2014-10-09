@@ -171,6 +171,7 @@
     <Content Include="Views\StoreManager\sletteModal.cshtml" />
     <Content Include="Views\Login\LoginNav.cshtml" />
     <Content Include="Views\Login\AdminView.cshtml" />
+    <Content Include="Views\Home\SalesItemView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

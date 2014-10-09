@@ -1,0 +1,22 @@
+﻿@model WebAppH2014.Models.SalesItem
+
+<div class="panel" id="content">
+    <div class="panel-body">
+        <a href="~/Store/Details/@(Model.SalesItemId)"><img id="item-img" src="~/Resources/@(Model.ImageUrl).png" alt="Keyboard" /></a>
+        <h2>@Model.Name</h2>
+    </div>
+    <div class="panel-footer">
+        @if (Model.Description.Length > 60)
+        {
+            <p style="height:40px">@(Model.Description.Substring(0, 60)) <a href="~/Store/Details/@(Model.SalesItemId)"> ...les mer</a></p>
+        }
+        else
+        {
+            <p style="height:40px">@(Model.Description) <a href="~/Store/Details/@(Model.SalesItemId)"> ...les mer</a></p>
+        }
+        <div id="price-wrap"><h3>@(Model.Price),-</h3></div>
+        <div id="img-wrap">
+            @Html.ActionLink("Legg i Handlevogn", "AddToCart", "ShoppingCart", new { id = Model.SalesItemId }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+</div>
