@@ -84,28 +84,5 @@ namespace WebAppH2014.Controllers
 
             return PartialView("CartSummary");
         }
-
-        [ChildActionOnly]
-        public ActionResult LoggedIn()
-        {
-            string ut = "Logg inn";
-            if (isLoggedIn())
-                ut = "Min Side";
-
-            ViewData["CartCount"] = ut;
-
-            return PartialView("LoggedSummary");
-        }
-        [ChildActionOnly]
-        public ActionResult LoggedInSidenav()
-        {
-            string ut = "Logg inn";
-            if (isLoggedIn())
-                ut = "Min Side";
-
-            ViewData["CartCount"] = ut;
-
-            return PartialView("LoggedSummarySide");
-        }
     }
 }
