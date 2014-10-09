@@ -24,7 +24,7 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,13 +33,12 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Tast-En-Tur", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
+                </div>
             <div class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav"
-                    <li>@{Html.RenderAction("LoggedIn", "ShoppingCart", new { @class = "navbar-brand" });}</li>
-                    <li>@{Html.RenderAction("CartSummary", "ShoppingCart", new { @class = "navbar-brand"});}</li>
-                    @*<li>@Html.ActionLink("Handlevogn", "Index", "ShoppingCart", new { area = "" }, new { @class = "navbar-brand" })</li>*@
-                    <li>@Html.ActionLink("DbTest", "Index", "DbTest", new { area = "" }, new { @class = "navbar-brand" })</li>
+                <ul class="nav navbar-nav">
+                    <li>@{Html.RenderAction("LoginLink", "Login");}</li>
+                    <li>@{Html.RenderAction("CartSummary", "ShoppingCart");}</li>
+                    <li>@Html.ActionLink("DbTest", "Index", "DbTest")</li>
                 </ul>
             </div>
         </div>

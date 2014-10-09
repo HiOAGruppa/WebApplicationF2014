@@ -169,8 +169,7 @@
     <Content Include="Views\Login\UserOrders.cshtml" />
     <Content Include="Views\Login\UserPage.cshtml" />
     <Content Include="Views\StoreManager\sletteModal.cshtml" />
-    <Content Include="Views\ShoppingCart\LoggedSummary.cshtml" />
-    <Content Include="Views\ShoppingCart\LoggedSummarySide.cshtml" />
+    <Content Include="Views\Login\LoginNav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -193,7 +192,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1371</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

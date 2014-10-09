@@ -208,6 +208,24 @@ namespace WebAppH2014.Controllers
             }
             return false;
         }
+
+        //Renders the Login button to reflect whether the user is logged in or not. (shows log in/my page)
+        [ChildActionOnly]
+        public ActionResult LoginLink()
+        {
+            if (isLoggedIn())
+            {
+                ViewData["LoginText"] = "Min Side";
+                ViewData["LoginLink"] = "UserPage";
+            }
+            else {
+                ViewData["LoginText"] = "Logg inn";
+                ViewData["LoginLink"] = "Index";
+
+            }
+            return PartialView("LoginNav");
+        }
+
         //returns null if everything went well.
         //returns current UsermodifyUser-object for further editing if we didnt save info properly
         private UserModifyUser modifyUserInfo(UserModifyUser user, StoreContext db)
