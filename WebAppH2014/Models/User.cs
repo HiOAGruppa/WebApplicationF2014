@@ -12,12 +12,19 @@ namespace WebAppH2014.Models
     public class User
     {
          public int UserId { get; set; }
-        
+         public bool? Admin { get; set; }
+
+        [Required(ErrorMessage = "Fornavn må oppgis")]
+        [StringLength(30, ErrorMessage = "Maks 30 tegn i fornavn")]
         public String FirstName { get; set; }
+
+        [Required(ErrorMessage = "Etternavn må oppgis")]
+        [StringLength(50, ErrorMessage = "Maks 50 tegn i etternavn")]
         public String LastName { get; set; }
-        public bool? Admin { get; set; }
-        
+
         public String Address { get; set; }
+       
+        
         public int? ZipCode { get; set; }
 
         [DisplayFormat(DataFormatString= "{0:dd/MM/yyyy}", ApplyFormatInEditMode=true)]
