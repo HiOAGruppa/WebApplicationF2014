@@ -11,6 +11,7 @@ namespace WebAppH2014.Models
 {
     public class User
     {
+
          public int UserId { get; set; }
         
         public String FirstName { get; set; }
