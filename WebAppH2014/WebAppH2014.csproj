@@ -170,6 +170,7 @@
     <Content Include="Views\Login\UserPage.cshtml" />
     <Content Include="Views\StoreManager\sletteModal.cshtml" />
     <Content Include="Views\Login\LoginNav.cshtml" />
+    <Content Include="Views\Login\AdminView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

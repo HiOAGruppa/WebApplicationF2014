@@ -53,12 +53,15 @@
     @*SIDE BAR*@
     <div class="row">
         <div class="col-md-2">
-            <div id="sidebar" class="navbar-default" style="height:90vh">
-                <div class="nav">
-                    @Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
+            <div id="sidebar" class="sidebar-navbar">
                 <ul class="nav">
+                    <li>@Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "sidebar-brand" }) </li>
                     @{Html.RenderAction("GenreMenu", "Store");}
+                </ul>
+                <ul class="nav">
+                    <li>@Html.ActionLink("Bruker", "Index", "Login", new { area = "" }, new { @class = "sidebar-brand" })</li>
+                    <li>@Html.ActionLink("Admin", "Index", "StoreManager", new { area = "" }, new { @class = "sidebar-nav" })</li>
+                    <li>@{Html.RenderAction("LoginLink", "Login", null);}</li>
                 </ul>
             </div>
         </div>

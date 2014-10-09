@@ -77,11 +77,18 @@ namespace WebAppH2014.Controllers
 
                 if (user == null)
                     HttpNotFound();
-
-                return View(user);
+                if (user.Admin != null && user.Admin == true)
+                    return RedirectToAction("AdminView");
+                else
+                    return View(user);
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult AdminView()
+        {
+            return View();
         }
 
         public ActionResult UserOrders()
