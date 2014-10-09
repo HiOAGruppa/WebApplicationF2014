@@ -5,6 +5,10 @@ using System.Web;
 
 namespace WebAppH2014.Models
 {
+    /// <summary>
+    /// The class is used for handling the information in both login and registry of users.
+    /// Particularly to separate out the handling of passwords in cleartext to a temporary object.
+    /// </summary>
     public class UserModifyUser : User
     {
         public UserModifyUser()
