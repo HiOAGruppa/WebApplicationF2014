@@ -57,6 +57,14 @@ table#tableStyle
 	min-width: 400px;
 	width: 100%;
 }
+
+#img-logo-landscape {
+    float: left;
+    vertical-align: central;
+    height: 30px;
+    margin: 10px;
+}
+
 tr
 {
 	border: 1px solid #000;
