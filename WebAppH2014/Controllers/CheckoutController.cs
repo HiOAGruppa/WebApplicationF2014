@@ -34,12 +34,12 @@ namespace WebAppH2014.Controllers
                     error += "\n";
                 error += "Adresse ikke registrert!";
             }
-            if(currentUser.DateOfBirth == null)
+            /*if(currentUser.DateOfBirth == null)
             {
                 if (!error.Equals(""))
                     error += "\n";
                 error += "Fødselsdato ikke registrert!";
-            }
+            }*/
 
             if(!error.Equals(""))
             {
