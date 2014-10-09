@@ -1,4 +1,4 @@
-﻿@model WebAppH2014.Models.Genre
+﻿@model List<WebAppH2014.Models.SalesItem>
 
 @{
     ViewBag.Title = "Hjem";
@@ -29,11 +29,11 @@
                 var num = -1;
                 while (used.Contains(num))
                 {
-                    num = r.Next(@Model.Items.Count);
+                    num = r.Next(@Model.Count);
                 }
                 used[i] = num;
 
-                var item = Model.Items.ElementAt(num);
+                var item = Model.ElementAt(num);
                 <div class="panel" id="content">
                     <div class="panel-body">
                         <a href="~/Store/Details/@(item.SalesItemId)"><img id="item-img" src="~/Resources/@(item.ImageUrl).png" alt="Keyboard" /></a>
