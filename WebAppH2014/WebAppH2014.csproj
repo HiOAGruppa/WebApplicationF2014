@@ -167,6 +167,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Login\UserOrders.cshtml" />
     <Content Include="Views\Login\UserPage.cshtml" />
+    <Content Include="Views\StoreManager\sletteModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
