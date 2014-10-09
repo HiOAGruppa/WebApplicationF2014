@@ -221,6 +221,5 @@ namespace WebAppH2014.Controllers
             Debug.WriteLine("modifyUser: \n" + user.toString());
             return;
         }
-
     }
 }
