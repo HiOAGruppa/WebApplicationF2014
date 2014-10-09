@@ -163,6 +163,7 @@ namespace WebAppH2014.Controllers
             if (inUser.NewPassword != inUser.ConfirmNewPassword && inUser.NewPassword != null && inUser.ConfirmNewPassword != null)
             {
                 ModelState.AddModelError("passwordFormatError", "Your new passwords don't match.");
+                return View(inUser);
             }
 
             if (isLoggedIn())
@@ -213,8 +214,21 @@ namespace WebAppH2014.Controllers
         {
             if (user.UserId != 0)
             {
-                //changes all user-settings that differ from db-object
                 User userInDb = db.getUser(user.UserId);
+
+                //did user type in correct password compared to database entry?
+                bool passwordMatchesHash = false;
+                if (user.OldPassword != null)
+                    passwordMatchesHash = StructuralComparisons.StructuralEqualityComparer.Equals(genHash(user.OldPassword), userInDb.UserLogin.Password);
+
+                //tells user no settings will be saved if old password is mistyped or null
+                if (!passwordMatchesHash || user.OldPassword == null)
+                {
+                    ModelState.AddModelError("oldPasswordIncorrect", "Du har skrevet feil passord, ingen endringer vil bli lagret.");
+                    return user;
+                }
+
+                //changes all user-settings that differ from db-object
                 if (user.FirstName != userInDb.FirstName && user.FirstName != "")
                     userInDb.FirstName = user.FirstName;
                 if (user.LastName != userInDb.LastName && user.LastName != "")
@@ -226,11 +240,6 @@ namespace WebAppH2014.Controllers
                 if (user.DateOfBirth != userInDb.DateOfBirth)
                     userInDb.DateOfBirth = user.DateOfBirth;
 
-                bool passwordMatchesHash = false;
-                if (user.OldPassword != null)
-                    passwordMatchesHash = StructuralComparisons.StructuralEqualityComparer.Equals(genHash(user.OldPassword), userInDb.UserLogin.Password);
-                else
-                    return user;
                 //validates that new password has been typed twice, and that old password matches old hashed password.
                 if (user.NewPassword == user.ConfirmNewPassword && passwordMatchesHash && user.NewPassword != null)
                 {
@@ -238,17 +247,9 @@ namespace WebAppH2014.Controllers
                     userInDb.UserLogin.Password = genHash(user.NewPassword);
                 }
 
-                //tells user no settings will be saved if old password is mistyped
-                if (!passwordMatchesHash && user.OldPassword != null)
-            {
-                ModelState.AddModelError("oldPasswordIncorrect", "Du har skrevet feil passord, ingen endringer vil bli lagret.");
-                return user;
-            }
-            else
-            {
                 Debug.WriteLine("settings saved");
                 db.SaveChanges();
-            }
+            
             }
             Debug.WriteLine("modifyUser: \n" + user.toString());
             return null;
