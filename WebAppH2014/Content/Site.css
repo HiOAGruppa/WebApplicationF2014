@@ -55,35 +55,38 @@ h1 {
     padding-bottom: 0px;
 }
 
-ul.nav :hover {
+ul.nav .nav-item :hover {
     background: -webkit-linear-gradient(top, #007fdf, #005f9f);
 }
 
+ul.nav li.nav-item :visited,
+ul.nav li.nav-item :link {
+    font-size:large;
+    color: white;
+}
 
 ul.nav li :hover {
-    background: none;
     text-decoration: none;
 }
 
-    .nav-item a {
-        color: #fff;
-    }
-
+.navbar-collapse {
+    background: -webkit-linear-gradient(top, #005fbf, #003f7f);
+}
 
 @media (min-width: 768px) {
-    #main-sidebar{
-        float:left;
+    #main-sidebar {
+        float: left;
         width: 130px;
         height: 100vh;
     }
 
     #main-content {
-        overflow-x:hidden;
+        overflow-x: hidden;
         margin-left: 150px;
         margin-right: 20px;
     }
 
-    .sidebar-navbar a{
+    .sidebar-navbar a {
         padding-top: 6%;
         padding-bottom: 6%;
     }
@@ -104,31 +107,33 @@ ul.nav li :hover {
         border-color: silver;
     }
 
-.sidebar-navbar ul.nav .sidebar-brand {
-    font-family: Arial;
-    font-weight: bold;
-    font-size:larger;
-    color: #444;
-     background: #ebebef;
-}
+    .sidebar-navbar ul.nav .sidebar-brand {
+        font-family: Arial;
+        font-weight: bold;
+        font-size: larger;
+        color: #444;
+        background: #ebebef;
+    }
+    .sidebar-navbar ul.nav :link,
+    .sidebar-navbar ul.nav :visited,
+    .sidebar-navbar ul.nav .sidebar-nav {
+        color: #444;
+    }
 
-.sidebar-navbar ul.nav .sidebar-nav {
-    color: #444;
-}
+    .sidebar-navbar ul.nav :hover {
+        background-color: #bbb;
+        color: #000;
+    }
 
-.sidebar-navbar ul.nav :hover {
-    background-color: #bbb;
-    color: #000;
-}
+    .sidebar-navbar ul.nav :active {
+        background-color: #808080;
+    }
 
-.sidebar-navbar ul.nav :active {
-    background-color: #808080;
-}
+    .sidebar-navbar .navbar-collapse {
+        padding: 0;
+        max-height: none;
+    }
 
-.sidebar-navbar .navbar-collapse {
-    padding: 0;
-    max-height: none;
-}
 
 
 #navlist li {
@@ -186,11 +191,10 @@ th, td {
     float: left;
 }
 
-#WrongP
-{
-    text-align:center;
-    padding-top:1em;
-    border:thin solid silver;
-    background-color:#f5f3f3;
-    color:red;
+#WrongP {
+    text-align: center;
+    padding-top: 1em;
+    border: thin solid silver;
+    background-color: #f5f3f3;
+    color: red;
 }
