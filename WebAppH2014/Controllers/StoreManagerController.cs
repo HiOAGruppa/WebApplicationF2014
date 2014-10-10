@@ -93,7 +93,6 @@ namespace WebAppH2014.Controllers
         {
             if (ModelState.IsValid)
             {
-                item.ImageUrl = item.Name;
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
