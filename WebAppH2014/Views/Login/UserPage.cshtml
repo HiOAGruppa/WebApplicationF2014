@@ -6,53 +6,50 @@
 
 <body>
     <h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName) sin side</h2>
+    <hr />
 
-    <div>
-        <h4></h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Fornavn
-            </dt>
+    <dl class="dl-horizontal">
+        <dt>
+            Fornavn
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
 
-            <dt>
-                Etternavn
-            </dt>
+        <dt>
+            Etternavn
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
 
-            <dt>
-                Adresse
-            </dt>
+        <dt>
+            Adresse
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
 
-            <dt>
-                Postnummer
-            </dt>
+        <dt>
+            Postnummer
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ZipCode)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
 
-            <dt>
-                Fødselsdato
-            </dt>
+        <dt>
+            Fødselsdato
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.DateOfBirth)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </dd>
 
-        </dl>
-    </div>
+    </dl>
     <hr />
     <p>
         @Html.ActionLink("Min handlevogn", "Index", "ShoppingCart", new { tom = "" }, new { @class = "btn btn-success" })
