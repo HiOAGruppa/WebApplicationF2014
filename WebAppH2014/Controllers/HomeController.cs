@@ -22,6 +22,11 @@ namespace WebApp.Controllers
             return View();
         }
 
+        public ActionResult SalesItemView()
+        {
+            return View();
+        }
+
         // UNUSED??? BAD TODO-PRACTICE #YOLO
         /*     
         public ActionResult About()

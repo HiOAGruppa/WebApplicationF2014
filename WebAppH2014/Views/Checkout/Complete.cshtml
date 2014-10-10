@@ -1,12 +1,43 @@
-﻿
+﻿@model WebAppH2014.Models.Order
 @{
     ViewBag.Title = "Betaling Utført";
 }
-<h2>Betaling Utført</h2>
+<body>
+    <h2>Betaling Utført</h2>
 
-<p>Takk for din bestilling! Ditt ordrenummer er: </p>
+    <p>Takk for din bestilling! </p>
+    <table class="table">
+        <tr>
+            <th colspan="3">
+                <p><h4>Ordernummer: @Model.OrderId</h4></p>
+            </th>
+        </tr>
+        <tr class="tsh">
+            <td> Produkt </td>
+            <td> Pris per enhet </td>
+            <td> Antall </td>
+        </tr>
 
-<p>
-    Hva med å se på noen av våre andre keyboards?
-    @Html.ActionLink("Se mer", "Index", "Home")
-</p>
+
+        @if (@Model.SalesItems != null)
+        {
+            foreach (var item in @Model.SalesItems)
+            {
+                if (item.SalesItem != null)
+                {
+                    <tr>
+                        <td> @item.SalesItem.Name </td>
+                        <td> @item.SalesItem.Price </td>
+                        <td> @item.Amount </td>
+                    </tr>
+                }
+            }
+        }
+
+    </table>
+
+    <p>
+        Hva med å se på noen av våre andre keyboards?<br />
+        @Html.ActionLink("Se mer", "Index", "Home",null, new { @class = "btn btn-primary" })
+    </p>
+</body>
