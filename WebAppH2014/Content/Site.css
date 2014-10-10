@@ -88,9 +88,10 @@ h1 {
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
   .sidebar-navbar{
-        background-color:#ddd;
+        background-color:#f5f3f3; /*#ddd*/
         border-width:thin;
         border-color:#666;
+        border-right: thin solid silver;
         height:100vh;
   }
 
@@ -101,10 +102,17 @@ h1 {
     .sidebar-navbar ul.nav li{
        border-bottom:solid;
        border-width:thin;
-       border-color:#ccc;
-       background-color:#ddd;         
-       background:-webkit-linear-gradient(top, #ddd, #ccc);
+       border-color:silver;
+       //background-color:#ddd;         
+      //background:-webkit-linear-gradient(top, #ddd, #ccc);
   }
+    #menuHead
+    {
+       border-bottom:solid;
+       border-width:thin;
+       border-color:silver;
+       background:#ebebef;
+    }
    .sidebar-navbar .nav .sidebar-brand{
        font-family:Arial;
        font-weight:bold;

@@ -9,6 +9,9 @@
         <hr />
         <dl class="dl-horizontal"></dl>
     </div>
-   <p> @Html.ActionLink("Vare lager", "Index", "StoreManager", new { area = "" }, new { @class = "btn btn-success" })</p>
+   <p>
+       @Html.ActionLink("Vare lager", "Index", "StoreManager", new { area = "" }, new { @class = "btn btn-success" })
+       @Html.ActionLink("Logg ut", "LogoutAction", "Login", new { tom = "" }, new { @class = "btn btn-default" })
+    </p>
 </body>
 
