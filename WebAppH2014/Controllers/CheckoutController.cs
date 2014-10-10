@@ -16,11 +16,14 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
-            if (!isLoggedIn())
-                return RedirectToAction("Index", "Login");
-            
+
             string error = "";
-            if (ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
+            if (!isLoggedIn())
+            {
+               // return RedirectToAction("Index", "Login");
+                error += "For å fullføre denne handlingen må du være innlogget! Logg inn eller registrer deg, og prøv igjen.";
+            }
+            else if (ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
             {
                 error +="Handlevognen er tom!";
             }
@@ -35,12 +38,6 @@ namespace WebAppH2014.Controllers
                     error += "Adresse ikke registrert! Registrer adresse på din side, og prøv igjen.";
                 }
             }
-            /*if(currentUser.DateOfBirth == null)
-            {
-                if (!error.Equals(""))
-                    error += "\n";
-                error += "Fødselsdato ikke registrert!";
-            }*/
 
             if(!error.Equals(""))
             {
