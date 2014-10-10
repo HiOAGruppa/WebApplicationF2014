@@ -52,9 +52,13 @@
             </div>
         </div>
 
-        <p>
-            @Html.ActionLink("Tilbake", "Index", new { tom = "" }, new { @class = "btn btn-primary" })
-            <input type="submit" value="Lagre" class="btn btn-success col-md-2" />
-        </p>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-1">
+                @Html.ActionLink("Tilbake", "Index", new { tom = "" }, new { @class = "btn btn-primary" })
+            </div>
+            <div class="col-md-1">
+                <input type="submit" value="Lagre" class="btn btn-success" />
+            </div>
+        </div>
     </div>
 }

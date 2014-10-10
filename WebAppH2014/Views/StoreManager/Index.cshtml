@@ -56,9 +56,11 @@
 </head>
 <body>
     <h2>Oversikt</h2>
-    <p>
-        @Html.ActionLink("Opprett Ny", "Create", new { tom = "" }, new { @class = "btn btn-success" })
-    </p>
+    <hr/>
+    @Html.ActionLink("Tilbake", "AdminView", "Login", new { tom = "" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Legg til vare", "Create", new { tom = "" }, new { @class = "btn btn-success" })
+    <hr />
+
     <table id="tableStyle">
         <tr>
             <th>

@@ -73,13 +73,14 @@ ul.nav li :hover {
 @media (min-width: 768px) {
     #main-sidebar{
         float:left;
-        width: 120px;
+        width: 130px;
         height: 100vh;
     }
 
     #main-content {
         overflow-x:hidden;
-        margin-left: 140px;
+        margin-left: 150px;
+        margin-right: 20px;
     }
 
     .sidebar-navbar a{
