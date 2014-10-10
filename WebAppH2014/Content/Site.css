@@ -177,7 +177,9 @@ th, td {
 #img-logo-landscape {
     float: left;
     vertical-align: central;
-    height: 35px;
+    max-height:35px;
+    height : 3vw;
+    min-height:30px;
     margin: 10px;
     margin-left: 15px;
 }
