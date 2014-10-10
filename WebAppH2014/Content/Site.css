@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 55px;
     padding-bottom: 20px;
 }
 
@@ -30,41 +30,96 @@ textarea {
           transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
+#content {
+    background: #003f7f;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+    margin: 5px;
+    width: 30%;
+    display: inline-block;
+    float: inherit;
+}
+
+.body-content {
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+}
+
+h1 {
+        font-family: Arial;
+        font-weight: bold;
+    }
+
+
+/*Navbar Header*/
+@media (min-width: 768px) {
+    .navbar-inverse{
+        background:-webkit-linear-gradient(top, #005fbf, #003f7f);
+        height:55px;
+        padding-bottom:0px;
+    }
+
+    ul.nav :hover {
+        background: -webkit-linear-gradient(top, #007fdf, #005f9f);
+    }
+
+
+    ul.nav li :hover {
+        background:none;
+        text-decoration:none;
+    }
+
+    .nav-item {
+        border-left:solid;
+        border-width:thin;
+        border-color:#aaa;
+    }
+
+    .nav-item:first-child{
+        border-left:none;
+    }
+
+    .nav-item a{
+        color:#fff;
+    }
+        
+}
+
 /* make sidebar nav vertical */ 
 @media (min-width: 768px) {
   .sidebar-navbar{
-      border:solid;
-      border-width:thin;
-      border-color:#666;
-      height:100vh
+        background-color:#ddd;
+        border-width:thin;
+        border-color:#666;
+        height:100vh;
   }
 
     .sidebar-navbar ul{
         font-size:15px;
-        background-color:#eeeeee;
   }
 
     .sidebar-navbar ul.nav li{
        border-bottom:solid;
        border-width:thin;
+       border-color:#ccc;
+       background-color:#ddd;         
+       background:-webkit-linear-gradient(top, #ddd, #ccc);
   }
    .sidebar-navbar .nav .sidebar-brand{
        font-family:Arial;
        font-weight:bold;
-       background:-webkit-linear-gradient(top, #eee, #aaa);
-       color:#555;
        font-size: 24px;
        padding: 10px;
+       color: #444;
+
   }
-
-
     .sidebar-navbar ul.nav .sidebar-nav{
-       color: #000;
+       color: #444;
   }
 
     .sidebar-navbar ul.nav :hover{
-      background-color:#003f7f;
-      color:#fff;
+      background-color:#bbb;
+      color:#000;
   }
 
     .sidebar-navbar ul.nav :active{
@@ -77,7 +132,6 @@ textarea {
   }
 
 }
-
 
 /*navlist == navigation in the topbar*/
 #navlist
@@ -93,48 +147,47 @@ textarea {
 
 
 /*Styling for the tables (cart and admin)*/
-table#tableStyle
-{
-    border: 1px solid #000;
-	border-collapse: collapse;
-	color: #666666;
-	min-width: 400px;
-	width: 100%;
+@media (min-width: 768px) {
+
+    table#tableStyle {
+        border: 1px solid #000;
+        border-collapse: collapse;
+        color: #666666;
+        min-width: 400px;
+        width: 100%;
+    }
+
+    tr {
+        border: 1px solid #000;
+        line-height: 20px;
+    }
+
+    th {
+        background: #005fbf;
+        color: #FFF;
+        font-size: 13px;
+        text-align: left;
+    }
+
+    th, td {
+        padding-left: 5px;
+    }
+
+    .tsh {
+        background: #609ae6;
+        color: #FFF;
+        font-size: 13px;
+        text-align: left;
+    }
 }
+
 
 #img-logo-landscape {
     float: left;
     vertical-align: central;
-    height: 30px;
+    height: 35px;
     margin: 10px;
     margin-left: 15px;
-}
-
-tr
-{
-	border: 1px solid #000;
-	line-height: 20px;
-}
-
-th
-{
-    background:-webkit-linear-gradient(top, #005fbf, #003f7f);
-	color: #FFF;
-	font-size: 13px;
-	text-align: left;
-}
-
-th, td
-{
-	padding-left: 5px;
-}
-
-.tsh
-{
-    background: #3079c3;
-	color: #FFF;
-	font-size: 13px;
-	text-align: left;
 }
 
 /*Buttons*/

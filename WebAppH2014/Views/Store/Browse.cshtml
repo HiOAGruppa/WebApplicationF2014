@@ -7,14 +7,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" type="text/css" href="~/Content/Item.css" />
     <title>Utvalg</title>
 </head>
 <body>
-    <div class="genre">
-        <h1 id="sub-title">@Model.Name</h1>
-        <br>
-
+    <div>
+        <div class="header">
+            <h1>@Model.Name</h1>
+            <hr/>
+        </div>
         @foreach (var item in Model.Items)
         {
             <div class="panel" id="content">
