@@ -24,7 +24,7 @@ namespace WebAppH2014.Controllers
             {
                 ViewBag.isLoggedIn = (bool)Session["LoggedIn"];
             }
-
+            ViewBag.WrongPassword = false;
             return View();
         }
 
@@ -35,12 +35,14 @@ namespace WebAppH2014.Controllers
             {
                 Debug.WriteLine("Login == true");
                 LogIn(inUser);
+                ViewBag.WrongPassword = false;
                 return View();
             }
             else
             {
                 Debug.WriteLine("Login == false");
                 LogOut();
+                ViewBag.WrongPassword = true;
                 return View();
             }
         }
@@ -197,7 +199,8 @@ namespace WebAppH2014.Controllers
                         User currentUser = db.getUser(userId);
                         Debug.WriteLine(currentUser.toString());
                         UserModifyUser editUser = new UserModifyUser(currentUser);
-                        return View(editUser);
+                        //return View(editUser);
+                        return RedirectToAction("Index");
                     }
                     catch
                     {

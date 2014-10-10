@@ -206,3 +206,12 @@ h1 {
 {
     float: left;
 }
+
+#WrongP
+{
+    text-align:center;
+    padding-top:1em;
+    border:thin solid silver;
+    background-color:#f5f3f3;
+    color:red;
+}
