@@ -7,27 +7,29 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-      display: block;
-      width: 100%;
-  height: 34px;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.428571429;
-  color: #555555;
-  vertical-align: middle;
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-          transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 #content {
@@ -40,151 +42,139 @@ textarea {
     float: inherit;
 }
 
-.body-content {
-    border-bottom-left-radius:10px;
-    border-bottom-right-radius:10px;
-}
-
 h1 {
-        font-family: Arial;
-        font-weight: bold;
-    }
+    font-family: Arial;
+    font-weight: bold;
+}
 
 
 /*Navbar Header*/
-@media (min-width: 768px) {
-    .navbar-inverse{
-        background:-webkit-linear-gradient(top, #005fbf, #003f7f);
-        height:55px;
-        padding-bottom:0px;
-    }
-
-    ul.nav :hover {
-        background: -webkit-linear-gradient(top, #007fdf, #005f9f);
-    }
-
-
-    ul.nav li :hover {
-        background:none;
-        text-decoration:none;
-    }
-
-    .nav-item {
-        border-left:solid;
-        border-width:thin;
-        border-color:#aaa;
-    }
-
-    .nav-item:first-child{
-        border-left:none;
-    }
-
-    .nav-item a{
-        color:#fff;
-    }
-        
+.navbar-inverse {
+    background: -webkit-linear-gradient(top, #005fbf, #003f7f);
+    height: 55px;
+    padding-bottom: 0px;
 }
 
-/* make sidebar nav vertical */ 
-@media (min-width: 768px) {
-  .sidebar-navbar{
-        background-color:#f5f3f3; /*#ddd*/
-        border-width:thin;
-        border-color:#666;
-        border-right: thin solid silver;
-        height:100vh;
-  }
+ul.nav :hover {
+    background: -webkit-linear-gradient(top, #007fdf, #005f9f);
+}
 
-    .sidebar-navbar ul{
-        font-size:15px;
-  }
 
-    .sidebar-navbar ul.nav li{
-       border-bottom:solid;
-       border-width:thin;
-       border-color:silver;
-  }
-    #menuHead
-    {
-       border-bottom:solid;
-       border-width:thin;
-       border-color:silver;
-       background:#ebebef;
+ul.nav li :hover {
+    background: none;
+    text-decoration: none;
+}
+
+.nav-item {
+    border-left: solid;
+    border-width: thin;
+    border-color: #aaa;
+}
+
+    .nav-item:first-child {
+        border-left: none;
     }
-   .sidebar-navbar .nav .sidebar-brand{
-       font-family:Arial;
-       font-weight:bold;
-       font-size: 24px;
-       padding: 10px;
-       color: #444;
 
-  }
-    .sidebar-navbar ul.nav .sidebar-nav{
-       color: #444;
-  }
+    .nav-item a {
+        color: #fff;
+    }
 
-    .sidebar-navbar ul.nav :hover{
-      background-color:#bbb;
-      color:#000;
-  }
 
-    .sidebar-navbar ul.nav :active{
-      background-color:#808080;
-  }
+@media (min-width: 768px) {
+    #main-body{
 
-    .sidebar-navbar .navbar-collapse {
+    }
+
+    #sidebar{
+        float:left;
+        height: 100vh;
+        width: 120px;
+    }
+
+    #main-content {
+        float:left;
+    }
+}
+
+/* Navbar Sidebar */
+.sidebar-navbar {
+    background-color: #f5f3f3; /*#ddd*/
+    border-width: thin;
+    border-color: #666;
+    border-right: thin solid silver;
+}
+
+
+    .sidebar-navbar ul.nav li {
+        border-bottom: solid;
+        border-width: thin;
+        border-color: silver;
+    }
+
+.sidebar-navbar ul.nav .sidebar-brand {
+    font-family: Arial;
+    font-weight: bold;
+    font-size:larger;
+    padding: 6%;
+    color: #444;
+     background: #ebebef;
+}
+
+.sidebar-navbar ul.nav .sidebar-nav {
+    color: #444;
+    padding: 6%;
+}
+
+.sidebar-navbar ul.nav :hover {
+    background-color: #bbb;
+    color: #000;
+}
+
+.sidebar-navbar ul.nav :active {
+    background-color: #808080;
+}
+
+.sidebar-navbar .navbar-collapse {
     padding: 0;
     max-height: none;
-  }
-
 }
 
-/*navlist == navigation in the topbar*/
-#navlist
-{
-	/*float: right;*/
-    /*quick fix*/
-}
 
-#navlist li
-{
-	display:inline;
+#navlist li {
+    display: inline;
 }
 
 
 /*Styling for the tables (cart and admin)*/
-@media (min-width: 768px) {
+table#tableStyle {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    color: #666666;
+    min-width: 400px;
+    width: 100%;
+}
 
-    table#tableStyle {
-        border: 1px solid #000;
-        border-collapse: collapse;
-        color: #666666;
-        min-width: 400px;
-        width: 100%;
-    }
+tr {
+    border: 1px solid #000;
+    line-height: 20px;
+}
 
-    tr {
-        border: 1px solid #000;
-        line-height: 20px;
-    }
+th {
+    background: #005fbf;
+    color: #FFF;
+    font-size: 13px;
+    text-align: left;
+}
 
-    th {
-        background: #005fbf;
-        color: #FFF;
-        font-size: 13px;
-        text-align: left;
-    }
+th, td {
+    padding-left: 5px;
+}
 
-    th, td {
-        padding-left: 5px;
-    }
-
-    .tsh {
-        background: #609ae6;
-        color: #FFF;
-        font-size: 13px;
-        text-align: left;
-    }
+.tsh {
+    background: #609ae6;
+    color: #FFF;
+    font-size: 13px;
+    text-align: left;
 }
 
 
@@ -197,12 +187,10 @@ h1 {
 }
 
 /*Buttons*/
-.button 
-{
+.button {
     float: right;
 }
 
-.button2
-{
+.button2 {
     float: left;
 }

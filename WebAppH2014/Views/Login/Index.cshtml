@@ -10,6 +10,9 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+    <h2>Logg inn</h2>
+    <hr/>
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -21,7 +24,6 @@
         }
         <div style="margin-top:20px">
             <fieldset>
-                <legend>Logg inn</legend>
                 <div class="form-horizontal">
                     <div class="form-group">
                         @Html.Label("Brukernavn", new { @class = "control-label col-md-2" })
