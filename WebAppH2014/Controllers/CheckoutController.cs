@@ -24,15 +24,16 @@ namespace WebAppH2014.Controllers
             {
                 error +="Handlevognen er tom!";
             }
-            
-            int userId = (int)Session["UserId"];
-            User currentUser = storeDB.getUser(userId);
+            else {
+                int userId = (int)Session["UserId"];
+                User currentUser = storeDB.getUser(userId);
 
-            if(currentUser.Address == null || currentUser.ZipCode == null)
-            {
-                if (!error.Equals("")) 
-                    error += "\n";
-                error += "Adresse ikke registrert!";
+                if (currentUser.Address == null || currentUser.ZipCode == null)
+                {
+                    if (!error.Equals(""))
+                        error += "\n";
+                    error += "Adresse ikke registrert! Registrer adresse på din side, og prøv igjen.";
+                }
             }
             /*if(currentUser.DateOfBirth == null)
             {
