@@ -33,15 +33,15 @@
                         @Html.ActionLink(item.Item.Name, "Details", "Store", new { id = item.SalesItemId }, null)
                     </td>
                     <td>
-                        @item.Item.Price
+                        @(item.Item.Price),-
                     </td>
                     <td id="item-count-@item.CartItemId">
                         @item.Count
                     </td>
                     <td>
                         <form action="ShoppingCart/RemoveFromCart/@item.CartItemId" data-ajax="true" data-ajax-mode="replace"
-                              data-ajax-update="#update-message" method="post">
-                            <input type="submit" name="rem" value="slett" class="btn btn-danger" />
+                                data-ajax-update="#update-message" method="post">
+                            <input type="submit" name="rem" value="Slett" class="btn btn-danger" />
                         </form>
                     </td>
                 </tr>
@@ -51,7 +51,7 @@
                     Totalt
                 </td>
                 <td id="cart-total">
-                    @Model.CartTotal
+                    @(Model.CartTotal),-
                 </td>
             </tr>
         </table>
