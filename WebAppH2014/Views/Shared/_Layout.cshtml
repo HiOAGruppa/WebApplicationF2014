@@ -16,7 +16,7 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 
 </head>
-<div>
+<body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -37,27 +37,26 @@
         </div>
     </nav>
 
-    <div id="main-body">
-        @*SIDE BAR*@
-        <div id="sidebar" class="sidebar-navbar">
+    @*SIDE BAR*@
+    <div id="main-sidebar" class="sidebar-navbar">
 
-            <ul class=" nav">
-                <li>@Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "sidebar-brand" }) </li>
-                @{Html.RenderAction("GenreMenu", "Store");}
-            </ul>
-            <ul class="nav">
-                <li>@Html.ActionLink("Bruker", "Index", "Login", new { area = "" }, new { @class = "sidebar-brand" })</li>
-                <li>@{Html.RenderAction("LoginLink", "Login", null);}</li>
-            </ul>
-        </div>
-
-        <div id="main-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Tast-En-Tur</p>
-            </footer>
-        </div>
+        <ul class=" nav">
+            <li>@Html.ActionLink("Kategorier", "Index", "Store", new { area = "" }, new { @class = "sidebar-brand" }) </li>
+            @{Html.RenderAction("GenreMenu", "Store");}
+        </ul>
+        <ul class="nav">
+            <li>@Html.ActionLink("Bruker", "Index", "Login", new { area = "" }, new { @class = "sidebar-brand" })</li>
+            <li>@{Html.RenderAction("LoginLink", "Login", null);}</li>
+        </ul>
     </div>
-</div>
+
+    <div id="main-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Tast-En-Tur</p>
+        </footer>
+    </div>
+
+</body>
 </html>

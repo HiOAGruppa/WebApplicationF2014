@@ -65,34 +65,20 @@ ul.nav li :hover {
     text-decoration: none;
 }
 
-.nav-item {
-    border-left: solid;
-    border-width: thin;
-    border-color: #aaa;
-}
-
-    .nav-item:first-child {
-        border-left: none;
-    }
-
     .nav-item a {
         color: #fff;
     }
 
 
 @media (min-width: 768px) {
-    #main-body{
-
-    }
-
-    #sidebar{
+    #main-sidebar{
         float:left;
         height: 100vh;
         width: 120px;
     }
 
     #main-content {
-        float:left;
+        margin-left: 140px;
     }
 }
 

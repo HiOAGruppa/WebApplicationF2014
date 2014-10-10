@@ -6,10 +6,6 @@
     <title>Logg inn</title>
 </head>
 <body>
-    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
     <h2>Logg inn</h2>
     <hr/>
 
@@ -22,18 +18,12 @@
         {
             Response.Redirect("~/Login/UserPage");
         }
-        <div style="margin-top:20px">
-            <fieldset>
-                <legend>Logg inn</legend>
 
-               @if (ViewBag.WrongPassword)
-                {
-                    <div id="WrongP" class="col-md-offset-1 col-md-5"><p>Du har tastet inn feil passord eller brukernavn<br />Prøv igjen</p></div>
-                   <br /><br /><br /><br />
-                }
-                
+        <div>
+            <fieldset>
                 <div class="form-horizontal">
                     <div class="form-group">
+                        
                         @Html.Label("Brukernavn", new { @class = "control-label col-md-2" })
                 
                         <div class="col-md-3">
@@ -55,6 +45,10 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-3">
                             <input type="submit" value="Logg inn" class="btn btn-success" />
+                            @if (ViewBag.WrongPassword)
+                            {
+                                <div id="WrongP"><p>Feil passord eller brukernavn.<br />Prøv igjen</p></div>
+                            }
                         </div>
                     </div> 
                 </div>
