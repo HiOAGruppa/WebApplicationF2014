@@ -33,7 +33,7 @@
                         @Html.ActionLink(item.Item.Name, "Details", "Store", new { id = item.SalesItemId }, null)
                     </td>
                     <td>
-                        @item.Item.Price
+                        @(item.Item.Price),-
                     </td>
                     <td id="item-count-@item.CartItemId">
                         @item.Count
@@ -51,7 +51,7 @@
                     Totalt
                 </td>
                 <td id="cart-total">
-                    @Model.CartTotal
+                    @(Model.CartTotal),-
                 </td>
             </tr>
         </table>
