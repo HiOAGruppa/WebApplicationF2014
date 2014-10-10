@@ -26,22 +26,5 @@ namespace WebApp.Controllers
         {
             return View();
         }
-
-        // UNUSED??? BAD TODO-PRACTICE #YOLO
-        /*     
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-        */
     }
 }
