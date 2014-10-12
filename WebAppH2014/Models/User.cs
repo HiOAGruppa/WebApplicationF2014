@@ -28,7 +28,7 @@ namespace WebAppH2014.Models
         
         public int? ZipCode { get; set; }
 
-        [DisplayFormat(DataFormatString= "{0:dd/MM/yyyy}", ApplyFormatInEditMode=true)]
+        [DisplayFormat(DataFormatString= "{0:MM/dd/yyyy}", ApplyFormatInEditMode=true)]
         public DateTime? DateOfBirth { get; set; } 
 
         public ICollection<Order> Orders { get; set; }
