@@ -114,7 +114,6 @@
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DbTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
