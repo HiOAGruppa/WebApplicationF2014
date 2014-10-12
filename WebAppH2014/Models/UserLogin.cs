@@ -16,7 +16,6 @@ namespace WebAppH2014.Models
         [Index("UserNameIndex", IsUnique = true)]
         [Required(ErrorMessage = "Brukernavn må oppgis")]
         public String UserName { get; set; }
-        [Required(ErrorMessage = "Må fylles ut!")]
         public byte[] Password { get; set; }
 
     }
