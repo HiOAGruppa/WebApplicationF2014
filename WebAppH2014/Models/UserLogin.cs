@@ -15,6 +15,7 @@ namespace WebAppH2014.Models
         [StringLength(450)]
         [Index("UserNameIndex", IsUnique = true)]
         [Required(ErrorMessage = "Brukernavn må oppgis")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Skriv inn en godkjent epost-adresse.")]
         public String UserName { get; set; }
         public byte[] Password { get; set; }
 
