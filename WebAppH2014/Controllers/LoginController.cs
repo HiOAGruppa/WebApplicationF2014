@@ -128,7 +128,7 @@ namespace WebAppH2014.Controllers
             {
                 try
                 {
-                    var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName };
+                    var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName, Address = inUser.Address };
                     byte[] passwordDb = genHash(inUser.OldPassword);
                     UserLogin userlogin = new UserLogin { UserId = newUser.UserId, Password = passwordDb, UserName = inUser.UserLogin.UserName };
                     newUser.UserLogin = userlogin;
