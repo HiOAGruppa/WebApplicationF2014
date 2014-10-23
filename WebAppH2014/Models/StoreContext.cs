@@ -64,14 +64,13 @@ namespace WebAppH2014.Models
         private void addOrderSalesItems(Order order, List<SalesItem> allItems)
         {
             var salesItemsInOrder = SalesItemInOrder.Where(it => it.OrderId == order.OrderId).ToList();
-            //foreach (var item in salesItemsInOrder)
-            //{
-            //    var salesitem = allItems.Where(it => it.SalesItemId == item.SalesItemId).First();
-            //    item.SalesItem = salesitem;
-            //}
-            //order.SalesItems = salesItemsInOrder;
         }
 
+        public List<SalesItem> searchSalesItems(String nameQuery)
+        {
+           var items = SalesItems.Where(it => it.Name.Contains(nameQuery)).ToList();
+           return items;
+        }
 
 
     }
