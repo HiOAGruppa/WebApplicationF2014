@@ -72,6 +72,103 @@ namespace DAL
            return items;
         }
 
+        string ShoppingCartId { get; set; }
+        public void AddToCart(SalesItem item)
+        {
+            // Get the matching cart and item instances
+            var cartItem = Carts.SingleOrDefault(
+                    c => c.CartId == ShoppingCartId
+                       && c.SalesItemId == item.SalesItemId);
+
+            if (cartItem == null)
+            {
+                // Create a new cart item if no cart item exists
+                cartItem = new Cart
+                {
+                    SalesItemId = item.SalesItemId,
+                    CartId = ShoppingCartId,
+                    Count = 1,
+                    DateCreated = DateTime.Now
+                };
+
+                Carts.Add(cartItem);
+            }
+            else
+            {
+                // If the item does exist in the cart, then add one to the quantity
+                cartItem.Count++;
+            }
+
+            // Save changes
+            SaveChanges();
+        }
+
+
+        public int RemoveFromCart(int id)
+        {
+            // Get the cart
+            var cartItem = Carts.Single(
+                cart => cart.CartId == ShoppingCartId
+                && cart.CartItemId == id);
+
+            int itemCount = 0;
+
+            if (cartItem != null)
+            {
+                if (cartItem.Count > 1)
+                {
+                    cartItem.Count--;
+                    itemCount = cartItem.Count;
+                }
+                else
+                {
+                    Carts.Remove(cartItem);
+                }
+
+                // Save changes
+                SaveChanges();
+            }
+
+            return itemCount;
+        }
+        public List<Cart> GetCartItems()
+        {
+            return Carts.Where(cart => cart.CartId == ShoppingCartId).ToList();
+        }
+
+        public int GetCartItemCount()
+        {
+            // Get the count of each item in the cart and sum them up
+            int? count = (from cartItems in Carts
+                          where cartItems.CartId == ShoppingCartId
+                          select (int?)cartItems.Count).Sum();
+
+            // Return 0 if all entries are null
+            return count ?? 0;
+        }
+
+        public decimal GetCartItemTotal()
+        {
+            decimal? total = (from cartItems in Carts
+                              where cartItems.CartId == ShoppingCartId
+                              select (int?)cartItems.Count * cartItems.Item.Price).Sum();
+            return total ?? decimal.Zero;
+        }
+
+        public void EmptyCart()
+        {
+            var cartItems = Carts.Where(cart => cart.CartId == ShoppingCartId);
+
+            foreach (var cartItem in cartItems)
+            {
+                Carts.Remove(cartItem);
+            }
+
+            // Save changes
+            SaveChanges();
+        }
+
+
 
     }
 

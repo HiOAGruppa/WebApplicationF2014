@@ -6,12 +6,17 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-using WebAppH2014.Models;
+using Model;
+using BLL;
 
 namespace WebAppH2014.Controllers
 {
+
     public class LoginController : Controller
     {
+
+        private static UserBLL db = new UserBLL();
+
         // GET: Login
         public ActionResult Index()
         {
@@ -50,13 +55,11 @@ namespace WebAppH2014.Controllers
         private static bool isUserInDB(UserModifyUser inUser)
         {
 
-            using (var db = new StoreContext())
-            {
                 if (inUser.OldPassword == null || inUser.UserLogin.UserName == null)
                     return false;
                 //these fields are dependent on index.cshtml modelformat used to generate the inUser
                 byte[] passordDb = genHash(inUser.OldPassword);
-                UserLogin foundUser = db.UserPasswords.Where(b => b.Password == passordDb && b.UserName == inUser.UserLogin.UserName).FirstOrDefault();
+                UserLogin foundUser = db.findUserLoginByPassword(passordDb, inUser.UserLogin.UserName);
                 if (foundUser == null)
                 {
                     return false;
@@ -66,12 +69,11 @@ namespace WebAppH2014.Controllers
                     inUser.UserId = foundUser.UserId;
                     return true;
                 }
-            }
+            
         }
 
         public ActionResult UserPage()
         {
-            StoreContext db = new StoreContext();
             if (isLoggedIn())
             {
                 int id = (int)Session["UserId"];
@@ -95,7 +97,6 @@ namespace WebAppH2014.Controllers
 
         public ActionResult UserOrders()
         {
-            StoreContext db = new StoreContext();
             int id = (int)Session["UserId"];
             User currentUser = db.getUser(id);
 
@@ -124,8 +125,7 @@ namespace WebAppH2014.Controllers
             {
                 return View();
             }
-            using (var db = new StoreContext())
-            {
+
                 try
                 {
                     var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName, Address = inUser.Address };
@@ -133,16 +133,14 @@ namespace WebAppH2014.Controllers
                     UserLogin userlogin = new UserLogin { UserId = newUser.UserId, Password = passwordDb, UserName = inUser.UserLogin.UserName };
                     newUser.UserLogin = userlogin;
 
-                    db.Users.Add(newUser);
-                    db.UserPasswords.Add(userlogin);
-                    db.SaveChanges();
+                    db.addUser(newUser, userlogin);
                     return RedirectToAction("Index");
                 }
                 catch
                 {
                     return View();
                 }
-            }
+            
         }
 
         private static byte[] genHash(string inPassword)
@@ -164,7 +162,6 @@ namespace WebAppH2014.Controllers
         {
             if (isLoggedIn())
             {
-                var db = new StoreContext();
                 User userInDb = db.getUser((int)Session["UserId"]);
                 UserModifyUser displayUser = new UserModifyUser(userInDb);
                 return View(displayUser);
@@ -184,11 +181,9 @@ namespace WebAppH2014.Controllers
 
             if (isLoggedIn())
             {
-                using (var db = new StoreContext())
-                {
                     int userId = (int)Session["UserId"];
 
-                    UserModifyUser problematicSave = modifyUserInfo(inUser, db);
+                    UserModifyUser problematicSave = modifyUserInfo(inUser);
 
                     //if returned null, method executed without fault
                     if (problematicSave != null)
@@ -206,7 +201,7 @@ namespace WebAppH2014.Controllers
                     {
                         return RedirectToAction("Index");
                     }
-                }
+                
             }
 
 
@@ -245,7 +240,7 @@ namespace WebAppH2014.Controllers
 
         //returns null if everything went well.
         //returns current UsermodifyUser-object for further editing if we didnt save info properly
-        private UserModifyUser modifyUserInfo(UserModifyUser user, StoreContext db)
+        private UserModifyUser modifyUserInfo(UserModifyUser user)
         {
             int userId = (int)Session["UserId"];
             if (userId != 0)
@@ -284,7 +279,7 @@ namespace WebAppH2014.Controllers
                 }
 
                 Debug.WriteLine("settings saved");
-                db.SaveChanges();
+                db.editUser(userInDb.UserId, userInDb);
                 Debug.WriteLine("modifyUser: \n" + user.toString());
             }
             else

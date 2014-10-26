@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebAppH2014.Models;
 using WebAppH2014.ViewModels;
 using BLL;
+
 
 namespace WebAppH2014.Controllers
 {
 
     public class ShoppingCartController : Controller
     {
-
-        ShoppingCartBLL shoppingcart = new ShoppingCartBLL();
-        StoreContext storeDB = new StoreContext();
+        CartBLL shoppingcartDb = new CartBLL();
+        SalesItemBLL itemdb = new SalesItemBLL();
 
         //
         // GET: /ShoppingCart/
 
         public ActionResult Index()
         {
-            var cart = shoppingcart.GetCart(this.HttpContext);
+            var cart = CartBLL.GetCart(this.HttpContext);
 
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
             {
-                CartItems = cart.GetCartItems(),
-                CartTotal = cart.GetTotal()
+                CartItems = shoppingcartDb.GetCartItems(),
+                CartTotal = shoppingcartDb.GetCartItemTotal()
             };
 
             // Return the view
@@ -39,13 +38,12 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddToCart(int id)
         {
-            var addedItem = storeDB.SalesItems
-                .Single(i => i.SalesItemId == id);
+            var addedItem = itemdb.findSalesItem(id);
 
             // Add it to the shopping cart
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = CartBLL.GetCart(this.HttpContext);
 
-            cart.AddToCart(addedItem);
+            shoppingcartDb.AddToCart(addedItem);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
@@ -58,8 +56,8 @@ namespace WebAppH2014.Controllers
         public ActionResult RemoveFromCart(int id)
         {
             // Remove the item from the cart
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-            int itemCount = cart.RemoveFromCart(id);
+            var cart = CartBLL.GetCart(this.HttpContext);
+            int itemCount = shoppingcartDb.RemoveFromCart(id);
 
 
             return RedirectToAction("Index");
@@ -81,9 +79,9 @@ namespace WebAppH2014.Controllers
         [ChildActionOnly]
         public ActionResult CartSummary()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = CartBLL.GetCart(this.HttpContext);
 
-            ViewData["CartCount"] = cart.GetCount();
+            ViewData["CartCount"] = shoppingcartDb.GetCartItemCount();
 
             return PartialView("CartSummary");
         }

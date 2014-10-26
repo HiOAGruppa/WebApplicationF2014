@@ -1,4 +1,4 @@
-﻿@model List<WebAppH2014.Models.SalesItem>
+﻿@model List<Model.SalesItem>
 
 @{
     ViewBag.Title = "Hjem";
@@ -31,7 +31,7 @@
                 }
                 used[i] = num;
 
-                var item = Model.ElementAt(num);
+                var item = Model.ElementAt(num); 
                 
                 @Html.Partial("SalesItemView", item);
                 

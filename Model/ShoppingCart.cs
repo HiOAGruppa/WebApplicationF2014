@@ -1,14 +1,13 @@
-﻿using System;
+﻿using WebAppH2014.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using DAL;
-using Model;
 using System.Web.Mvc;
 
-namespace BLL
+namespace WebAppH2014.Models
 {
-    public class ShoppingCartBLL
+    public partial class ShoppingCart
     {
         StoreContext storeDB = new StoreContext();
 
@@ -16,15 +15,15 @@ namespace BLL
 
         public const string CartSessionKey = "CartId";
 
-        public static ShoppingCartBLL GetCart(HttpContextBase context)
+        public static ShoppingCart GetCart(HttpContextBase context)
         {
-            var cart = new ShoppingCartBLL();
+            var cart = new ShoppingCart();
             cart.ShoppingCartId = cart.GetCartId(context);
             return cart;
         }
 
         // Helper method to simplify shopping cart calls
-        public static ShoppingCartBLL GetCart(Controller controller)
+        public static ShoppingCart GetCart(Controller controller)
         {
             return GetCart(controller.HttpContext);
         }

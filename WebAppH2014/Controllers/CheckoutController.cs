@@ -10,8 +10,10 @@ namespace WebAppH2014.Controllers
 {
     public class CheckoutController : Controller
     {
-        ShoppingCartBLL shoppingcart = new ShoppingCartBLL();
-        StoreContext storeDB = new StoreContext();
+        CartBLL cartDb = new CartBLL();
+        UserBLL userDb = new UserBLL();
+        SalesItemBLL itemDb = new SalesItemBLL();
+        OrderBLL orderDb = new OrderBLL();
 
         //
         // GET: /Checkout/AddressAndPayment
@@ -25,13 +27,13 @@ namespace WebAppH2014.Controllers
                // return RedirectToAction("Index", "Login");
                 error += "For å fullføre denne handlingen må du være innlogget! Logg inn eller registrer deg, og prøv igjen.";
             }
-            else if (ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count == 0)
+            else if (CartBLL.GetCart(this.HttpContext).GetCartItems().Count == 0)
             {
                 error +="Handlevognen er tom!";
             }
             else {
                 int userId = (int)Session["UserId"];
-                User currentUser = storeDB.getUser(userId);
+                User currentUser = userDb.getUser(userId);
 
                 if (currentUser.Address == null || currentUser.ZipCode == null)
                 {
@@ -53,15 +55,15 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Complete()
         {
-            if(ShoppingCart.GetCart(this.HttpContext).GetCartItems().Count==0)
+            if (CartBLL.GetCart(this.HttpContext).GetCartItems().Count == 0)
                 return RedirectToAction("UserPage", "Login");
             if (isLoggedIn())
             {
                 int userId = (int)Session["UserId"];
-                User currentUser = storeDB.getUser(userId);
+                User currentUser = userDb.getUser(userId);
 
-                var cart = ShoppingCart.GetCart(this.HttpContext);
-                List<Cart> cartList = cart.GetCartItems();
+                var cart = CartBLL.GetCart(this.HttpContext);
+                List<Cart> cartList = cartDb.GetCartItems();
                 
 
                 var order = new Order();
@@ -69,7 +71,7 @@ namespace WebAppH2014.Controllers
 
                 foreach(Cart item in cartList )
                 {
-                    SalesItem sItem = storeDB.SalesItems.Find(item.SalesItemId);
+                    SalesItem sItem = itemDb.findSalesItem(item.SalesItemId);
                     OrderSalesItem osItem = new OrderSalesItem()
                     {
                         SalesItemId = sItem.SalesItemId,
@@ -79,15 +81,13 @@ namespace WebAppH2014.Controllers
                         Order = order
                     };
 
-                    storeDB.SalesItemInOrder.Add(osItem);
+                    orderDb.addSalesItemInOrder(osItem);
 
                 }
-                currentUser.Orders.Add(order);
 
-                storeDB.Orders.Add(order);
-                storeDB.SaveChanges();
+                orderDb.addOrder(order, currentUser);
 
-                ShoppingCart.GetCart(this.HttpContext).EmptyCart();
+                CartBLL.GetCart(this.HttpContext).EmptyCart();
                 return View(order);
             }
             
