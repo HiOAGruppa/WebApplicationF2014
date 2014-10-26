@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebAppH2014.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
-namespace WebAppH2014.Models
+namespace Model
 {
     public class SalesItem
     {

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebAppH2014.Models;
+using Model;
+using BLL;
 
 namespace WebAppH2014.Controllers
 {
     public class CheckoutController : Controller
     {
+        ShoppingCartBLL shoppingcart = new ShoppingCartBLL();
         StoreContext storeDB = new StoreContext();
 
         //
@@ -16,7 +18,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
-
+            
             string error = "";
             if (!isLoggedIn())
             {

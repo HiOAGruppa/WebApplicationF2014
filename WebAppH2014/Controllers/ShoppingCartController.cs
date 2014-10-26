@@ -5,12 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using WebAppH2014.Models;
 using WebAppH2014.ViewModels;
+using BLL;
 
 namespace WebAppH2014.Controllers
 {
 
     public class ShoppingCartController : Controller
     {
+
+        ShoppingCartBLL shoppingcart = new ShoppingCartBLL();
         StoreContext storeDB = new StoreContext();
 
         //
@@ -18,7 +21,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Index()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = shoppingcart.GetCart(this.HttpContext);
 
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel

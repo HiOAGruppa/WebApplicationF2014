@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebAppH2014.Models
+namespace Model
 {
     /// <summary>
     /// The class is used for handling the information in both login and registry of users.

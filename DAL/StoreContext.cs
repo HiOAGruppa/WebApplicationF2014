@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
-using WebAppH2014.Models;
+using System.Data.Entity;
+using Model;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace WebAppH2014.Models
+namespace DAL
 {
     public class StoreContext : DbContext
     {

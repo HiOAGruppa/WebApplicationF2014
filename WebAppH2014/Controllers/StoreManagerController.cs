@@ -4,13 +4,15 @@ using System.Linq;
 using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
-using WebAppH2014.Models;
+using Model;
+using BLL;
 
 namespace WebAppH2014.Controllers
 {
     public class StoreManagerController : Controller
     {
-        private StoreContext db = new StoreContext();
+        private SalesItemBLL db = new SalesItemBLL();
+        private GenreBLL genreDb = new GenreBLL();
         //
         // GET: /StoreManager/
         public ActionResult Index()
@@ -22,8 +24,10 @@ namespace WebAppH2014.Controllers
                 ViewBag.ErrorMessage = error;
                 return View("Error");
             }
-            var items = db.SalesItems.Include(a => a.Genre);
-            return View(items.ToList());
+            //TODO What does this line do?
+            //var items = db.SalesItems.Include(a => a.Genre);
+           // return View(items.ToList());
+            return View();
         }
 
         public ViewResult Details(int id)
@@ -35,7 +39,7 @@ namespace WebAppH2014.Controllers
                 ViewBag.ErrorMessage = error;
                 return View("Error");
             }
-            SalesItem item = db.SalesItems.Find(id);
+            SalesItem item = db.findSalesItem(id);
             return View(item);
         }
 
@@ -48,7 +52,7 @@ namespace WebAppH2014.Controllers
                 ViewBag.ErrorMessage = error;
                 return View("Error");
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name");
+            ViewBag.GenreId = new SelectList(genreDb.getGenres(), "GenreId", "Name");
             return View();
         }
 
@@ -61,12 +65,11 @@ namespace WebAppH2014.Controllers
             item.ImageUrl = "placeholder";
             if (ModelState.IsValid)
             {
-                db.SalesItems.Add(item);
-                db.SaveChanges();
+                db.addSalesItem(item);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
+            ViewBag.GenreId = new SelectList(genreDb.getGenres(), "GenreId", "Name", item.GenreId);
             return View(item);
         }
 
@@ -80,8 +83,8 @@ namespace WebAppH2014.Controllers
                 ViewBag.ErrorMessage = error;
                 return View("Error");
             }
-            SalesItem item = db.SalesItems.Find(id);
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
+            SalesItem item = db.findSalesItem(id);
+            ViewBag.GenreId = new SelectList(genreDb.getGenres(), "GenreId", "Name", item.GenreId);
             return View(item);
         }
 
@@ -93,16 +96,15 @@ namespace WebAppH2014.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
+                db.editSalesItem(item);
                 return RedirectToAction("Index");
             }
-            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", item.GenreId);
+            ViewBag.GenreId = new SelectList(genreDb.getGenres(), "GenreId", "Name", item.GenreId);
             return View(item);
         }
         public ActionResult Delete(int id)
         {
-            SalesItem item = db.SalesItems.Find(id);
+            SalesItem item = db.findSalesItem(id);
             return View(item);
         }
 
@@ -112,34 +114,35 @@ namespace WebAppH2014.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            SalesItem item = db.SalesItems.Find(id);
-            db.SalesItems.Remove(item);
-            db.SaveChanges();
+            SalesItem item = db.findSalesItem(id);
+            db.removeSalesItem(item);
             return RedirectToAction("Index");
         }
 
         public void Slett(int id)
         {
             // denne kalles via et Ajax-kall
-            SalesItem item = db.SalesItems.Find(id);
-            db.SalesItems.Remove(item);
-            db.SaveChanges();
+            SalesItem item = db.findSalesItem(id);
+            db.removeSalesItem(item);
             // kunne returnert en feil dersom slettingen feilet....
         }
 
-        protected override void Dispose(bool disposing)
+        //Martin hva gjør den her? copy-paste?
+      /*  protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
+       * */
 
 
         private Boolean isAdmin()
         {
             if (isLoggedIn())
             {
+                UserBLL userDb = new UserBLL();
                 int userId = (int)Session["UserId"];
-                User currentUser = db.getUser(userId);
+                User currentUser = userDb.getUser(userId);
                 if (currentUser.Admin != null && currentUser.Admin == true)
                     return true;
             }

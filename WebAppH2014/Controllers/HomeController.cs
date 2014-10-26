@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebAppH2014.Models;
+using BLL;
 
-namespace WebApp.Controllers
+
+namespace WebAppH2014.Controllers
 {
     public class HomeController : Controller
     {
-        private StoreContext db = new StoreContext();
+        SalesItemBLL db = new SalesItemBLL();
 
         public ActionResult Index()
         {

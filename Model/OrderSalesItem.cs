@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebAppH2014.Models;
 
-namespace WebAppH2014.Models
+
+namespace Model
 {
     public class OrderSalesItem
     {

@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace WebAppH2014.Models
+namespace Model
 {
     public class UserLogin
     {
@@ -13,7 +13,8 @@ namespace WebAppH2014.Models
         [Key]
         public int UserId { get; set; }
         [StringLength(450)]
-        [Index("UserNameIndex", IsUnique = true)]
+
+       // [Index("UserNameIndex", IsUnique = true)]
         [Required(ErrorMessage = "Brukernavn må oppgis")]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Skriv inn en godkjent epost-adresse.")]
         public String UserName { get; set; }

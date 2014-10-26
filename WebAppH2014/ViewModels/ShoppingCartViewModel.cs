@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WebAppH2014.Models;
+using Model;
 
 namespace WebAppH2014.ViewModels
 {
