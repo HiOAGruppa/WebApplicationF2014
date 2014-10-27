@@ -48,11 +48,5 @@ namespace BLL
             db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
         }
-
-        //TODO martin, din greie
-        public void getSalesItemWithGenre()
-        {
-           // return db.SalesItems.Include(a => a.Genre);
-        }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using System.Data.Entity;
 using Model;
+using System.Diagnostics;
 
 namespace BLL
 {
@@ -17,5 +18,12 @@ namespace BLL
         {
             return db.Genres;
         }
+        
+        public Genre getSelectedGenre(string genre)
+        {
+            var genreModel = db.getSelectedGenre(genre);
+            return genreModel;
+        }
     }
+
 }

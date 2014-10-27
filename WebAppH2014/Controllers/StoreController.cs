@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using BLL;
+using System.Diagnostics;
 
 namespace WebAppH2014.Controllers
 {
@@ -18,7 +19,7 @@ namespace WebAppH2014.Controllers
         // GET: /Store/
         public ActionResult Index()
         {
-            var genres = genreDb.getGenres();
+            var genres = genreDb.getGenres().ToList();
 
             return View(genres);
         }
@@ -35,13 +36,8 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Browse(string genre)
         {
-            //TODO IMPLEMENT MARTIN
-            // Retrieve Genre and its Associated Albums from database
-          //  var genreModel = db.Genres.Include("Items")
-          //      .Single(g => g.Name == genre);
-
-           // return View(genreModel);
-            return View();
+            var genreModel = genreDb.getSelectedGenre(genre);
+            return View(genreModel);
         }
         public ActionResult GenreMenu()
         {

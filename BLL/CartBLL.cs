@@ -35,7 +35,7 @@ namespace BLL
         }
         public decimal GetCartItemTotal()
         {
-            return GetCartItemTotal();
+            return db.GetCartItemTotal();
         }
         public void EmptyCart()
         {
