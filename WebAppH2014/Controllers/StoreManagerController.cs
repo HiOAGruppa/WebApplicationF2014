@@ -25,9 +25,8 @@ namespace WebAppH2014.Controllers
                 return View("Error");
             }
             //TODO What does this line do?
-            //var items = db.SalesItems.Include(a => a.Genre);
-           // return View(items.ToList());
-            return View();
+            var items = db.getSalesItemsWithGenre();
+            return View(items);
         }
 
         public ViewResult Details(int id)

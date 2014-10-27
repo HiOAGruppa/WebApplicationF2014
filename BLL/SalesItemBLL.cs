@@ -48,5 +48,10 @@ namespace BLL
             db.Entry(item).State = EntityState.Modified;
             db.SaveChanges();
         }
+
+        public List<SalesItem> getSalesItemsWithGenre()
+        {
+            return db.SalesItems.Include(a => a.Genre).ToList();
+        }
     }
 }

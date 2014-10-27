@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class Global
-    {            
+    public class Global
+    {           
+        protected void  Application_Start(){ 
         Database.SetInitializer<StoreContext>(new StoreInitializer());
+            }
     }
 }
