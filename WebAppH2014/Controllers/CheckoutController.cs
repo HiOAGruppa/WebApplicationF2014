@@ -100,21 +100,14 @@ namespace WebAppH2014.Controllers
                     };
 
                     allOrderItems.Add(osItem);
-                   // orderDb.addSalesItemInOrder(osItem);
 
                 }
                 order.SalesItems = allOrderItems;
 
-        //        currentUser.Orders.Add(order);
                 orderDb.addOrder(order);
-
-                order.ownerUser = currentUser;
-                order.SalesItems = allOrderItems;
-
-
-         
+     
                 CartBLL.GetCart(this.HttpContext).EmptyCart();
-                return View(order);
+                return View(userDb.getUser(currentUser.UserId).Orders.Last());
             }
             
             ViewBag.ErrorMessage = "Du må være logget inn for å se dette...";
