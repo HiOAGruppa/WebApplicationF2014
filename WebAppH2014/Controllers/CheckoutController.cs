@@ -39,14 +39,14 @@ namespace WebAppH2014.Controllers
                     Zipcode = currentUser.ZipCode
                 };
                 return View(viewModel);
-            }
+                }
 
             ViewBag.ErrorMessage = error;
             return View("Error");
             
-        }
+            }
         [HttpPost]
-        
+
         public ActionResult AddressAndPayment(CheckoutViewModel user)
         {
            /* User currentUser = userDb.getUser(viewModel.PersonId);
@@ -117,12 +117,14 @@ namespace WebAppH2014.Controllers
                     };
 
                     allOrderItems.Add(osItem);
-
+                    sItem.InStock -= item.Count;
+                    itemDb.editSalesItem(sItem);
+                   // orderDb.addSalesItemInOrder(osItem);
                 }
                 order.SalesItems = allOrderItems;
 
                 orderDb.addOrder(order);
-     
+
                 CartBLL.GetCart(this.HttpContext).EmptyCart();
                 return View(userDb.getUser(currentUser.UserId).Orders.Last());
             }
