@@ -12,15 +12,10 @@ namespace WebAppH2014.Controllers
 {
     public class CheckoutController : Controller
     {
-        SalesItemBLL itemDb = new SalesItemBLL();
-        OrderBLL orderDb = new OrderBLL();
-
-        //
-        // GET: /Checkout/AddressAndPayment
-
         public ActionResult AddressAndPayment()
         {
             UserBLL userDb = new UserBLL();
+            SalesItemBLL itemDb = new SalesItemBLL();
             string error = "";
             if (!isLoggedIn())
             {
@@ -90,7 +85,8 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Complete()
         {
-
+            SalesItemBLL itemDb = new SalesItemBLL();
+            OrderBLL orderDb = new OrderBLL();
             UserBLL userDb = new UserBLL();
             if (CartBLL.GetCart(this.HttpContext).GetCartItems().Count == 0)
                 return RedirectToAction("UserPage", "Login");
