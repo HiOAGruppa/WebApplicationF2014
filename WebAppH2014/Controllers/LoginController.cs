@@ -15,7 +15,6 @@ namespace WebAppH2014.Controllers
     public class LoginController : Controller
     {
 
-        private static UserBLL db = new UserBLL();
 
         // GET: Login
         public ActionResult Index()
@@ -54,7 +53,7 @@ namespace WebAppH2014.Controllers
 
         private static bool isUserInDB(UserModifyUser inUser)
         {
-
+            UserBLL db = new UserBLL();
                 if (inUser.OldPassword == null || inUser.UserLogin.UserName == null)
                     return false;
                 //these fields are dependent on index.cshtml modelformat used to generate the inUser
@@ -74,6 +73,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult UserPage()
         {
+            UserBLL db = new UserBLL();
             if (isLoggedIn())
             {
                 int id = (int)Session["UserId"];
@@ -97,6 +97,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult UserOrders()
         {
+            UserBLL db = new UserBLL();
             int id = (int)Session["UserId"];
             User currentUser = db.getUser(id);
 
@@ -121,6 +122,7 @@ namespace WebAppH2014.Controllers
         [HttpPost]
         public ActionResult Register(UserModifyUser inUser)
         {
+            UserBLL db = new UserBLL();
             if (!ModelState.IsValid)
             {
                 return View();
@@ -160,6 +162,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult ModifyUser()
         {
+            UserBLL db = new UserBLL();
             if (isLoggedIn())
             {
                 User userInDb = db.getUser((int)Session["UserId"]);
@@ -181,6 +184,7 @@ namespace WebAppH2014.Controllers
 
             if (isLoggedIn())
             {
+                UserBLL db = new UserBLL();
                     int userId = (int)Session["UserId"];
 
                     UserModifyUser problematicSave = modifyUserInfo(inUser);
@@ -242,6 +246,7 @@ namespace WebAppH2014.Controllers
         //returns current UsermodifyUser-object for further editing if we didnt save info properly
         private UserModifyUser modifyUserInfo(UserModifyUser user)
         {
+            UserBLL db = new UserBLL();
             int userId = (int)Session["UserId"];
             if (userId != 0)
             {
