@@ -12,7 +12,6 @@ namespace WebAppH2014.Controllers
 {
     public class CheckoutController : Controller
     {
-        UserBLL userDb = new UserBLL();
         SalesItemBLL itemDb = new SalesItemBLL();
         OrderBLL orderDb = new OrderBLL();
 
@@ -21,7 +20,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult AddressAndPayment()
         {
-            
+            UserBLL userDb = new UserBLL();
             string error = "";
             if (!isLoggedIn())
             {
@@ -53,9 +52,9 @@ namespace WebAppH2014.Controllers
         }
         [HttpPost]
         
-        public ActionResult AddressAndPayment(CheckoutViewModel viewModel)
+        public ActionResult AddressAndPayment(CheckoutViewModel user)
         {
-            User currentUser = userDb.getUser(viewModel.PersonId);
+           /* User currentUser = userDb.getUser(viewModel.PersonId);
 
             currentUser.FirstName = viewModel.Firstname;
             currentUser.LastName = viewModel.Lastname;
@@ -63,6 +62,26 @@ namespace WebAppH2014.Controllers
             currentUser.ZipCode = viewModel.Zipcode;
 
             userDb.editUser(currentUser.UserId,currentUser);
+            return RedirectToAction("Complete");*/
+            UserBLL userDb = new UserBLL();
+            int userId = (int)Session["UserId"];
+            if (userId != 0)
+            {
+                User userInDb = userDb.getUser(userId);
+
+                
+                //changes all user-settings that differ from db-object
+                if (user.Firstname != userInDb.FirstName && user.Firstname != "")
+                    userInDb.FirstName = user.Firstname;
+                if (user.Lastname != userInDb.LastName && user.Lastname != "")
+                    userInDb.LastName = user.Lastname;
+                if (user.Zipcode != userInDb.ZipCode)
+                    userInDb.ZipCode = user.Zipcode;
+                if (user.Address != userInDb.Address)
+                    userInDb.Address = user.Address;
+
+                userDb.editUser(userInDb.UserId, userInDb);
+            }
 
             return RedirectToAction("Complete");
         }
@@ -71,6 +90,8 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Complete()
         {
+
+            UserBLL userDb = new UserBLL();
             if (CartBLL.GetCart(this.HttpContext).GetCartItems().Count == 0)
                 return RedirectToAction("UserPage", "Login");
             if (isLoggedIn())

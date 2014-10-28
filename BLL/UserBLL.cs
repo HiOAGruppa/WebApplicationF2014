@@ -31,9 +31,7 @@ namespace BLL
         public void editUser(int userId, User user)
         {
             User oldUser = getUser(userId);
-            db.Entry(oldUser).CurrentValues.SetValues(user);
-            db.SaveChanges();
-            db.Entry(oldUser).State = System.Data.Entity.EntityState.Modified;
+            oldUser = user;
             db.SaveChanges();
 
         }
