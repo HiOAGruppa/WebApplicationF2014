@@ -18,7 +18,7 @@ namespace DAL
             var users = new List<User>
             {
                 //userId 1
-                new User{FirstName = "Tore" ,LastName = "Tang", UserLogin = new UserLogin{UserName = "Toretang@gmail.com", Password = genHash("GammelMann")}},
+                new User{FirstName = "Tore" ,LastName = "Tang", Address="Tanggata 23", ZipCode=2222,UserLogin = new UserLogin{UserName = "Toretang@gmail.com", Password = genHash("1")}},
                 //userid 2
                 new User{FirstName = "Martin" ,LastName = "Hagen", UserLogin = new UserLogin{UserName = "Martinhagen@gmail.com", Password = genHash("BolleMann")}},
                 //userid 3

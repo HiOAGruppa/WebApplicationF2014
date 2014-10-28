@@ -12,7 +12,6 @@ namespace WebAppH2014.Controllers
 
     public class ShoppingCartController : Controller
     {
-        CartBLL shoppingcartDb = new CartBLL();
         SalesItemBLL itemdb = new SalesItemBLL();
 
         //
@@ -25,8 +24,8 @@ namespace WebAppH2014.Controllers
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
             {
-                CartItems = shoppingcartDb.GetCartItems(),
-                CartTotal = shoppingcartDb.GetCartItemTotal()
+                CartItems = cart.GetCartItems(),
+                CartTotal = cart.GetCartItemTotal()
             };
 
             // Return the view
@@ -43,7 +42,7 @@ namespace WebAppH2014.Controllers
             // Add it to the shopping cart
             var cart = CartBLL.GetCart(this.HttpContext);
 
-            shoppingcartDb.AddToCart(addedItem);
+            cart.AddToCart(addedItem);
 
             // Go back to the main store page for more shopping
             return RedirectToAction("Index");
@@ -57,7 +56,7 @@ namespace WebAppH2014.Controllers
         {
             // Remove the item from the cart
             var cart = CartBLL.GetCart(this.HttpContext);
-            int itemCount = shoppingcartDb.RemoveFromCart(id);
+            int itemCount = cart.RemoveFromCart(id);
 
 
             return RedirectToAction("Index");
@@ -81,7 +80,7 @@ namespace WebAppH2014.Controllers
         {
             var cart = CartBLL.GetCart(this.HttpContext);
 
-            ViewData["CartCount"] = shoppingcartDb.GetCartItemCount();
+            ViewData["CartCount"] = cart.GetCartItemCount();
 
             return PartialView("CartSummary");
         }

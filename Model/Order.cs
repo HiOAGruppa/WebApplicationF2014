@@ -13,6 +13,7 @@ namespace Model
         //TODO get these items from it's own database.  where ordernr=this select *
         public ICollection<OrderSalesItem> SalesItems { get; set; }
         public User ownerUser { get; set; }
+        public int UserId { get; set; }
 
 
         //TODO create reciept toString for showing on screen after purchase

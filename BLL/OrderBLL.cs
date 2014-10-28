@@ -22,12 +22,16 @@ namespace BLL
             db.SaveChanges();
         }
 
-        public void addOrder(Order order, User user)
+        public void addOrder(Order order)
         {
-            db.Orders.Add(order);
-            user.Orders.Add(order);
-            db.SaveChanges();
+            db.addOrder(order);
         }
+
+        public Order getOrder(int orderId)
+        {
+            return db.Orders.Where(a => a.OrderId == orderId).FirstOrDefault();
+        }
+
 
     }
 }

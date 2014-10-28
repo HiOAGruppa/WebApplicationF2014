@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace BLL
 {
-    public class CartBLL
+    public partial class CartBLL
     {
         StoreContext db = new StoreContext();
 

@@ -144,6 +144,7 @@ namespace DAL
                           where cartItems.CartId == ShoppingCartId
                           select (int?)cartItems.Count).Sum();
 
+            Debug.WriteLine("Cart.Itemcount =" + count);
             // Return 0 if all entries are null
             return count ?? 0;
         }
@@ -153,6 +154,7 @@ namespace DAL
             decimal? total = (from cartItems in Carts
                               where cartItems.CartId == ShoppingCartId
                               select (int?)cartItems.Count * cartItems.Item.Price).Sum();
+            Debug.WriteLine("Cart.TotalCost =" + total);
             return total ?? decimal.Zero;
         }
 
@@ -176,6 +178,13 @@ namespace DAL
             var genreModel = Genres.Include("Items").Single(g => g.Name == genre);
             return genreModel;
         }
+
+        public void addOrder(Order order)
+        {
+            Orders.Add(order);
+            SaveChanges();
+        }
+
 
     }
 

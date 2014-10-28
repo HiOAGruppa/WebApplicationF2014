@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using BLL;
+using System.Diagnostics;
 
 namespace WebAppH2014.Controllers
 {
     public class CheckoutController : Controller
     {
-        CartBLL cartDb = new CartBLL();
         UserBLL userDb = new UserBLL();
         SalesItemBLL itemDb = new SalesItemBLL();
         OrderBLL orderDb = new OrderBLL();
@@ -63,11 +63,15 @@ namespace WebAppH2014.Controllers
                 User currentUser = userDb.getUser(userId);
 
                 var cart = CartBLL.GetCart(this.HttpContext);
-                List<Cart> cartList = cartDb.GetCartItems();
+                List<Cart> cartList = cart.GetCartItems();
                 
 
                 var order = new Order();
-                order.ownerUser = currentUser;
+                order.UserId = currentUser.UserId;
+                Debug.WriteLine("currentUser ID: " + currentUser.UserId);
+
+
+                List<OrderSalesItem> allOrderItems = new List<OrderSalesItem>();
 
                 foreach(Cart item in cartList )
                 {
@@ -76,17 +80,23 @@ namespace WebAppH2014.Controllers
                     {
                         SalesItemId = sItem.SalesItemId,
                         OrderId = order.OrderId,
-                        Amount = item.Count,
-                        SalesItem = sItem,
-                        Order = order
+                        Amount = item.Count
                     };
 
-                    orderDb.addSalesItemInOrder(osItem);
+                    allOrderItems.Add(osItem);
+                   // orderDb.addSalesItemInOrder(osItem);
 
                 }
+                order.SalesItems = allOrderItems;
 
-                orderDb.addOrder(order, currentUser);
+        //        currentUser.Orders.Add(order);
+                orderDb.addOrder(order);
 
+                order.ownerUser = currentUser;
+                order.SalesItems = allOrderItems;
+
+
+         
                 CartBLL.GetCart(this.HttpContext).EmptyCart();
                 return View(order);
             }
