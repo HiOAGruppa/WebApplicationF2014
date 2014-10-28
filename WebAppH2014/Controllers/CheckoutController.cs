@@ -84,8 +84,9 @@ namespace WebAppH2014.Controllers
                     };
 
                     allOrderItems.Add(osItem);
+                    sItem.InStock -= item.Count;
+                    itemDb.editSalesItem(sItem);
                    // orderDb.addSalesItemInOrder(osItem);
-
                 }
                 order.SalesItems = allOrderItems;
 

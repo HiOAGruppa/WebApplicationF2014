@@ -42,7 +42,14 @@
                         </dt>
 
                         <dd>
-                            @Html.DisplayFor(model => model.InStock)
+                            @if (Model.InStock < 1)
+                            {
+                               <p style="padding-left:0">Ikke på lager</p>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(model => model.InStock);
+                            }
                         </dd>
 
                     </dl>
