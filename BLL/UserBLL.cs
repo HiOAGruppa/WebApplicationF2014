@@ -35,5 +35,16 @@ namespace BLL
             db.SaveChanges();
 
         }
+        public List<User> getUsers()
+        {
+            return db.getUsers();
+        }
+
+
+        public void removeUser(User user)
+        {
+            db.Users.Remove(user);
+            db.SaveChanges();
+        }
     }
 }

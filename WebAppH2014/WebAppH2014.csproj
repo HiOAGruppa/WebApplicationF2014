@@ -161,6 +161,11 @@
     <Content Include="Views\Login\LoginNav.cshtml" />
     <Content Include="Views\Login\AdminView.cshtml" />
     <Content Include="Views\Home\SalesItemView.cshtml" />
+    <Content Include="Views\StoreManager\Kunder.cshtml" />
+    <Content Include="Views\StoreManager\sletteModalUsers.cshtml">
+      <BrowseToURL>~/Views/StoreManager/sletteModalUsers.cshtml</BrowseToURL>
+    </Content>
+    <Content Include="Views\StoreManager\EditUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

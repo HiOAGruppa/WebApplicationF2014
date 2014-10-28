@@ -6,8 +6,9 @@
 <body>
     <h2>Administrator-side</h2>
     <hr />
-    
-    @Html.ActionLink("Varelager", "Index", "StoreManager", new { area = "" }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Varelager", "Index", "StoreManager", new { area = "" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Kunder", "Kunder", "StoreManager", new { area = "" }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Ordre", "Ordre", "StoreManager", new { area = "" }, new { @class = "btn btn-primary" })
     @Html.ActionLink("Logg ut", "LogoutAction", "Login", new { tom = "" }, new { @class = "btn btn-default" })
 
 </body>

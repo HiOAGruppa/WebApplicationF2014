@@ -6,18 +6,17 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using BLL;
+using System.Diagnostics;
 
 namespace WebAppH2014.Controllers
 {
     public class StoreManagerController : Controller
     {
-        private SalesItemBLL db = new SalesItemBLL();
-        private GenreBLL genreDb = new GenreBLL();
         //
         // GET: /StoreManager/
         public ActionResult Index()
         {
-
+            SalesItemBLL db = new SalesItemBLL();
             if (!isAdmin())
             {
                 string error = "Du har ikke rettigheter til dette!";
@@ -31,7 +30,7 @@ namespace WebAppH2014.Controllers
 
         public ViewResult Details(int id)
         {
-
+            SalesItemBLL db = new SalesItemBLL();
             if (!isAdmin())
             {
                 string error = "Du har ikke rettigheter til dette!";
@@ -44,7 +43,7 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Create()
         {
-
+            GenreBLL genreDb = new GenreBLL();
             if (!isAdmin())
             {
                 string error = "Du har ikke rettigheter til dette!";
@@ -61,6 +60,8 @@ namespace WebAppH2014.Controllers
         [HttpPost]
         public ActionResult Create(SalesItem item)
         {
+            GenreBLL genreDb = new GenreBLL();
+            SalesItemBLL db = new SalesItemBLL();
             item.ImageUrl = "placeholder";
             if (ModelState.IsValid)
             {
@@ -76,6 +77,8 @@ namespace WebAppH2014.Controllers
 
         public ActionResult Edit(int id)
         {
+            GenreBLL genreDb = new GenreBLL();
+            SalesItemBLL db = new SalesItemBLL();
             if (!isAdmin())
             {
                 string error = "Du har ikke rettigheter til dette!";
@@ -93,6 +96,8 @@ namespace WebAppH2014.Controllers
         [HttpPost]
         public ActionResult Edit(SalesItem item)
         {
+            GenreBLL genreDb = new GenreBLL();
+            SalesItemBLL db = new SalesItemBLL();
             if (ModelState.IsValid)
             {
                 db.editSalesItem(item);
@@ -103,6 +108,7 @@ namespace WebAppH2014.Controllers
         }
         public ActionResult Delete(int id)
         {
+            SalesItemBLL db = new SalesItemBLL();
             SalesItem item = db.findSalesItem(id);
             return View(item);
         }
@@ -113,6 +119,7 @@ namespace WebAppH2014.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            SalesItemBLL db = new SalesItemBLL();
             SalesItem item = db.findSalesItem(id);
             db.removeSalesItem(item);
             return RedirectToAction("Index");
@@ -120,21 +127,78 @@ namespace WebAppH2014.Controllers
 
         public void Slett(int id)
         {
+            SalesItemBLL db = new SalesItemBLL();
             // denne kalles via et Ajax-kall
             SalesItem item = db.findSalesItem(id);
             db.removeSalesItem(item);
             // kunne returnert en feil dersom slettingen feilet....
         }
 
-        //Martin hva gjør den her? copy-paste?
-      /*  protected override void Dispose(bool disposing)
+        public ActionResult Kunder()
         {
-            db.Dispose();
-            base.Dispose(disposing);
+            UserBLL userBll = new UserBLL();
+            var users = userBll.getUsers();
+            
+            return View(users);
         }
-       * */
 
+        public void SlettUser(int id)
+        {
+            UserBLL db = new UserBLL();
+            // denne kalles via et Ajax-kall
+            User user = db.getUser(id);
+            db.removeUser(user);
+            // kunne returnert en feil dersom slettingen feilet....
+        }
 
+        public ActionResult EditUser(int id)
+        {
+            UserBLL db = new UserBLL();
+            if (!isAdmin())
+            {
+                string error = "Du har ikke rettigheter til dette!";
+                ViewBag.ErrorMessage = error;
+                return View("Error");
+            }
+            User user = db.getUser(id);
+            UserModifyUser displayUser = new UserModifyUser(user);
+            return View(displayUser);
+        }
+
+        //
+        // POST: /StoreManager/Edit/5
+
+        [HttpPost]
+        public ActionResult EditUser(UserModifyUser user)
+        {
+            UserBLL db = new UserBLL();
+            if (ModelState.IsValid)
+            {
+                UserModifyUser problematicSave = modifyUserInfo(user);
+
+                //if returned null, method executed without fault
+                if (problematicSave != null)
+                    return View(problematicSave);
+
+                try
+                {
+                    User currentUser = db.getUser(user.UserId);
+                    Debug.WriteLine(currentUser.toString());
+                    UserModifyUser editUser = new UserModifyUser(currentUser);
+                    //return View(editUser);
+                    return RedirectToAction("Kunder");
+                }
+                catch
+                {
+                    return RedirectToAction("Kunder");
+                }
+            }
+            return RedirectToAction("Kunder");
+        }
+        public ActionResult Ordre()
+        {
+            return View();
+        }
         private Boolean isAdmin()
         {
             if (isLoggedIn())
@@ -158,6 +222,29 @@ namespace WebAppH2014.Controllers
                     return false;
             }
             return false;
+        }
+
+
+        private UserModifyUser modifyUserInfo(UserModifyUser user)
+        {
+            UserBLL db = new UserBLL();
+            User userInDb = db.getUser(user.UserId);
+
+            //changes all user-settings that differ from db-object
+            if (user.FirstName != userInDb.FirstName && user.FirstName != "")
+                userInDb.FirstName = user.FirstName;
+            if (user.LastName != userInDb.LastName && user.LastName != "")
+                userInDb.LastName = user.LastName;
+            if (user.ZipCode != userInDb.ZipCode)
+                userInDb.ZipCode = user.ZipCode;
+            if (user.Address != userInDb.Address)
+                userInDb.Address = user.Address;
+            if (user.DateOfBirth != userInDb.DateOfBirth)
+                userInDb.DateOfBirth = user.DateOfBirth;
+
+            db.editUser(userInDb.UserId, userInDb);
+
+            return null;
         }
 	}
 }

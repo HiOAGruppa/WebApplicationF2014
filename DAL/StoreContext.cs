@@ -185,6 +185,11 @@ namespace DAL
             SaveChanges();
         }
 
+        public List<User> getUsers()
+        {
+            var users = Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
+            return users;
+        }
 
     }
 
