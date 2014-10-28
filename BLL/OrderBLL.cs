@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Data.Entity;
+using System.Diagnostics;
 
 namespace BLL
 {
@@ -30,6 +32,13 @@ namespace BLL
         public Order getOrder(int orderId)
         {
             return db.Orders.Where(a => a.OrderId == orderId).FirstOrDefault();
+        }
+
+        public Order getOrderWithItems(int orderId)
+        {
+            Order order = db.Orders.Include("SalesItems").ToList().Single(a => a.OrderId == orderId);
+            Debug.WriteLine(order.SalesItems.ToString());
+            return order;
         }
 
 
