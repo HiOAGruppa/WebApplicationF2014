@@ -6,21 +6,16 @@ using System.Web.Mvc;
 using Model;
 using BLL;
 using System.Diagnostics;
+using WebAppH2014.ViewModels;
 
 namespace WebAppH2014.Controllers
 {
     public class CheckoutController : Controller
     {
-        UserBLL userDb = new UserBLL();
-        SalesItemBLL itemDb = new SalesItemBLL();
-        OrderBLL orderDb = new OrderBLL();
-
-        //
-        // GET: /Checkout/AddressAndPayment
-
         public ActionResult AddressAndPayment()
         {
-            
+            UserBLL userDb = new UserBLL();
+            SalesItemBLL itemDb = new SalesItemBLL();
             string error = "";
             if (!isLoggedIn())
             {
@@ -35,26 +30,64 @@ namespace WebAppH2014.Controllers
                 int userId = (int)Session["UserId"];
                 User currentUser = userDb.getUser(userId);
 
-                if (currentUser.Address == null || currentUser.ZipCode == null)
+                var viewModel = new CheckoutViewModel()
                 {
-                    if (!error.Equals(""))
-                        error += "\n";
-                    error += "Adresse ikke registrert! Registrer adresse på din side, og prøv igjen.";
+                    PersonId = userId,
+                    Firstname = currentUser.FirstName,
+                    Lastname = currentUser.LastName,
+                    Address = currentUser.Address,
+                    Zipcode = currentUser.ZipCode
+                };
+                return View(viewModel);
                 }
+
+            ViewBag.ErrorMessage = error;
+            return View("Error");
+            
+            }
+        [HttpPost]
+
+        public ActionResult AddressAndPayment(CheckoutViewModel user)
+        {
+           /* User currentUser = userDb.getUser(viewModel.PersonId);
+
+            currentUser.FirstName = viewModel.Firstname;
+            currentUser.LastName = viewModel.Lastname;
+            currentUser.Address = viewModel.Address;
+            currentUser.ZipCode = viewModel.Zipcode;
+
+            userDb.editUser(currentUser.UserId,currentUser);
+            return RedirectToAction("Complete");*/
+            UserBLL userDb = new UserBLL();
+            int userId = (int)Session["UserId"];
+            if (userId != 0)
+            {
+                User userInDb = userDb.getUser(userId);
+
+                
+                //changes all user-settings that differ from db-object
+                if (user.Firstname != userInDb.FirstName && user.Firstname != "")
+                    userInDb.FirstName = user.Firstname;
+                if (user.Lastname != userInDb.LastName && user.Lastname != "")
+                    userInDb.LastName = user.Lastname;
+                if (user.Zipcode != userInDb.ZipCode)
+                    userInDb.ZipCode = user.Zipcode;
+                if (user.Address != userInDb.Address)
+                    userInDb.Address = user.Address;
+
+                userDb.editUser(userInDb.UserId, userInDb);
             }
 
-            if(!error.Equals(""))
-            {
-                ViewBag.ErrorMessage = error;
-                return View("Error");
-            }
-            return View();
+            return RedirectToAction("Complete");
         }
         //
         // GET: /Checkout/Complete
 
         public ActionResult Complete()
         {
+            SalesItemBLL itemDb = new SalesItemBLL();
+            OrderBLL orderDb = new OrderBLL();
+            UserBLL userDb = new UserBLL();
             if (CartBLL.GetCart(this.HttpContext).GetCartItems().Count == 0)
                 return RedirectToAction("UserPage", "Login");
             if (isLoggedIn())
@@ -90,16 +123,10 @@ namespace WebAppH2014.Controllers
                 }
                 order.SalesItems = allOrderItems;
 
-        //        currentUser.Orders.Add(order);
                 orderDb.addOrder(order);
 
-                order.ownerUser = currentUser;
-                order.SalesItems = allOrderItems;
-
-
-         
                 CartBLL.GetCart(this.HttpContext).EmptyCart();
-                return View(order);
+                return View(userDb.getUser(currentUser.UserId).Orders.Last());
             }
             
             ViewBag.ErrorMessage = "Du må være logget inn for å se dette...";

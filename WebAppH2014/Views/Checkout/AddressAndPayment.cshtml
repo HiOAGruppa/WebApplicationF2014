@@ -1,12 +1,58 @@
-﻿@model Model.Order
-
+﻿@model WebAppH2014.ViewModels.CheckoutViewModel
 @{
     ViewBag.Title = "Adresse og Betaling";
 }
 <body>
     <h2>Adresse og Betaling</h2>
     <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-    @Html.ActionLink("Avbryt", "Index", "Home", null, new { @class = "btn btn-danger" })
-    @Html.ActionLink("Betal", "Complete", "Checkout", null, new { @class = "btn btn-success" })
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.PersonId)
+
+            <div class="form-group">
+                @Html.Label("Fornavn", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Etternavn", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Adresse", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Postnr", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-1">
+                    @Html.ActionLink("Avbryt", "Index", "Home", null, new { @class = "btn btn-danger" })
+                </div>
+                <div class="col-md-1">
+                    <input type="submit" value="Bekreft bestilling" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
 </body>
