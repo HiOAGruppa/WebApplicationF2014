@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Model;
 using BLL;
 using System.Diagnostics;
+using WebAppH2014.ViewModels;
 
 namespace WebAppH2014.Controllers
 {
@@ -35,20 +36,35 @@ namespace WebAppH2014.Controllers
                 int userId = (int)Session["UserId"];
                 User currentUser = userDb.getUser(userId);
 
-                if (currentUser.Address == null || currentUser.ZipCode == null)
+                var viewModel = new CheckoutViewModel()
                 {
-                    if (!error.Equals(""))
-                        error += "\n";
-                    error += "Adresse ikke registrert! Registrer adresse på din side, og prøv igjen.";
-                }
+                    PersonId = userId,
+                    Firstname = currentUser.FirstName,
+                    Lastname = currentUser.LastName,
+                    Address = currentUser.Address,
+                    Zipcode = currentUser.ZipCode
+                };
+                return View(viewModel);
             }
 
-            if(!error.Equals(""))
-            {
-                ViewBag.ErrorMessage = error;
-                return View("Error");
-            }
-            return View();
+            ViewBag.ErrorMessage = error;
+            return View("Error");
+            
+        }
+        [HttpPost]
+        
+        public ActionResult AddressAndPayment(CheckoutViewModel viewModel)
+        {
+            User currentUser = userDb.getUser(viewModel.PersonId);
+
+            currentUser.FirstName = viewModel.Firstname;
+            currentUser.LastName = viewModel.Lastname;
+            currentUser.Address = viewModel.Address;
+            currentUser.ZipCode = viewModel.Zipcode;
+
+            userDb.editUser(currentUser.UserId,currentUser);
+
+            return RedirectToAction("Complete");
         }
         //
         // GET: /Checkout/Complete
