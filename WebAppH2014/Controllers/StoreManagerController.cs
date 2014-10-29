@@ -197,7 +197,23 @@ namespace WebAppH2014.Controllers
         }
         public ActionResult Ordre()
         {
-            return View();
+            OrderBLL db = new OrderBLL();
+            var orders = db.getOrders();
+            /*foreach (Order o in orders)
+            {
+                Debug.Print("Order: " + o.OrderId);
+                foreach (OrderSalesItem i in o.SalesItems)
+                    Debug.Print("Item: " + i.SalesItem.Name);
+            }*/
+            return View(orders);
+        }
+        public void SlettOrder(int id)
+        {
+            OrderBLL db = new OrderBLL();
+            Debug.Print("Order id: " + id);
+            // denne kalles via et Ajax-kall
+            db.removeOrder(id);
+            // kunne returnert en feil dersom slettingen feilet....
         }
         private Boolean isAdmin()
         {

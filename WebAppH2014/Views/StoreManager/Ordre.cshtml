@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Model.Order>
+    @{
+        ViewBag.Title = "Ordre";
+    }
+ <head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+    <title>The Stock</title>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        // lag en hendelse som utføres når en a-href med "data-SletteModal = true" trykkes.
+        $('a[data-sletteModal=true]').click(function () {
+
+            // hent inn data-taggene fra denne a-hef lenken
+            var data_navn = $(this).data('navn');
+            var data_id = $(this).data('id');
+
+            // legg ut dataene i div'en i modal-view'et
+            $('#slettNavn').html(data_navn);
+
+            // lag en hendelse for knappen for å slette via ajax, knappen ligger i modal-view'et
+            // må ligge inne i denne overordnede funksjonen for at id'én som er valgt kan brukes
+            $("#sletteModalKnapp").click(function () {
+                // id som skal slettes ligger i data_id
+                $.ajax({
+                    url: '@Url.Action("SlettOrder", "StoreManager")',
+                    data: { id: data_id },  // en parameter inn i slett(id)-metoden i kunde-kontrolleren (JSON-objekt)
+                    success: function () {
+                        // må kalle liste-metoden for å vise den nye listen av kunder
+                        $.ajax({
+                            url: '@Url.Action("Ordre", "StoreManager")',
+                            success: function () {
+                                // så må siden reloades!
+                                window.location.reload();
+                            }
+                        });
+                        }
+                    });
+                })
+            })
+    });
+  </script>
+ </head>
+    <body>
+        <h2>Ordrehistorikk</h2>
+        <hr />
+        @Html.ActionLink("Tilbake", "AdminView", "Login", new { tom = "" }, new { @class = "btn btn-primary" })
+        <hr />
+        <table class="table">
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <th colspan="3">
+                        <p><h4>Ordernummer: @order.OrderId - Kunde: @order.ownerUser.FirstName @order.ownerUser.LastName</h4></p>
+                    </th>
+                    <th><a href="#sletteModal" class="btn btn-large btn-danger" id="sletteKnapp"
+                           data-navn="Ordernummer: @order.OrderId - kunde @order.ownerUser.FirstName @order.ownerUser.LastName"
+                           data-id="@order.OrderId " data-toggle="modal" data-slettemodal="true">Slett</a>
+                    </th>
+                </tr>
+                <tr class="tsh">
+                    <td> Produkt </td>
+                    <td> Pris per enhet </td>
+                    <td> Antall </td>
+                    <td>
+                    </td>
+                </tr>
+
+
+                if (order.SalesItems != null)
+                {
+                    foreach (var item in order.SalesItems)
+                    {
+                        if (item.SalesItem != null)
+                        {
+                            <tr>
+                                <td> @item.SalesItem.Name </td>
+                                <td> @(item.SalesItem.Price),- </td>
+                                <td> @item.Amount </td>
+                                <td></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+
+        </table>
+        @Html.Partial("sletteModal")
+    </body>
+

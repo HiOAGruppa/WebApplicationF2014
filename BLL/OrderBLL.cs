@@ -41,6 +41,20 @@ namespace BLL
             return order;
         }
 
+        public void removeOrder(int id)
+        {
+            Order order = getOrder(id);
+            //7Debug.Print("order: " + order.OrderId + " " + order.UserId);
+            db.Orders.Remove(order);
+            db.SaveChanges();
+        }
+
+        public List<Order> getOrders()
+        {
+            var orders = db.Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
+            return orders;
+        }
+
 
     }
 }

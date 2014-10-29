@@ -105,6 +105,29 @@
     <Content Include="Content\navmenu-reveal.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Resources\Commandore 64.png" />
+    <Content Include="Resources\Data.png" />
+    <Content Include="Resources\Keyboard - Android.png" />
+    <Content Include="Resources\Keyboard - Bended.png" />
+    <Content Include="Resources\Keyboard - Black.png" />
+    <Content Include="Resources\Keyboard - Drawing.png" />
+    <Content Include="Resources\Keyboard - Enthusiast.png" />
+    <Content Include="Resources\Keyboard - Futuristic.png" />
+    <Content Include="Resources\Keyboard - Half Wierd.png" />
+    <Content Include="Resources\Keyboard - New Rainbow.png" />
+    <Content Include="Resources\Keyboard - No Case.png" />
+    <Content Include="Resources\Keyboard - Rainbow.png" />
+    <Content Include="Resources\Keyboard - Red.png" />
+    <Content Include="Resources\Keyboard - Right Handed.png" />
+    <Content Include="Resources\Keyboard - Virtual.png" />
+    <Content Include="Resources\Musical Keyboard - Retro.png" />
+    <Content Include="Resources\Musical Keyboard with iPad.png" />
+    <Content Include="Resources\Musical Keyboard.png" />
+    <Content Include="Resources\Musikk.png" />
+    <Content Include="Resources\placeholder.png" />
+    <Content Include="Resources\Tast1Tur.png" />
+    <Content Include="Resources\Tast1Tur2.png" />
+    <Content Include="Resources\Tast1TurLandscape.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -176,10 +199,8 @@
     <Content Include="Views\Login\AdminView.cshtml" />
     <Content Include="Views\Home\SalesItemView.cshtml" />
     <Content Include="Views\StoreManager\Kunder.cshtml" />
-    <Content Include="Views\StoreManager\sletteModalUsers.cshtml">
-      <BrowseToURL>~/Views/StoreManager/sletteModalUsers.cshtml</BrowseToURL>
-    </Content>
     <Content Include="Views\StoreManager\EditUser.cshtml" />
+    <Content Include="Views\StoreManager\Ordre.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
