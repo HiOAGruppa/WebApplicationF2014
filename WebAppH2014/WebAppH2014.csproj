@@ -201,6 +201,7 @@
     <Content Include="Views\StoreManager\Kunder.cshtml" />
     <Content Include="Views\StoreManager\EditUser.cshtml" />
     <Content Include="Views\StoreManager\Ordre.cshtml" />
+    <Content Include="Views\Store\SearchResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

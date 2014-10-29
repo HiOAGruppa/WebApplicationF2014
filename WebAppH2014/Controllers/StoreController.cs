@@ -45,5 +45,12 @@ namespace WebAppH2014.Controllers
 
             return PartialView(genres);
         }
+
+        [HttpGet]
+        public ActionResult SearchResult(string search)
+        {
+            var items = itemDb.searchSalesItems(search);
+            return View(items);
+        }
 	}
 }
