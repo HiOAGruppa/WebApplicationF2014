@@ -39,21 +39,11 @@ namespace WebAppH2014.Controllers
             var genreModel = genreDb.getSelectedGenre(genre);
             return View(genreModel);
         }
-
         public ActionResult GenreMenu()
         {
             var genres = genreDb.getGenres();
 
             return PartialView(genres);
-        }
-
-        [HttpGet]
-        public ActionResult SearchResult(string search)
-        {
-            System.Diagnostics.Debug.WriteLine(search+" YOLO");
-            var items = itemDb.searchSalesItems(search);
-            //var items = itemDb.getAllSalesItems();
-            return View(items);
         }
 	}
 }
