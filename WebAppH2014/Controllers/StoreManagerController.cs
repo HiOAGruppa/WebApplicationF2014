@@ -199,12 +199,6 @@ namespace WebAppH2014.Controllers
         {
             OrderBLL db = new OrderBLL();
             var orders = db.getOrders();
-            /*foreach (Order o in orders)
-            {
-                Debug.Print("Order: " + o.OrderId);
-                foreach (OrderSalesItem i in o.SalesItems)
-                    Debug.Print("Item: " + i.SalesItem.Name);
-            }*/
             return View(orders);
         }
         public void SlettOrder(int id)

@@ -33,10 +33,10 @@
                         @using (Html.BeginForm("SearchResult", "Store", FormMethod.Get))
                         {
                             <p>
-                                @Html.TextBox("search") <br>
-                                <input type="submit" value="Søk" />
-                            </p>
-                        } 
+                            @Html.TextBox("search")
+                            <input type="submit" value="Søk" />
+                            </p>    
+                        }
                     </li>
                     <li class="nav-item">  @{Html.RenderAction("LoginLink", "Login");} </li>
                     <li class="nav-item">  @{Html.RenderAction("CartSummary", "ShoppingCart");} </li>

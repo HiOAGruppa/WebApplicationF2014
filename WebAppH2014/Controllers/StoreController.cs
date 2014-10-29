@@ -50,9 +50,7 @@ namespace WebAppH2014.Controllers
         [HttpGet]
         public ActionResult SearchResult(string search)
         {
-            System.Diagnostics.Debug.WriteLine(search+" YOLO");
             var items = itemDb.searchSalesItems(search);
-            //var items = itemDb.getAllSalesItems();
             return View(items);
         }
 	}
