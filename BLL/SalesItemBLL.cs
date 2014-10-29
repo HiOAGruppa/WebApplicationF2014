@@ -33,25 +33,22 @@ namespace BLL
 
         public void addSalesItem(SalesItem item)
         {
-            db.SalesItems.Add(item);
-            db.SaveChanges();
+            db.addSalesItem(item);
         }
 
         public void removeSalesItem(SalesItem item)
         {
-            db.SalesItems.Remove(item);
-            db.SaveChanges();
+            db.removeSalesItem(item);
         }
 
         public void editSalesItem(SalesItem item)
         {
-            db.Entry(item).State = EntityState.Modified;
-            db.SaveChanges();
+            db.editSalesItem(item);
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
         {
-            return db.SalesItems.Include(a => a.Genre).ToList();
+            return db.getSalesItemsWithGenre();
         }
     }
 }

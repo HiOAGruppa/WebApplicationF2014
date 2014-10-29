@@ -191,6 +191,86 @@ namespace DAL
             return users;
         }
 
+        public Order getOrder(int orderId)
+        {
+            return Orders.Where(a => a.OrderId == orderId).FirstOrDefault();
+        }
+
+        public void addSalesItemInOrder(OrderSalesItem item)
+        {
+            SalesItemInOrder.Add(item);
+            SaveChanges();
+        }
+
+        public Order getOrderWithItems(int orderId)
+        {
+            Order order = Orders.Include("SalesItems").ToList().Single(a => a.OrderId == orderId);
+            Debug.WriteLine(order.SalesItems.ToString());
+            return order;
+        }
+
+        public void removeOrder(int id)
+        {
+            Order order = getOrder(id);
+            Orders.Remove(order);
+            SaveChanges();
+        }
+
+        public List<Order> getOrders()
+        {
+            var orders = Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
+            return orders;
+        }
+
+        public void addSalesItem(SalesItem item)
+        {
+            SalesItems.Add(item);
+            SaveChanges();
+        }
+
+        public void removeSalesItem(SalesItem item)
+        {
+            SalesItems.Remove(item);
+            SaveChanges();
+        }
+
+        public void editSalesItem(SalesItem item)
+        {
+            Entry(item).State = EntityState.Modified;
+            SaveChanges();
+        }
+
+        public List<SalesItem> getSalesItemsWithGenre()
+        {
+            return SalesItems.Include(a => a.Genre).ToList();
+        }
+
+        public UserLogin findUserLoginByPassword(byte[] passwordhash, String username)
+        {
+            return UserPasswords.Where(b => b.Password == passwordhash && b.UserName == username).FirstOrDefault();
+        }
+
+        public void addUser(User user, UserLogin login)
+        {
+            Users.Add(user);
+            UserPasswords.Add(login);
+            SaveChanges();
+        }
+
+
+        public void editUser(int userId, User user)
+        {
+            User oldUser = getUser(userId);
+            oldUser = user;
+            SaveChanges();
+        }
+
+        public void removeUser(User user)
+        {
+            Users.Remove(user);
+            SaveChanges();
+        }
+
     }
 
 }
