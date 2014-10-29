@@ -271,6 +271,36 @@ namespace DAL
             SaveChanges();
         }
 
+        public bool isUserInDB(UserModifyUser inUser)
+        {
+            Debug.WriteLine("In Context: " + inUser.toString());
+
+            if (inUser.OldPassword == null || inUser.UserLogin.UserName == null)
+                return false;
+            //these fields are dependent on index.cshtml modelformat used to generate the inUser
+            byte[] passordDb = genHash(inUser.OldPassword);
+            UserLogin foundUser = findUserLoginByPassword(passordDb, inUser.UserLogin.UserName);
+            if (foundUser == null)
+            {
+                return false;
+            }
+            else
+            {
+                inUser.UserId = foundUser.UserId;
+                return true;
+            }
+
+        }
+
+        private static byte[] genHash(string inPassword)
+        {
+            byte[] inData, outData;
+            var algorithm = System.Security.Cryptography.SHA256.Create();
+            inData = System.Text.Encoding.ASCII.GetBytes(inPassword);
+            outData = algorithm.ComputeHash(inData);
+            return outData;
+        }
+
     }
 
 }

@@ -21,8 +21,9 @@ namespace Model
         public String LastName { get; set; }
 
         public String Address { get; set; }
-       
-        
+
+        [Required(ErrorMessage = "Oppgi postnummer.")]
+        [RegularExpression(@"\d{4}",ErrorMessage="Oppgi et fire-sifret postnummer.")]
         public int? ZipCode { get; set; }
 
         [DisplayFormat(DataFormatString= "{0:MM/dd/yyyy}", ApplyFormatInEditMode=true)]

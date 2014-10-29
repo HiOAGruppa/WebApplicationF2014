@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using Model;
+using System.Diagnostics;
 
 namespace BLL
 {
@@ -39,6 +40,12 @@ namespace BLL
         public void removeUser(User user)
         {
             db.removeUser(user);
+        }
+
+        public bool isUserInDB(UserModifyUser inUser)
+        {
+            Debug.WriteLine("In BLL: " + inUser.toString());
+            return db.isUserInDB(inUser);
         }
     }
 }
