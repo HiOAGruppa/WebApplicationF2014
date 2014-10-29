@@ -69,8 +69,8 @@ namespace DAL
 
         public List<SalesItem> searchSalesItems(String nameQuery)
         {
-            var items = SalesItems.Where(it => it.Name.Contains(nameQuery)).ToList();
-            return items;
+           var items = SalesItems.Where(it => it.Name.Contains(nameQuery)).ToList();
+           return items;
         }
 
         string ShoppingCartId { get; set; }

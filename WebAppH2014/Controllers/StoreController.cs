@@ -39,7 +39,6 @@ namespace WebAppH2014.Controllers
             var genreModel = genreDb.getSelectedGenre(genre);
             return View(genreModel);
         }
-
         public ActionResult GenreMenu()
         {
             var genres = genreDb.getGenres();
