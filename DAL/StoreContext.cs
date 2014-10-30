@@ -39,6 +39,7 @@ namespace DAL
             return user;
         }
 
+        //gets all orders associated with the user in question
         public List<Order> getUserOrders(int userId)
         {
             //get all orders of the user
@@ -68,6 +69,7 @@ namespace DAL
             Debug.WriteLine("Database-change: Added order, of type List<SalesItem>, to SalesItemInOrder");
         }
 
+        //Method for searching for a given item with % Text % in db
         public List<SalesItem> searchSalesItems(String nameQuery)
         {
            var items = SalesItems.Where(it => it.Name.Contains(nameQuery)).ToList();
@@ -106,7 +108,7 @@ namespace DAL
             Debug.WriteLine("Database-change: Added SalesItem(" + item.Name + ") to cart");
         }
 
-
+        //removes a single item from the shoppingcart that's bound to session.
         public int RemoveFromCart(int id)
         {
             // Get the cart
@@ -135,11 +137,13 @@ namespace DAL
 
             return itemCount;
         }
+        //gets all items in the shoppingcart
         public List<Cart> GetCartItems()
         {
             return Carts.Where(cart => cart.CartId == ShoppingCartId).ToList();
         }
 
+        //finds number of items in the shoppingcart
         public int GetCartItemCount()
         {
             // Get the count of each item in the cart and sum them up
@@ -151,7 +155,7 @@ namespace DAL
             // Return 0 if all entries are null
             return count ?? 0;
         }
-
+        //gets the total sum for the items in shoppingcart
         public decimal GetCartItemTotal()
         {
             decimal? total = (from cartItems in Carts
@@ -161,6 +165,7 @@ namespace DAL
             return total ?? decimal.Zero;
         }
 
+        //empties out the shoppingcart associated with session. Always called after purchase.
         public void EmptyCart()
         {
             var cartItems = Carts.Where(cart => cart.CartId == ShoppingCartId);
@@ -177,12 +182,14 @@ namespace DAL
 
         //Store 
 
+
         public Genre getSelectedGenre(string genre)
         {
             var genreModel = Genres.Include("Items").Single(g => g.Name == genre);
             return genreModel;
         }
 
+        //adds an order to the database
         public void addOrder(Order order)
         {
             Orders.Add(order);
@@ -190,6 +197,7 @@ namespace DAL
             Debug.WriteLine("Database-change: Added order, of type Order");
         }
 
+        //get all users
         public List<User> getUsers()
         {
             var users = Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
@@ -201,20 +209,21 @@ namespace DAL
             return Orders.Where(a => a.OrderId == orderId).FirstOrDefault();
         }
 
+        //add a single salesitem in an order.
         public void addSalesItemInOrder(OrderSalesItem item)
         {
             SalesItemInOrder.Add(item);
             SaveChanges();
             Debug.WriteLine("Database-change: Added OrderSalesItem (" + item.SalesItem.Name + ") to SalesItemInOrder");
         }
-
+        //get an order and include the salesitems in it.
         public Order getOrderWithItems(int orderId)
         {
             Order order = Orders.Include("SalesItems").ToList().Single(a => a.OrderId == orderId);
             Debug.WriteLine(order.SalesItems.ToString());
             return order;
         }
-
+        //remove an order.
         public void removeOrder(int id)
         {
             Order order = getOrder(id);
@@ -255,6 +264,7 @@ namespace DAL
             return SalesItems.Include(a => a.Genre).ToList();
         }
 
+        //finds if a user with a given username and password in the database
         public UserLogin findUserLoginByPassword(byte[] passwordhash, String username)
         {
             return UserPasswords.Where(b => b.Password == passwordhash && b.UserName == username).FirstOrDefault();
@@ -284,6 +294,7 @@ namespace DAL
             Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
         }
 
+        //Does the username already exist in the db? Used for checking on register of new user.
         public bool usernameExists(String username)
         {
             UserLogin user = UserPasswords.Where(a => a.UserName.Equals(username)).SingleOrDefault();
@@ -294,6 +305,7 @@ namespace DAL
                 return false;
         }
 
+        //verifies a user when logging in. Is user in db? user not null
         public bool verifyUser(UserModifyUser inUser)
         {
             Debug.WriteLine("In Context: " + inUser.toString());
@@ -315,6 +327,7 @@ namespace DAL
 
         }
 
+        //method used to generate a hashed password to match it up against the database.
         private static byte[] genHash(string inPassword)
         {
             byte[] inData, outData;
