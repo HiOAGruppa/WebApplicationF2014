@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using Model;
+using System.Diagnostics;
 
 namespace BLL
 {
@@ -18,22 +19,17 @@ namespace BLL
 
         public UserLogin findUserLoginByPassword(byte[] passwordhash, String username)
         {
-            return db.UserPasswords.Where(b => b.Password == passwordhash && b.UserName == username).FirstOrDefault();
+            return db.findUserLoginByPassword(passwordhash, username);
         }
 
         public void addUser(User user, UserLogin login)
         {
-            db.Users.Add(user);
-            db.UserPasswords.Add(login);
-            db.SaveChanges();
+            db.addUser(user, login);
         }
 
         public void editUser(int userId, User user)
         {
-            User oldUser = getUser(userId);
-            oldUser = user;
-            db.SaveChanges();
-
+            db.editUser(userId, user);
         }
         public List<User> getUsers()
         {
@@ -43,8 +39,13 @@ namespace BLL
 
         public void removeUser(User user)
         {
-            db.Users.Remove(user);
-            db.SaveChanges();
+            db.removeUser(user);
+        }
+
+        public bool isUserInDB(UserModifyUser inUser)
+        {
+            Debug.WriteLine("In BLL: " + inUser.toString());
+            return db.isUserInDB(inUser);
         }
     }
 }

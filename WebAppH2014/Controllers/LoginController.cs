@@ -35,7 +35,8 @@ namespace WebAppH2014.Controllers
         [HttpPost]
         public ActionResult Index(UserModifyUser inUser)
         {
-            if (isUserInDB(inUser))
+            UserBLL db = new UserBLL();
+            if (db.isUserInDB(inUser))
             {
                 Debug.WriteLine("Login == true");
                 LogIn(inUser);
@@ -51,25 +52,6 @@ namespace WebAppH2014.Controllers
             }
         }
 
-        private static bool isUserInDB(UserModifyUser inUser)
-        {
-            UserBLL db = new UserBLL();
-                if (inUser.OldPassword == null || inUser.UserLogin.UserName == null)
-                    return false;
-                //these fields are dependent on index.cshtml modelformat used to generate the inUser
-                byte[] passordDb = genHash(inUser.OldPassword);
-                UserLogin foundUser = db.findUserLoginByPassword(passordDb, inUser.UserLogin.UserName);
-                if (foundUser == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    inUser.UserId = foundUser.UserId;
-                    return true;
-                }
-            
-        }
 
         public ActionResult UserPage()
         {
@@ -130,7 +112,7 @@ namespace WebAppH2014.Controllers
 
                 try
                 {
-                    var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName, Address = inUser.Address };
+                    var newUser = new User { FirstName = inUser.FirstName, LastName = inUser.LastName, Address = inUser.Address, ZipCode = inUser.ZipCode};
                     byte[] passwordDb = genHash(inUser.OldPassword);
                     UserLogin userlogin = new UserLogin { UserId = newUser.UserId, Password = passwordDb, UserName = inUser.UserLogin.UserName };
                     newUser.UserLogin = userlogin;

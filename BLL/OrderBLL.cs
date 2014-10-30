@@ -20,8 +20,7 @@ namespace BLL
 
         public void addSalesItemInOrder(OrderSalesItem item)
         {
-            db.SalesItemInOrder.Add(item);
-            db.SaveChanges();
+            db.addSalesItemInOrder(item);
         }
 
         public void addOrder(Order order)
@@ -31,28 +30,22 @@ namespace BLL
 
         public Order getOrder(int orderId)
         {
-            return db.Orders.Where(a => a.OrderId == orderId).FirstOrDefault();
+            return db.getOrder(orderId);
         }
 
         public Order getOrderWithItems(int orderId)
         {
-            Order order = db.Orders.Include("SalesItems").ToList().Single(a => a.OrderId == orderId);
-            Debug.WriteLine(order.SalesItems.ToString());
-            return order;
+            return db.getOrderWithItems(orderId);
         }
 
         public void removeOrder(int id)
         {
-            Order order = getOrder(id);
-            //7Debug.Print("order: " + order.OrderId + " " + order.UserId);
-            db.Orders.Remove(order);
-            db.SaveChanges();
+            db.removeOrder(id);
         }
 
         public List<Order> getOrders()
         {
-            var orders = db.Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
-            return orders;
+            return db.getOrders();
         }
 
 

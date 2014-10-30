@@ -20,11 +20,11 @@ namespace DAL
                 //userId 1
                 new User{FirstName = "Tore" ,LastName = "Tang", Address="Tanggata 23", ZipCode=2222,UserLogin = new UserLogin{UserName = "Toretang@gmail.com", Password = genHash("1")}},
                 //userid 2
-                new User{FirstName = "Martin" ,LastName = "Hagen", UserLogin = new UserLogin{UserName = "Martinhagen@gmail.com", Password = genHash("BolleMann")}},
+                new User{FirstName = "Martin" ,LastName = "Hagen",ZipCode=5555, UserLogin = new UserLogin{UserName = "Martinhagen@gmail.com", Password = genHash("BolleMann")}},
                 //userid 3
-                new User{FirstName = "Sondre" ,LastName = "Boge", UserLogin = new UserLogin{UserName = "Sondreboge@gmail.com", Password = genHash("WhatWhat")}},
+                new User{FirstName = "Sondre" ,LastName = "Boge",ZipCode=5555, UserLogin = new UserLogin{UserName = "Sondreboge@gmail.com", Password = genHash("WhatWhat")}},
                 //userid 4
-                new User{FirstName ="Store", LastName="Admin", UserLogin = new UserLogin{UserName = "admin@gmail.com", Password = genHash("123")},Admin=true}
+                new User{FirstName ="Store", LastName="Admin",ZipCode=5555, UserLogin = new UserLogin{UserName = "admin@gmail.com", Password = genHash("123")},Admin=true}
             };
 
             Debug.WriteLine("Users Created");
