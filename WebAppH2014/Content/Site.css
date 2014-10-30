@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 55px;
     padding-bottom: 20px;
+    background-color: #EEE;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -38,8 +39,6 @@ textarea {
     border: 1px solid #ebebeb;
     margin: 5px;
     width: 30%;
-    display: inline-block;
-    float: inherit;
 }
 
 h1 {
@@ -98,9 +97,17 @@ ul.nav li :hover {
     }
 
     #main-content {
+        border-right: thin solid silver;
+        border-bottom: thin solid silver;
         overflow-x: hidden;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 10px;
         margin-left: 150px;
         margin-right: 20px;
+        max-width:  1000px;
+        background-color: #FFF;
+        border-radius: 4px;
     }
     .sidebar-navbar a {
         padding-top: 6%;
@@ -110,10 +117,11 @@ ul.nav li :hover {
 
 /* Navbar Sidebar */
 .sidebar-navbar {
-    background-color: #f5f3f3; /*#ddd*/
+    background-color: white;/* #f5f3f3; #ddd*/
     border-width: thin;
     border-color: #666;
     border-right: thin solid silver;
+    border-bottom: thin solid silver;
 }
 
 
@@ -128,7 +136,7 @@ ul.nav li :hover {
         font-weight: bold;
         font-size: larger;
         color: #444;
-        background: #ebebef;
+        background: #f2f2f2;
     }
     .sidebar-navbar ul.nav :link,
     .sidebar-navbar ul.nav :visited,
