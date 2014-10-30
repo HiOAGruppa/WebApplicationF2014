@@ -182,7 +182,7 @@ th, td {
     padding-left: 5px;
 }
 
-td .btn {
+td .btn, th .btn {
     margin: 2px;
     float: right;
 }
@@ -192,6 +192,7 @@ td .btn {
     color: #000;
     font-size: 13px;
     text-align: left;
+    height: 15px;
 }
 
 
