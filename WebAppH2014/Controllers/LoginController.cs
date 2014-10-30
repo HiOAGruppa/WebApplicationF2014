@@ -295,6 +295,7 @@ namespace WebAppH2014.Controllers
             Session["LoggedIn"] = false;
             ViewBag.isLoggedIn = false;
             ViewBag.isUserId = 0;
+            CartBLL.GetCart(this.HttpContext).EmptyCart();
         }
 
         public ActionResult LogoutAction()
