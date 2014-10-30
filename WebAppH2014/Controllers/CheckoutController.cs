@@ -30,6 +30,12 @@ namespace WebAppH2014.Controllers
                 int userId = (int)Session["UserId"];
                 User currentUser = userDb.getUser(userId);
 
+                if(currentUser.Admin==true)
+                {
+                    CartBLL.GetCart(this.HttpContext).EmptyCart();
+                    return RedirectToAction("Index","ShoppingCart");
+                }
+
                 var viewModel = new CheckoutViewModel()
                 {
                     PersonId = userId,
@@ -132,6 +138,7 @@ namespace WebAppH2014.Controllers
             ViewBag.ErrorMessage = "Du må være logget inn for å se dette...";
             return View("Error");
         }
+
 
         private Boolean isLoggedIn()
         {
