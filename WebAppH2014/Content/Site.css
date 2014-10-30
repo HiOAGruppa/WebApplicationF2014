@@ -64,7 +64,24 @@ ul.nav li.nav-item :link {
     font-size:large;
     color: white;
 }
-
+ul.nav li.nav-search table
+{
+    margin-top:9px;
+    display: inline-block;
+    border:0;
+    border-collapse: collapse; 
+}
+ul.nav li.nav-search table tr
+{
+    border:0;
+    border-collapse: collapse; 
+}
+ul.nav li.nav-search input[type=submit]
+{
+    text-align:center;
+    padding-left:7px;
+    width:40px;
+}
 ul.nav li :hover {
     text-decoration: none;
 }
@@ -85,7 +102,6 @@ ul.nav li :hover {
         margin-left: 150px;
         margin-right: 20px;
     }
-
     .sidebar-navbar a {
         padding-top: 6%;
         padding-bottom: 6%;
