@@ -92,7 +92,7 @@
                 </td>
                 <td>
 
-                    @Html.ActionLink("EndreUser", "EditUser", new { id = user.UserId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Endre", "EditUser", new { id = user.UserId }, new { @class = "btn btn-success" })
                     <a href="#sletteModal" class="btn btn-large btn-danger" id="sletteKnapp"
                        data-navn="User: @user.UserId, Fornavn: @user.FirstName, Etternavn: @user.LastName"
                        data-id="@user.UserId " data-toggle="modal" data-slettemodal="true">Slett</a>

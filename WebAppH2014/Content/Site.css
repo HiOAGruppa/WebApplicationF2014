@@ -182,9 +182,14 @@ th, td {
     padding-left: 5px;
 }
 
+td .btn {
+    margin: 2px;
+    float: right;
+}
+
 .tsh {
-    background: #609ae6;
-    color: #FFF;
+    background: #BBB;
+    color: #000;
     font-size: 13px;
     text-align: left;
 }
