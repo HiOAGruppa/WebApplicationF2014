@@ -65,6 +65,7 @@ namespace DAL
         private void addOrderSalesItems(Order order, List<SalesItem> allItems)
         {
             var salesItemsInOrder = SalesItemInOrder.Where(it => it.OrderId == order.OrderId).ToList();
+            Debug.WriteLine("Database-change: Added order, of type List<SalesItem>, to SalesItemInOrder");
         }
 
         public List<SalesItem> searchSalesItems(String nameQuery)
@@ -102,6 +103,7 @@ namespace DAL
 
             // Save changes
             SaveChanges();
+            Debug.WriteLine("Database-change: Added SalesItem(" + item.Name + ") to cart");
         }
 
 
@@ -128,6 +130,7 @@ namespace DAL
 
                 // Save changes
                 SaveChanges();
+                Debug.WriteLine("Database-change: Removed Item(" + cartItem.Item.Name + ") from cart");
             }
 
             return itemCount;
@@ -144,7 +147,7 @@ namespace DAL
                           where cartItems.CartId == ShoppingCartId
                           select (int?)cartItems.Count).Sum();
 
-            Debug.WriteLine("Cart.Itemcount =" + count);
+            Debug.WriteLine("Cart.Itemcount = " + count);
             // Return 0 if all entries are null
             return count ?? 0;
         }
@@ -154,7 +157,7 @@ namespace DAL
             decimal? total = (from cartItems in Carts
                               where cartItems.CartId == ShoppingCartId
                               select (int?)cartItems.Count * cartItems.Item.Price).Sum();
-            Debug.WriteLine("Cart.TotalCost =" + total);
+            Debug.WriteLine("Cart.TotalCost = " + total);
             return total ?? decimal.Zero;
         }
 
@@ -169,6 +172,7 @@ namespace DAL
 
             // Save changes
             SaveChanges();
+            Debug.WriteLine("Database-change: Cart emptied");
         }
 
         //Store 
@@ -183,6 +187,7 @@ namespace DAL
         {
             Orders.Add(order);
             SaveChanges();
+            Debug.WriteLine("Database-change: Added order, of type Order");
         }
 
         public List<User> getUsers()
@@ -200,6 +205,7 @@ namespace DAL
         {
             SalesItemInOrder.Add(item);
             SaveChanges();
+            Debug.WriteLine("Database-change: Added OrderSalesItem (" + item.SalesItem.Name + ") to SalesItemInOrder");
         }
 
         public Order getOrderWithItems(int orderId)
@@ -214,6 +220,7 @@ namespace DAL
             Order order = getOrder(id);
             Orders.Remove(order);
             SaveChanges();
+            Debug.WriteLine("Database-change: Removed order beloning to (" + order.ownerUser.UserLogin.UserName + ")");
         }
 
         public List<Order> getOrders()
@@ -226,18 +233,21 @@ namespace DAL
         {
             SalesItems.Add(item);
             SaveChanges();
+            Debug.WriteLine("Database-change: Added SalesItem (" + item.Name + ") to database");
         }
 
         public void removeSalesItem(SalesItem item)
         {
             SalesItems.Remove(item);
             SaveChanges();
+            Debug.WriteLine("Database-change: Removed SalesItem (" + item.Name + ") from database");
         }
 
         public void editSalesItem(SalesItem item)
         {
             Entry(item).State = EntityState.Modified;
             SaveChanges();
+            Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
@@ -255,6 +265,7 @@ namespace DAL
             Users.Add(user);
             UserPasswords.Add(login);
             SaveChanges();
+            Debug.WriteLine("Database-change: Added User (" + login.UserName + ") to database");
         }
 
 
@@ -263,12 +274,14 @@ namespace DAL
             User oldUser = getUser(userId);
             oldUser = user;
             SaveChanges();
+            Debug.WriteLine("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
         }
 
         public void removeUser(User user)
         {
             Users.Remove(user);
             SaveChanges();
+            Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
         }
 
         public bool isUserInDB(UserModifyUser inUser)
