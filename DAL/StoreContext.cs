@@ -284,7 +284,17 @@ namespace DAL
             Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
         }
 
-        public bool isUserInDB(UserModifyUser inUser)
+        public bool usernameExists(String username)
+        {
+            UserLogin user = UserPasswords.Where(a => a.UserName.Equals(username)).SingleOrDefault();
+
+            if (user != null)
+                return true;
+            else
+                return false;
+        }
+
+        public bool verifyUser(UserModifyUser inUser)
         {
             Debug.WriteLine("In Context: " + inUser.toString());
 

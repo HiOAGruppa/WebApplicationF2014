@@ -7,6 +7,7 @@ using DAL;
 using Model;
 using System.Diagnostics;
 
+
 namespace BLL
 {
     public class UserBLL
@@ -42,10 +43,15 @@ namespace BLL
             db.removeUser(user);
         }
 
-        public bool isUserInDB(UserModifyUser inUser)
+        public bool usernameExists(String username)
+        {
+           return db.usernameExists(username);
+        }
+
+        public bool verifyUser(UserModifyUser inUser)
         {
             Debug.WriteLine("In BLL: " + inUser.toString());
-            return db.isUserInDB(inUser);
+            return db.verifyUser(inUser);
         }
     }
 }
