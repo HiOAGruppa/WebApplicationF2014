@@ -52,16 +52,13 @@ namespace DAL
 
         public bool editSalesItem(SalesItem item)
         {
-            try
-            {
-                item = null;
+            try {
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
                 return true;
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 var sw = new System.IO.StreamWriter(filename, true);
                 sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 sw.Close();
