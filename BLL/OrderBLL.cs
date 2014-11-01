@@ -10,9 +10,22 @@ using System.Diagnostics;
 
 namespace BLL
 {
-    public class OrderBLL
+    public class OrderBLL : BLL.IOrderBLL
     {
-        StoreContext db = new StoreContext();
+StoreContext db;
+
+        private IStoreManagerRepository _repository;
+
+        public OrderBLL() {
+            db = new StoreContext();
+            _repository = new StoreManagerRepository();
+        }
+        public OrderBLL(IStoreManagerRepository stub)
+        {
+            db = new StoreContext();
+            _repository = stub;
+        }
+        
         public List<Model.Order> getUserOrders(int userId)
         {
             return db.getUserOrders(userId);

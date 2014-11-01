@@ -36,7 +36,7 @@ namespace WebAppH2014.Controllers
         public ActionResult Index(UserModifyUser inUser)
         {
             UserBLL db = new UserBLL();
-            if (db.isUserInDB(inUser))
+            if (db.verifyUser(inUser))
             {
                 Debug.WriteLine("Login == true");
                 LogIn(inUser);
@@ -105,6 +105,13 @@ namespace WebAppH2014.Controllers
         public ActionResult Register(UserModifyUser inUser)
         {
             UserBLL db = new UserBLL();
+
+            if (db.usernameExists(inUser.UserLogin.UserName))
+            {
+                ModelState.AddModelError("usernameExistsError", "Brukernavnet finnes fra før, prøv et annet navn.");
+                return View();
+            }
+
             if (!ModelState.IsValid)
             {
                 return View();
