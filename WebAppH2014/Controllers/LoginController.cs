@@ -303,11 +303,14 @@ namespace WebAppH2014.Controllers
         //method for defining user as logged in.
         private void LogIn(User inUser)
         {
-            //saves userId and loginState
-            Session["UserId"] = inUser.UserId;
-            Session["LoggedIn"] = true;
-            ViewBag.isLoggedIn = true;
-            ViewBag.isUserId = inUser.UserId;
+            if (inUser != null)//saves userId and loginState
+            {
+                Session["UserId"] = inUser.UserId;
+                Session["LoggedIn"] = true;
+                ViewBag.isLoggedIn = true;
+                ViewBag.isUserId = inUser.UserId;
+            }
+
            
         }
         //method for defining a user as logged out.

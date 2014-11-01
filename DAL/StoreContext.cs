@@ -472,6 +472,7 @@ namespace DAL
         {
             try {
                 string name = user.UserLogin.UserName;
+                UserPasswords.Remove(user.UserLogin);
                 Users.Remove(user);
                 SaveChanges();
                 Debug.WriteLine("Database-change: Removed User (" + name + ") from database");
