@@ -116,10 +116,12 @@ namespace DAL
                 cart => cart.CartId == ShoppingCartId
                 && cart.CartItemId == id);
 
+            string name = "";
             int itemCount = 0;
 
             if (cartItem != null)
             {
+                name = cartItem.Item.Name;
                 if (cartItem.Count > 1)
                 {
                     cartItem.Count--;
@@ -127,12 +129,13 @@ namespace DAL
                 }
                 else
                 {
+                    
                     Carts.Remove(cartItem);
                 }
 
                 // Save changes
                 SaveChanges();
-                Debug.WriteLine("Database-change: Removed Item(" + cartItem.Item.Name + ") from cart");
+                if(!name.Equals("")) Debug.WriteLine("Database-change: Removed Item(" + name + ") from cart");
             }
 
             return itemCount;
