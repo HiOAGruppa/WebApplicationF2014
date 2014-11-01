@@ -149,7 +149,8 @@ namespace WebAppH2014.Controllers
         {
             // denne kalles via et Ajax-kall
             User user = _userBLL.getUser(id);
-            _userBLL.removeUser(user);
+            if (user.Admin != true)
+                _userBLL.removeUser(user);
             // kunne returnert en feil dersom slettingen feilet....
         }
 
