@@ -76,8 +76,11 @@ namespace WebAppH2014.Controllers
             item.ImageUrl = "placeholder";
             if (ModelState.IsValid)
             {
-                _itemBLL.addSalesItem(item);
-                return RedirectToAction("Index");
+                var ok = _itemBLL.addSalesItem(item);
+                if (ok)
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.GenreId = new SelectList(_genreBLL.getGenres(), "GenreId", "Name", item.GenreId);
@@ -107,7 +110,7 @@ namespace WebAppH2014.Controllers
         {
             if (ModelState.IsValid)
             {
-                _itemBLL.editSalesItem(item);
+                var ok =_itemBLL.editSalesItem(item);
                 return RedirectToAction("Index");
             }
             ViewBag.GenreId = new SelectList(_genreBLL.getGenres(), "GenreId", "Name", item.GenreId);
@@ -126,7 +129,7 @@ namespace WebAppH2014.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             SalesItem item = _itemBLL.findSalesItem(id);
-            _itemBLL.removeSalesItem(item);
+            var ok = _itemBLL.removeSalesItem(item);
             return RedirectToAction("Index");
         }
 
@@ -134,7 +137,7 @@ namespace WebAppH2014.Controllers
         {
             // denne kalles via et Ajax-kall
             SalesItem item = _itemBLL.findSalesItem(id);
-            _itemBLL.removeSalesItem(item);
+            var ok = _itemBLL.removeSalesItem(item);
             // kunne returnert en feil dersom slettingen feilet....
         }
 
@@ -150,7 +153,9 @@ namespace WebAppH2014.Controllers
             // denne kalles via et Ajax-kall
             User user = _userBLL.getUser(id);
             if (user.Admin != true)
-                _userBLL.removeUser(user);
+            {
+                var ok = _userBLL.removeUser(user);
+            }
             // kunne returnert en feil dersom slettingen feilet....
         }
 
@@ -251,7 +256,7 @@ namespace WebAppH2014.Controllers
             if (user.DateOfBirth != userInDb.DateOfBirth)
                 userInDb.DateOfBirth = user.DateOfBirth;
 
-            _userBLL.editUser(userInDb.UserId, userInDb);
+            var ok = _userBLL.editUser(userInDb.UserId, userInDb);
 
             return null;
         }

@@ -81,7 +81,7 @@ namespace WebAppH2014.Controllers
                 if (user.Address != userInDb.Address)
                     userInDb.Address = user.Address;
 
-                userDb.editUser(userInDb.UserId, userInDb);
+                var ok = userDb.editUser(userInDb.UserId, userInDb);
             }
 
             return RedirectToAction("Complete");
@@ -124,7 +124,7 @@ namespace WebAppH2014.Controllers
 
                     allOrderItems.Add(osItem);
                     sItem.InStock -= item.Count;
-                    itemDb.editSalesItem(sItem);
+                    var ok = itemDb.editSalesItem(sItem);
                    // orderDb.addSalesItemInOrder(osItem);
                 }
                 order.SalesItems = allOrderItems;

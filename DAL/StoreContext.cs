@@ -447,8 +447,9 @@ namespace DAL
             }
         }
 
-        public void editUser(int userId, User user)
+        public bool editUser(int userId, User user)
         {
+            var ok = true;
             try {
                 User oldUser = getUser(userId);
                 oldUser = user;
@@ -457,11 +458,15 @@ namespace DAL
             }
             catch (Exception e) {
                 logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                ok = false;
             }
+            return ok;
         }
 
-        public void removeUser(User user)
+
+        public bool removeUser(User user)
         {
+            var ok = true;
             try {
                 string name = user.UserLogin.UserName;
                 UserPasswords.Remove(user.UserLogin);
@@ -471,7 +476,9 @@ namespace DAL
             }
             catch (Exception e) {
                 logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                ok = false;
             }
+            return ok;
         }
 
         //Does the username already exist in the db? Used for checking on register of new user.

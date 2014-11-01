@@ -112,8 +112,9 @@ namespace DAL
             }
         }
 
-        public void editUser(int userId, User user)
+        public bool editUser(int userId, User user)
         {
+            var value = true;
             try {
                 User oldUser = db.getUser(userId);
                 oldUser = user;
@@ -123,11 +124,14 @@ namespace DAL
             catch (Exception e)
             {
                 logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                value = false;
             }
+            return value;
         }
 
-        public void removeUser(User user)
+        public bool removeUser(User user)
         {
+            var ok = true;
             try {
                 string name = user.UserLogin.UserName;
                 db.Users.Remove(user);
@@ -137,7 +141,9 @@ namespace DAL
             catch (Exception e)
             {
                 logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                ok = false;
             }
+            return ok;
         }
 
         private void logError(String message)

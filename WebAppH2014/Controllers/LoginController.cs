@@ -289,7 +289,7 @@ namespace WebAppH2014.Controllers
                 }
 
                 Debug.WriteLine("settings saved");
-                db.editUser(userInDb.UserId, userInDb);
+                var ok = db.editUser(userInDb.UserId, userInDb);
                 Debug.WriteLine("modifyUser: \n" + user.toString());
             }
             else
