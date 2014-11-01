@@ -230,10 +230,9 @@ namespace DAL
         public void removeOrder(int id)
         {
             Order order = getOrder(id);
-            string name = order.ownerUser.UserLogin.UserName;
             Orders.Remove(order);
             SaveChanges();
-            Debug.WriteLine("Database-change: Removed order belonging to (" + name + ")");
+            Debug.WriteLine("Database-change: Removed order (" + id + ")");
         }
 
         public List<Order> getOrders()
