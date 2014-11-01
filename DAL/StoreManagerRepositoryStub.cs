@@ -60,6 +60,30 @@ namespace DAL
             return salesItems;
         }
 
+        public SalesItem findSalesItem(int id)
+        {
+            if (id == 0)
+            {
+                var item = new SalesItem();
+                item.SalesItemId = 0;
+                return item;
+            }
+            else
+            {
+                var item = new SalesItem()
+                {
+                    SalesItemId = 1,
+                    Price = new decimal(100.0),
+                    Name = "Keyboard",
+                    Description = "Fint keyboard",
+                    InStock = 10,
+                    GenreId = 1,
+                    ImageUrl = "bilde"
+                };
+                return item;
+            }
+        }
+
 
         public List<User> getUsers()
         {

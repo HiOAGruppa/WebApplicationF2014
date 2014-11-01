@@ -9,67 +9,149 @@ using System.Diagnostics;
 
 namespace DAL
 {
-    public class StoreManagerRepository : DAL.IStoreManagerRepository
+    public class StoreManagerRepository : DbContext, DAL.IStoreManagerRepository
     {
         StoreContext db = new StoreContext();
+        string fileError = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logErrors.txt";
+        string fileChange = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logChanges.txt";
 
         public bool addSalesItem(SalesItem item)
         {
-            db.SalesItems.Add(item);
-            db.SaveChanges();
-            Debug.WriteLine("Database-change: Added SalesItem (" + item.Name + ") to database");
-            return true;
+            try {
+                db.SalesItems.Add(item);
+                db.SaveChanges();
+                logChange("Database-change: Added SalesItem (" + item.Name + ") to database");
+                return true;
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return false;
+            }
         }
 
         public bool removeSalesItem(SalesItem item)
         {
-            db.SalesItems.Remove(item);
-            db.SaveChanges();
-            Debug.WriteLine("Database-change: Removed SalesItem (" + item.Name + ") from database");
-            return true;
+            try
+            {
+                string name = item.Name;
+                db.SalesItems.Remove(item);
+                db.SaveChanges();
+                logChange("Database-change: Removed SalesItem (" + name + ") from database");
+                return true;
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return false;
+            }
         }
 
         public bool editSalesItem(SalesItem item)
         {
-            db.Entry(item).State = EntityState.Modified;
-            db.SaveChanges();
-            Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
-            return true;
+            try {
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                logChange("Database-change: Edited SalesItem (" + item.Name + ") in database");
+                return true;
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return false;
+            }
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
         {
-            return db.SalesItems.Include(a => a.Genre).ToList();
+            try {
+                return db.SalesItems.Include(a => a.Genre).ToList();
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
+        }
+
+        public SalesItem findSalesItem(int id)
+        {
+            try {
+                return db.SalesItems.Find(id);
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
         }
 
 
         //get all users
         public List<User> getUsers()
         {
-            var users = db.Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
-            return users;
+            try {
+                var users = db.Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
+                return users;
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
         }
-
 
         public List<Order> getOrders()
         {
-            var orders = db.Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
-            return orders;
+            try {
+                var orders = db.Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
+                return orders;
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
         }
 
         public void editUser(int userId, User user)
         {
-            User oldUser = db.getUser(userId);
-            oldUser = user;
-            db.SaveChanges();
-            Debug.WriteLine("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
+            try {
+                User oldUser = db.getUser(userId);
+                oldUser = user;
+                db.SaveChanges();
+                logChange("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+            }
         }
 
         public void removeUser(User user)
         {
-            db.Users.Remove(user);
-            db.SaveChanges();
-            Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
+            try {
+                string name = user.UserLogin.UserName;
+                db.Users.Remove(user);
+                db.SaveChanges();
+                logChange("Database-change: Removed User (" + name + ") from database");
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+            }
+        }
+
+        private void logError(String message)
+        {
+            var sw = new System.IO.StreamWriter(fileError, true);
+            sw.WriteLine(message);
+            sw.Close();
+        }
+
+        private void logChange(String message)
+        {
+            var sw = new System.IO.StreamWriter(fileChange, true);
+            sw.WriteLine(DateTime.Now.ToString() + Environment.NewLine + message);
+            sw.Close();
         }
     }
 }

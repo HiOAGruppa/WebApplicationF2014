@@ -1,20 +1,32 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Web.Mvc;
-using System.Linq;
-using System.Collections.Generic;
-using WebAppH2014.Controllers;
-using BLL;
+﻿using BLL;
 using DAL;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using WebAppH2014.Controllers;
 
 namespace Enhetstest
 {
     [TestClass]
     public class StoreManagerControllerTest
     {
-        
+        /*[SetUp]
+        public void SetUp()
+        {
+            HttpContext.Current = new HttpContext(
+                new HttpRequest(null, "http://tempuri.org", null),
+                new HttpResponse(null));
+        }
+        [TearDown]
+        public void TearDown()
+        {
+            HttpContext.Current = null;
+        }*/
+
         [TestMethod]
         public void show_alle_items()
         {
@@ -59,6 +71,7 @@ namespace Enhetstest
             }
         }
 
+        [TestMethod]
         public void show_item_view()
         {
             //Arrange
@@ -92,6 +105,87 @@ namespace Enhetstest
             Assert.AreEqual(forventetResultat.InStock, resultatItem.InStock);
             Assert.AreEqual(forventetResultat.GenreId, resultatItem.GenreId);
             Assert.AreEqual(forventetResultat.ImageUrl, resultatItem.ImageUrl);
+        }
+
+        [TestMethod]
+        public void show_create_view()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            //Act
+            var resultat = (ViewResult)controller.Create();
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        [TestMethod]
+        public void create_item_OK()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem()
+            {
+                SalesItemId = 1,
+                Price = new decimal(100.0),
+                Name = "Keyboard",
+                Description = "Fint keyboard",
+                InStock = 10,
+                GenreId = 1,
+                ImageUrl = "bilde"
+            };
+
+            //Act
+            var resultat = (RedirectToRouteResult)controller.Create(inItem);
+
+            //Assert
+            Assert.AreEqual(resultat.RouteName, "");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+        }
+
+        [TestMethod]
+        public void create_item_validate_error()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem();
+            controller.ViewData.ModelState.AddModelError("Name", "No Name Given ");
+
+            //Act
+            var resultat = (ViewResult)controller.Create(inItem);
+
+            //Assert
+            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1);
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        [TestMethod]
+        public void create_item_post_error()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+            
+            var inItem = new SalesItem();
+            inItem.Name = "";
+
+            //Act
+            var resultat = (RedirectToRouteResult)controller.Create(inItem);
+
+            //Assert
+            Assert.AreEqual(resultat.RouteName, "");
+        }
+
+        [TestMethod]
+        public void edit_item()
+        {
+
         }
     }
 }

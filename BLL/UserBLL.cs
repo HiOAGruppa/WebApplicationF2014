@@ -12,9 +12,9 @@ namespace BLL
 {
     public class UserBLL : BLL.IUserBLL
     {
-StoreContext db;
-
+        StoreContext db;
         private IStoreManagerRepository _repository;
+        bool test = false;
 
         public UserBLL() {
             db = new StoreContext();
@@ -22,6 +22,7 @@ StoreContext db;
         }
         public UserBLL(IStoreManagerRepository stub)
         {
+            test = true;
             db = new StoreContext();
             _repository = stub;
         }        
@@ -43,17 +44,23 @@ StoreContext db;
 
         public void editUser(int userId, User user)
         {
-            db.editUser(userId, user);
+            if (test)
+                _repository.editUser(userId, user);
+            else
+                db.editUser(userId, user);
         }
         public List<User> getUsers()
         {
-            return db.getUsers();
+            return _repository.getUsers();
         }
 
 
         public void removeUser(User user)
         {
-            db.removeUser(user);
+            if (test)
+                _repository.removeUser(user);
+            else
+                db.removeUser(user);
         }
 
         public bool usernameExists(String username)

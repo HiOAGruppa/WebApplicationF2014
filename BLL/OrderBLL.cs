@@ -12,7 +12,8 @@ namespace BLL
 {
     public class OrderBLL : BLL.IOrderBLL
     {
-StoreContext db;
+        StoreContext db;
+        bool test = false;
 
         private IStoreManagerRepository _repository;
 
@@ -22,6 +23,7 @@ StoreContext db;
         }
         public OrderBLL(IStoreManagerRepository stub)
         {
+            test = true;
             db = new StoreContext();
             _repository = stub;
         }
@@ -58,7 +60,10 @@ StoreContext db;
 
         public List<Order> getOrders()
         {
-            return db.getOrders();
+            if(test)
+                return _repository.getOrders();
+            else
+                return db.getOrders();
         }
 
 

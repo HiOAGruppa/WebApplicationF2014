@@ -31,12 +31,15 @@ namespace DAL
             var orders = new List<Order>();
             foreach (var user in users)
             {
-                //TODO add orders to user
+                
+                    //TODO add orders to user
                 context.Users.Add(user);
-
-                //OrderId 1-3 generated
-                orders.Add(new Order { ownerUser = user });
-                Debug.WriteLine("User added");
+                if (user.Admin != true)
+                { 
+                    //OrderId 1-3 generated
+                    orders.Add(new Order { ownerUser = user });
+                    Debug.WriteLine("User added");
+                }
             }
             context.SaveChanges();
 
