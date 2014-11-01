@@ -23,7 +23,8 @@ namespace DAL
 
         public DbSet<Cart> Carts { get; set; }
 
-        string filename = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logErrors.txt";
+        string fileError = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logErrors.txt";
+        string fileChange = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logChanges.txt";
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,9 +33,7 @@ namespace DAL
             }
             catch (Exception e)
             {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
@@ -51,9 +50,7 @@ namespace DAL
             }
             catch (Exception e)
             {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -74,9 +71,7 @@ namespace DAL
             }
             catch (Exception e)
             {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -89,9 +84,7 @@ namespace DAL
             }
             catch (Exception e)
             {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -101,12 +94,10 @@ namespace DAL
         {
             try {
                 var salesItemsInOrder = SalesItemInOrder.Where(it => it.OrderId == order.OrderId).ToList();
-                Debug.WriteLine("Database-change: Added order, of type List<SalesItem>, with length " + allItems.Count + ", to SalesItemInOrder");
+                logChange("Database-change: Added order, of type List<SalesItem>, with length " + allItems.Count + ", to SalesItemInOrder");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }       
         }
 
@@ -118,9 +109,7 @@ namespace DAL
                return items;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -155,13 +144,11 @@ namespace DAL
 
                 // Save changes
                 SaveChanges();
-                Debug.WriteLine("Database-change: Added SalesItem(" + item.Name + ") to cart");
+                logChange("Database-change: Added SalesItem(" + item.Name + ") to cart");
             }
             catch (Exception e)
             {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
@@ -193,14 +180,12 @@ namespace DAL
 
                     // Save changes
                     SaveChanges();
-                    if(!name.Equals("")) Debug.WriteLine("Database-change: Removed Item(" + name + ") from cart");
+                    if (!name.Equals("")) logChange("Database-change: Removed Item(" + name + ") from cart");
                 }
                 return itemCount;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return 0;
             }
         }
@@ -211,9 +196,7 @@ namespace DAL
                 return Carts.Where(cart => cart.CartId == ShoppingCartId).ToList();
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -233,9 +216,7 @@ namespace DAL
                 return count ?? 0;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return 0;
             }
         }
@@ -250,9 +231,7 @@ namespace DAL
                 return total ?? decimal.Zero;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return 0;
             }
         }
@@ -270,49 +249,76 @@ namespace DAL
 
                 // Save changes
                 SaveChanges();
-                Debug.WriteLine("Database-change: Cart emptied");
+                logChange("Database-change: Cart emptied");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
         public bool addSalesItem(SalesItem item)
         {
-            SalesItems.Add(item);
-            SaveChanges();
-            Debug.WriteLine("Database-change: Added SalesItem (" + item.Name + ") to database");
-            return true;
+            try {
+                SalesItems.Add(item);
+                SaveChanges();
+                logChange("Database-change: Added SalesItem (" + item.Name + ") to database");
+                return true;
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return false;
+            }
         }
 
         public bool removeSalesItem(SalesItem item)
         {
-            SalesItems.Remove(item);
-            SaveChanges();
-            Debug.WriteLine("Database-change: Removed SalesItem (" + item.Name + ") from database");
-            return true;
+            try {
+                SalesItems.Remove(item);
+                SaveChanges();
+                logChange("Database-change: Removed SalesItem (" + item.Name + ") from database");
+                return true;
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return false;
+            }
         }
 
         public bool editSalesItem(SalesItem item)
         {
-            Entry(item).State = EntityState.Modified;
-            SaveChanges();
-            Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
-            return true;
+            try {
+                Entry(item).State = EntityState.Modified;
+                SaveChanges();
+                logChange("Database-change: Edited SalesItem (" + item.Name + ") in database");
+                return true;
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return false;
+            }
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
         {
-            return SalesItems.Include(a => a.Genre).ToList();
+            try {
+                return SalesItems.Include(a => a.Genre).ToList();
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
         }
 
         public SalesItem findSalesItem(int id)
         {
-            return SalesItems.Find(id);
+            try {
+                return SalesItems.Find(id);
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
         }
-
 
 
         //Store 
@@ -323,9 +329,7 @@ namespace DAL
                 return genreModel;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -336,20 +340,24 @@ namespace DAL
             try {
                 Orders.Add(order);
                 SaveChanges();
-                Debug.WriteLine("Database-change: Added order, with length " + order.SalesItems.Count + ",of type Order");
+                logChange("Database-change: Added order, with length " + order.SalesItems.Count + ",of type Order");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
         //get all users
         public List<User> getUsers()
         {
-            var users = Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
-            return users;
+            try {
+                var users = Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
+                return users;
+            }
+            catch (Exception e) {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
         }
 
         public Order getOrder(int orderId)
@@ -358,9 +366,7 @@ namespace DAL
                 return Orders.Where(a => a.OrderId == orderId).FirstOrDefault();
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -371,12 +377,10 @@ namespace DAL
             try {
                 SalesItemInOrder.Add(item);
                 SaveChanges();
-                Debug.WriteLine("Database-change: Added OrderSalesItem (" + item.SalesItem.Name + ") to SalesItemInOrder");
+                logChange("Database-change: Added OrderSalesItem (" + item.SalesItem.Name + ") to SalesItemInOrder");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError((DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException));
             }
         }
         //get an order and include the salesitems in it.
@@ -388,9 +392,7 @@ namespace DAL
                 return order;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -401,12 +403,10 @@ namespace DAL
                 Order order = getOrder(id);
                 Orders.Remove(order);
                 SaveChanges();
-                Debug.WriteLine("Database-change: Removed order (" + id + ")");
+                logChange("Database-change: Removed order (" + id + ")");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
@@ -417,9 +417,7 @@ namespace DAL
                 return orders;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return null;
             }
         }
@@ -431,9 +429,7 @@ namespace DAL
                 return UserPasswords.Where(b => b.Password == passwordhash && b.UserName == username).FirstOrDefault();
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError((DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException));
                 return null;
             }
         }
@@ -444,12 +440,10 @@ namespace DAL
                 Users.Add(user);
                 UserPasswords.Add(login);
                 SaveChanges();
-                Debug.WriteLine("Database-change: Added User (" + login.UserName + ") to database");
+                logChange("Database-change: Added User (" + login.UserName + ") to database");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
@@ -459,12 +453,10 @@ namespace DAL
                 User oldUser = getUser(userId);
                 oldUser = user;
                 SaveChanges();
-                Debug.WriteLine("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
+                logChange("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
@@ -474,12 +466,10 @@ namespace DAL
                 string name = user.UserLogin.UserName;
                 Users.Remove(user);
                 SaveChanges();
-                Debug.WriteLine("Database-change: Removed User (" + name + ") from database");
+                logChange("Database-change: Removed User (" + name + ") from database");
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
             }
         }
 
@@ -495,9 +485,7 @@ namespace DAL
                     return false;
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return false;
             }
         }
@@ -523,9 +511,7 @@ namespace DAL
                 }
             }
             catch (Exception e) {
-                var sw = new System.IO.StreamWriter(filename, true);
-                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                sw.Close();
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
                 return false;
             }
         }
@@ -537,6 +523,20 @@ namespace DAL
             inData = System.Text.Encoding.ASCII.GetBytes(inPassword);
             outData = algorithm.ComputeHash(inData);
             return outData;
+        }
+
+        private void logError(String message)
+        {
+            var sw = new System.IO.StreamWriter(fileError, true);
+            sw.WriteLine(message);
+            sw.Close();
+        }
+
+        private void logChange(String message)
+        {
+            var sw = new System.IO.StreamWriter(fileChange, true);
+            sw.WriteLine(DateTime.Now.ToString() + Environment.NewLine + message);
+            sw.Close();
         }
     }
 }
