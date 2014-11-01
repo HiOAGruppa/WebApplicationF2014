@@ -9,11 +9,20 @@ using System.Data.Entity;
 
 namespace BLL
 {
-    public class SalesItemBLL
+    public class SalesItemBLL : BLL.ISalesItemBLL
     {
         StoreContext db;
+
+        private IStoreManagerRepository _repository;
+
         public SalesItemBLL() {
             db = new StoreContext();
+            _repository = new StoreManagerRepository();
+        }
+        public SalesItemBLL(IStoreManagerRepository stub)
+        {
+            db = new StoreContext();
+            _repository = stub;
         }
 
         public List<SalesItem> getAllSalesItems()
@@ -33,22 +42,22 @@ namespace BLL
 
         public void addSalesItem(SalesItem item)
         {
-            db.addSalesItem(item);
+            _repository.addSalesItem(item);
         }
 
         public void removeSalesItem(SalesItem item)
         {
-            db.removeSalesItem(item);
+            _repository.removeSalesItem(item);
         }
 
         public void editSalesItem(SalesItem item)
         {
-            db.editSalesItem(item);
+            _repository.editSalesItem(item);
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
         {
-            return db.getSalesItemsWithGenre();
+            return _repository.getSalesItemsWithGenre();
         }
     }
 }

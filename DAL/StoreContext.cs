@@ -238,32 +238,6 @@ namespace DAL
             return orders;
         }
 
-        public void addSalesItem(SalesItem item)
-        {
-            SalesItems.Add(item);
-            SaveChanges();
-            Debug.WriteLine("Database-change: Added SalesItem (" + item.Name + ") to database");
-        }
-
-        public void removeSalesItem(SalesItem item)
-        {
-            SalesItems.Remove(item);
-            SaveChanges();
-            Debug.WriteLine("Database-change: Removed SalesItem (" + item.Name + ") from database");
-        }
-
-        public void editSalesItem(SalesItem item)
-        {
-            Entry(item).State = EntityState.Modified;
-            SaveChanges();
-            Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
-        }
-
-        public List<SalesItem> getSalesItemsWithGenre()
-        {
-            return SalesItems.Include(a => a.Genre).ToList();
-        }
-
         //finds if a user with a given username and password in the database
         public UserLogin findUserLoginByPassword(byte[] passwordhash, String username)
         {

@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IStoreManagerRepository.cs" />
+    <Compile Include="StoreManagerRepositoryStub.cs" />
+    <Compile Include="StoreManagerRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoreContext.cs" />
     <Compile Include="StoreInitializer.cs" />
