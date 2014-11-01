@@ -76,6 +76,7 @@
     <Compile Include="CartBLL.cs" />
     <Compile Include="GenreBLL.cs" />
     <Compile Include="IGenreBLL.cs" />
+    <Compile Include="InitializerBLL.cs" />
     <Compile Include="IOrderBLL.cs" />
     <Compile Include="ISalesItemBLL.cs" />
     <Compile Include="IUserBLL.cs" />

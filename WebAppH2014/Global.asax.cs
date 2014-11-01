@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BLL;
 using DAL;
 
 namespace WebAppH2014
@@ -13,7 +14,7 @@ namespace WebAppH2014
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<StoreContext>(new StoreInitializer());
+            Database.SetInitializer<StoreContext>(new InitializerBLL());
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
