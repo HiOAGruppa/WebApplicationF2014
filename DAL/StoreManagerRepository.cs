@@ -23,9 +23,10 @@ namespace DAL
 
         public bool removeSalesItem(SalesItem item)
         {
+            string name = item.Name;
             db.SalesItems.Remove(item);
             db.SaveChanges();
-            Debug.WriteLine("Database-change: Removed SalesItem (" + item.Name + ") from database");
+            Debug.WriteLine("Database-change: Removed SalesItem (" + name + ") from database");
             return true;
         }
 
@@ -67,9 +68,10 @@ namespace DAL
 
         public void removeUser(User user)
         {
+            string name = user.UserLogin.UserName;
             db.Users.Remove(user);
             db.SaveChanges();
-            Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
+            Debug.WriteLine("Database-change: Removed User (" + name + ") from database");
         }
     }
 }

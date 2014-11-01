@@ -230,9 +230,10 @@ namespace DAL
         public void removeOrder(int id)
         {
             Order order = getOrder(id);
+            string name = order.ownerUser.UserLogin.UserName;
             Orders.Remove(order);
             SaveChanges();
-            Debug.WriteLine("Database-change: Removed order belonging to (" + order.ownerUser.UserLogin.UserName + ")");
+            Debug.WriteLine("Database-change: Removed order belonging to (" + name + ")");
         }
 
         public List<Order> getOrders()
@@ -266,9 +267,10 @@ namespace DAL
 
         public void removeUser(User user)
         {
+            string name = user.UserLogin.UserName;
             Users.Remove(user);
             SaveChanges();
-            Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
+            Debug.WriteLine("Database-change: Removed User (" + name + ") from database");
         }
 
         //Does the username already exist in the db? Used for checking on register of new user.
