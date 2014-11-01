@@ -66,7 +66,7 @@ namespace DAL
         private void addOrderSalesItems(Order order, List<SalesItem> allItems)
         {
             var salesItemsInOrder = SalesItemInOrder.Where(it => it.OrderId == order.OrderId).ToList();
-            Debug.WriteLine("Database-change: Added order, of type List<SalesItem>, to SalesItemInOrder");
+            Debug.WriteLine("Database-change: Added order, of type List<SalesItem>, with length " + allItems.Count + ", to SalesItemInOrder");
         }
 
         //Method for searching for a given item with % Text % in db
@@ -194,7 +194,7 @@ namespace DAL
         {
             Orders.Add(order);
             SaveChanges();
-            Debug.WriteLine("Database-change: Added order, of type Order");
+            Debug.WriteLine("Database-change: Added order, with length " + order.SalesItems.Count + ",of type Order");
         }
 
         //get all users
@@ -229,7 +229,7 @@ namespace DAL
             Order order = getOrder(id);
             Orders.Remove(order);
             SaveChanges();
-            Debug.WriteLine("Database-change: Removed order beloning to (" + order.ownerUser.UserLogin.UserName + ")");
+            Debug.WriteLine("Database-change: Removed order belonging to (" + order.ownerUser.UserLogin.UserName + ")");
         }
 
         public List<Order> getOrders()
