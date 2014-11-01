@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace DAL
 {
-    public class StoreManagerRepository : DAL.IStoreManagerRepository
+    public class StoreManagerRepository : DbContext, DAL.IStoreManagerRepository
     {
         StoreContext db = new StoreContext();
 
@@ -41,6 +41,10 @@ namespace DAL
         {
             return db.SalesItems.Include(a => a.Genre).ToList();
         }
+        public SalesItem findSalesItem(int id)
+        {
+            return db.SalesItems.Find(id);
+        }
 
 
         //get all users
@@ -65,11 +69,11 @@ namespace DAL
             Debug.WriteLine("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
         }
 
-        public void removeUser(User user)
-        {
+       public void removeUser(User user)
+       {
             db.Users.Remove(user);
             db.SaveChanges();
-            Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
+            //Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
         }
     }
 }

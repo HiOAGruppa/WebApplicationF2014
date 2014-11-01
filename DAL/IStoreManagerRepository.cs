@@ -11,5 +11,6 @@ namespace DAL
         System.Collections.Generic.List<Model.User> getUsers();
         bool removeSalesItem(Model.SalesItem item);
         void removeUser(Model.User user);
+        Model.SalesItem findSalesItem(int id);
     }
 }

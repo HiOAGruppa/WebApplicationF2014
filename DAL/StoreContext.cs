@@ -180,6 +180,42 @@ namespace DAL
             Debug.WriteLine("Database-change: Cart emptied");
         }
 
+        public bool addSalesItem(SalesItem item)
+        {
+            SalesItems.Add(item);
+            SaveChanges();
+            Debug.WriteLine("Database-change: Added SalesItem (" + item.Name + ") to database");
+            return true;
+        }
+
+        public bool removeSalesItem(SalesItem item)
+        {
+            SalesItems.Remove(item);
+            SaveChanges();
+            Debug.WriteLine("Database-change: Removed SalesItem (" + item.Name + ") from database");
+            return true;
+        }
+
+        public bool editSalesItem(SalesItem item)
+        {
+            Entry(item).State = EntityState.Modified;
+            SaveChanges();
+            Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
+            return true;
+        }
+
+        public List<SalesItem> getSalesItemsWithGenre()
+        {
+            return SalesItems.Include(a => a.Genre).ToList();
+        }
+
+        public SalesItem findSalesItem(int id)
+        {
+            return SalesItems.Find(id);
+        }
+
+
+
         //Store 
 
 

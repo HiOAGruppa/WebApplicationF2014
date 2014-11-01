@@ -12,8 +12,8 @@ namespace BLL
     public class SalesItemBLL : BLL.ISalesItemBLL
     {
         StoreContext db;
-
         private IStoreManagerRepository _repository;
+        bool test;
 
         public SalesItemBLL() {
             db = new StoreContext();
@@ -21,6 +21,7 @@ namespace BLL
         }
         public SalesItemBLL(IStoreManagerRepository stub)
         {
+            test = true;
             db = new StoreContext();
             _repository = stub;
         }
@@ -37,27 +38,42 @@ namespace BLL
 
         public SalesItem findSalesItem(int id)
         {
-            return db.SalesItems.Find(id);
+            if (test)
+                return _repository.findSalesItem(id);
+            else
+                return db.findSalesItem(id);
         }
 
         public void addSalesItem(SalesItem item)
         {
-            _repository.addSalesItem(item);
-        }
+            if (test)
+                _repository.addSalesItem(item);
+            else
+                db.addSalesItem(item);
+        }   
 
         public void removeSalesItem(SalesItem item)
         {
-            _repository.removeSalesItem(item);
+            if (test)
+                _repository.removeSalesItem(item);
+            else
+                db.removeSalesItem(item);
         }
 
         public void editSalesItem(SalesItem item)
         {
-            _repository.editSalesItem(item);
+            if (test)
+                _repository.editSalesItem(item);
+            else
+                db.editSalesItem(item);
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
         {
-            return _repository.getSalesItemsWithGenre();
+            if (test)
+                return _repository.getSalesItemsWithGenre();
+            else
+                return db.getSalesItemsWithGenre();
         }
     }
 }
