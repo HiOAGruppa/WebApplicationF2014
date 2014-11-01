@@ -223,6 +223,22 @@ namespace WebAppH2014.Controllers
             }
             return PartialView("LoginNav");
         }
+        //renders the register new user button in side-nav, if logged in it will not be visible
+        [ChildActionOnly]
+        public ActionResult RegLink()
+        {
+            if (isLoggedIn())
+            {
+                return null;
+            }
+            else
+            {
+                ViewData["LoginText"] = "Registrer deg";
+                ViewData["LoginLink"] = "Register";
+
+            }
+            return PartialView("RegNav");
+        }
 
         //returns null if everything went well.
         //returns current UsermodifyUser-object for further editing if we didnt save info properly
