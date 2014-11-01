@@ -183,9 +183,39 @@ namespace Enhetstest
         }
 
         [TestMethod]
-        public void edit_item()
+        public void show_edit_item_view()
         {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
+            var forventetResultat = new SalesItem()
+            {
+                SalesItemId = 1,
+                Price = new decimal(100.0),
+                Name = "Keyboard",
+                Description = "Fint keyboard",
+                InStock = 10,
+                GenreId = 1,
+                ImageUrl = "bilde",
+                Genre = new Genre()
+            };
+
+            //Act
+
+            var resultat = (ViewResult)controller.Edit(1);
+            var resultatItem = (SalesItem)resultat.Model;
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+
+            Assert.AreEqual(forventetResultat.SalesItemId, resultatItem.SalesItemId);
+            Assert.AreEqual(forventetResultat.Price, resultatItem.Price);
+            Assert.AreEqual(forventetResultat.Name, resultatItem.Name);
+            Assert.AreEqual(forventetResultat.Description, resultatItem.Description);
+            Assert.AreEqual(forventetResultat.InStock, resultatItem.InStock);
+            Assert.AreEqual(forventetResultat.GenreId, resultatItem.GenreId);
+            Assert.AreEqual(forventetResultat.ImageUrl, resultatItem.ImageUrl);
         }
     }
 }

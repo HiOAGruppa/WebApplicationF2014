@@ -12,20 +12,21 @@ namespace DAL
     public class StoreManagerRepository : DbContext, DAL.IStoreManagerRepository
     {
         StoreContext db = new StoreContext();
-        string fileError = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logErrors.txt";
-        string fileChange = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logChanges.txt";
+        string filename = AppDomain.CurrentDomain.BaseDirectory + "App_Data\\" + "logErrors.txt";
 
         public bool addSalesItem(SalesItem item)
         {
             try {
-                db.SalesItems.Add(item);
-                db.SaveChanges();
-                logChange("Database-change: Added SalesItem (" + item.Name + ") to database");
-                return true;
-            }
+            db.SalesItems.Add(item);
+            db.SaveChanges();
+            Debug.WriteLine("Database-change: Added SalesItem (" + item.Name + ") to database");
+            return true;
+        }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
                 return false;
             }
         }
@@ -37,12 +38,14 @@ namespace DAL
                 string name = item.Name;
                 db.SalesItems.Remove(item);
                 db.SaveChanges();
-                logChange("Database-change: Removed SalesItem (" + name + ") from database");
-                return true;
-            }
+                Debug.WriteLine("Database-change: Removed SalesItem (" + name + ") from database");
+            return true;
+        }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
                 return false;
             }
         }
@@ -50,13 +53,15 @@ namespace DAL
         public bool editSalesItem(SalesItem item)
         {
             try {
-                db.Entry(item).State = EntityState.Modified;
-                db.SaveChanges();
-                logChange("Database-change: Edited SalesItem (" + item.Name + ") in database");
-                return true;
-            }
+            db.Entry(item).State = EntityState.Modified;
+            db.SaveChanges();
+            Debug.WriteLine("Database-change: Edited SalesItem (" + item.Name + ") in database");
+            return true;
+        }
             catch (Exception e) {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
                 return false;
             }
         }
@@ -64,37 +69,34 @@ namespace DAL
         public List<SalesItem> getSalesItemsWithGenre()
         {
             try {
-                return db.SalesItems.Include(a => a.Genre).ToList();
+            return db.SalesItems.Include(a => a.Genre).ToList();
             }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
                 return null;
             }
         }
 
         public SalesItem findSalesItem(int id)
         {
-            try {
-                return db.SalesItems.Find(id);
-            }
-            catch (Exception e) {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-                return null;
-            }
+            return db.SalesItems.Find(id);
         }
-
 
         //get all users
         public List<User> getUsers()
         {
             try {
-                var users = db.Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
-                return users;
-            }
+            var users = db.Users.Include(u => u.UserLogin).ToList();//.Include(a => a.Orders)
+            return users;
+        }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
                 return null;
             }
         }
@@ -102,12 +104,14 @@ namespace DAL
         public List<Order> getOrders()
         {
             try {
-                var orders = db.Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
-                return orders;
-            }
+            var orders = db.Orders.Include(s => s.SalesItems.Select(i => i.SalesItem)).Include("ownerUser").ToList();
+            return orders;
+        }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
                 return null;
             }
         }
@@ -118,40 +122,31 @@ namespace DAL
                 User oldUser = db.getUser(userId);
                 oldUser = user;
                 db.SaveChanges();
-                logChange("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
-            }
+                Debug.WriteLine("Database-change: Edited User (" + user.UserLogin.UserName + ") in database");
+        }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
             }
         }
 
         public void removeUser(User user)
         {
-            try {
+            try
+            {
                 string name = user.UserLogin.UserName;
                 db.Users.Remove(user);
                 db.SaveChanges();
-                logChange("Database-change: Removed User (" + name + ") from database");
+                Debug.WriteLine("Database-change: Removed User (" + user.UserLogin.UserName + ") from database");
             }
             catch (Exception e)
             {
-                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
-            }
-        }
-
-        private void logError(String message)
-        {
-            var sw = new System.IO.StreamWriter(fileError, true);
-            sw.WriteLine(message);
-            sw.Close();
-        }
-
-        private void logChange(String message)
-        {
-            var sw = new System.IO.StreamWriter(fileChange, true);
-            sw.WriteLine(DateTime.Now.ToString() + Environment.NewLine + message);
-            sw.Close();
+                var sw = new System.IO.StreamWriter(filename, true);
+                sw.WriteLine(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                sw.Close();
+            } 
         }
     }
 }
