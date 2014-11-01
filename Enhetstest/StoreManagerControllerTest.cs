@@ -7,12 +7,14 @@ using WebAppH2014.Controllers;
 using BLL;
 using DAL;
 using Model;
+using System.Web;
 
 namespace Enhetstest
 {
     [TestClass]
     public class StoreManagerControllerTest
     {
+        
         [TestMethod]
         public void show_alle_items()
         {
