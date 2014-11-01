@@ -42,12 +42,12 @@ namespace BLL
             db.addUser(user, login);
         }
 
-        public void editUser(int userId, User user)
+        public bool editUser(int userId, User user)
         {
             if (test)
-                _repository.editUser(userId, user);
+                return _repository.editUser(userId, user);
             else
-                db.editUser(userId, user);
+                return db.editUser(userId, user);
         }
         public List<User> getUsers()
         {
@@ -55,12 +55,12 @@ namespace BLL
         }
 
 
-        public void removeUser(User user)
+        public bool removeUser(User user)
         {
             if (test)
-                _repository.removeUser(user);
+                return _repository.removeUser(user);
             else
-                db.removeUser(user);
+                return db.removeUser(user);
         }
 
         public bool usernameExists(String username)

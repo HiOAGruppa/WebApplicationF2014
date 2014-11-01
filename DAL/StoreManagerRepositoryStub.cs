@@ -120,14 +120,14 @@ namespace DAL
             return orders;
         }
 
-        public void editUser(int userId, User user)
+        public bool editUser(int userId, User user)
         {
-            return;
+            return true;
         }
 
-        public void removeUser(User user)
+        public bool removeUser(User user)
         {
-            return;
+            return true;
         }
     }
 }

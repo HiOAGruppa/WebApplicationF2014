@@ -44,28 +44,28 @@ namespace BLL
                 return db.findSalesItem(id);
         }
 
-        public void addSalesItem(SalesItem item)
+        public bool addSalesItem(SalesItem item)
         {
             if (test)
-                _repository.addSalesItem(item);
+                return _repository.addSalesItem(item);
             else
-                db.addSalesItem(item);
+                return db.addSalesItem(item);
         }   
 
-        public void removeSalesItem(SalesItem item)
+        public bool removeSalesItem(SalesItem item)
         {
             if (test)
-                _repository.removeSalesItem(item);
+                return _repository.removeSalesItem(item);
             else
-                db.removeSalesItem(item);
+                return db.removeSalesItem(item);
         }
 
-        public void editSalesItem(SalesItem item)
+        public bool editSalesItem(SalesItem item)
         {
             if (test)
-                _repository.editSalesItem(item);
+                return _repository.editSalesItem(item);
             else
-                db.editSalesItem(item);
+                return db.editSalesItem(item);
         }
 
         public List<SalesItem> getSalesItemsWithGenre()
