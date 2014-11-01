@@ -10,9 +10,21 @@ using System.Diagnostics;
 
 namespace BLL
 {
-    public class GenreBLL
+    public class GenreBLL : BLL.IGenreBLL
     {
-        StoreContext db = new StoreContext();
+StoreContext db;
+
+        private IStoreManagerRepository _repository;
+
+        public GenreBLL() {
+            db = new StoreContext();
+            _repository = new StoreManagerRepository();
+        }
+        public GenreBLL(IStoreManagerRepository stub)
+        {
+            db = new StoreContext();
+            _repository = stub;
+        }
 
         public DbSet<Genre> getGenres()
         {

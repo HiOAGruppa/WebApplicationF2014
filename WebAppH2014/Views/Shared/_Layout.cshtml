@@ -58,6 +58,7 @@
         <ul class="nav">
             <li>@Html.ActionLink("Bruker", "Index", "Login", new { area = "" }, new { @class = "sidebar-brand" })</li>
             <li>@{Html.RenderAction("LoginLink", "Login", null);}</li>
+            @{Html.RenderAction("RegLink", "Login", null);}
         </ul>
     </div>
 

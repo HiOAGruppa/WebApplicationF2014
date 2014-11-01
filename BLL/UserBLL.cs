@@ -10,9 +10,22 @@ using System.Diagnostics;
 
 namespace BLL
 {
-    public class UserBLL
+    public class UserBLL : BLL.IUserBLL
     {
-        StoreContext db = new StoreContext();
+StoreContext db;
+
+        private IStoreManagerRepository _repository;
+
+        public UserBLL() {
+            db = new StoreContext();
+            _repository = new StoreManagerRepository();
+        }
+        public UserBLL(IStoreManagerRepository stub)
+        {
+            db = new StoreContext();
+            _repository = stub;
+        }        
+        
         public User getUser(int userId)
         {
             return db.getUser(userId);

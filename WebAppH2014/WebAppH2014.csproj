@@ -202,6 +202,7 @@
     <Content Include="Views\StoreManager\EditUser.cshtml" />
     <Content Include="Views\StoreManager\Ordre.cshtml" />
     <Content Include="Views\Store\SearchResult.cshtml" />
+    <Content Include="Views\Login\RegNav.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
