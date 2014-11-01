@@ -210,8 +210,8 @@ namespace WebAppH2014.Controllers
         private Boolean isAdmin()
         {
             //FOR TESTING
-            return true;
-            /*if (isLoggedIn())
+           // return true;
+            if (isLoggedIn())
             {
                 int userId = (int)Session["UserId"];
                 User currentUser = _userBLL.getUser(userId);
@@ -219,7 +219,7 @@ namespace WebAppH2014.Controllers
                     return true;
             }
             
-            return false;*/
+            return false;
         }
         private Boolean isLoggedIn()
         {
