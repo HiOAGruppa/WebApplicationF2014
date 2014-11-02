@@ -18,20 +18,6 @@ namespace Enhetstest
         /*
          * Her tester vi metoder som har med storemanagercontroller (Altså Admindelen) å gjøre.
          */
-
-        /*[SetUp]
-        public void SetUp()
-        {
-            HttpContext.Current = new HttpContext(
-                new HttpRequest(null, "http://tempuri.org", null),
-                new HttpResponse(null));
-        }
-        [TearDown]
-        public void TearDown()
-        {
-            HttpContext.Current = null;
-        }*/
-
         
         //************************SALES ITEM TESTS****************************
         [TestMethod]
