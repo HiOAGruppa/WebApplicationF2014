@@ -104,7 +104,20 @@ namespace DAL
             return users;
         }
 
-
+        public User getUser(int id)
+        {
+            var user = new User()
+            {
+                UserId = 1,
+                FirstName = "Jon",
+                LastName = "Johnsen",
+                Admin = false,
+                Address = "HeiVeien 1",
+                ZipCode = 3412,
+                DateOfBirth = new System.DateTime(1991, 1, 1)
+            };
+            return user;
+        }
         public List<Order> getOrders()
         {
             var orders = new List<Order>();

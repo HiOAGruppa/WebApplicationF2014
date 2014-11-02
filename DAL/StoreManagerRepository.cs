@@ -99,6 +99,20 @@ namespace DAL
             }
         }
 
+        public User getUser(int id)
+        {
+            try
+            {
+                var users = db.Users.Include(u => u.UserLogin).Single(u=>u.UserId==id);//.Include(a => a.Orders)
+                return users;
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                return null;
+            }
+        }
+
         public List<Order> getOrders()
         {
             try {
