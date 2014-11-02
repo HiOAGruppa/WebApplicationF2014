@@ -111,29 +111,16 @@ namespace WebAppH2014.Controllers
             if (ModelState.IsValid)
             {
                 var ok =_itemBLL.editSalesItem(item);
-                return RedirectToAction("Index");
+                if(ok)
+                    return RedirectToAction("Index");
             }
             ViewBag.GenreId = new SelectList(_genreBLL.getGenres(), "GenreId", "Name", item.GenreId);
             return View(item);
         }
 
 
-        public ActionResult Delete(int id)
-        {
-            SalesItem item = _itemBLL.findSalesItem(id);
-            return View(item);
-        }
-
         //
         // POST: /StoreManager/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            SalesItem item = _itemBLL.findSalesItem(id);
-            var ok = _itemBLL.removeSalesItem(item);
-            return RedirectToAction("Index");
-        }
 
         public void Slett(int id)
         {
@@ -141,6 +128,15 @@ namespace WebAppH2014.Controllers
             SalesItem item = _itemBLL.findSalesItem(id);
             var ok = _itemBLL.removeSalesItem(item);
             // kunne returnert en feil dersom slettingen feilet....
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            SalesItem item = _itemBLL.findSalesItem(id);
+            var ok = _itemBLL.removeSalesItem(item);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Kunder()

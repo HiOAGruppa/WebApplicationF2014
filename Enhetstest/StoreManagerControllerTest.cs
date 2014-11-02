@@ -138,12 +138,13 @@ namespace Enhetstest
                 GenreId = 1,
                 ImageUrl = "bilde"
             };
-
             //Act
-            var resultat = (ViewResult)controller.Create(inItem);
+            var resultat = (RedirectToRouteResult)controller.Create(inItem);
 
             //Assert
-            Assert.AreEqual(resultat.ViewName, "");
+            Assert.AreEqual(resultat.RouteName, "");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+
         }
 
         [TestMethod]
@@ -175,10 +176,10 @@ namespace Enhetstest
             inItem.Name = "";
 
             //Act
-            var resultat = (RedirectToRouteResult)controller.Create(inItem);
+            var resultat = (ViewResult)controller.Create(inItem);
 
             //Assert
-            Assert.AreEqual(resultat.RouteName, "");
+            Assert.AreEqual(resultat.ViewName, "");
         }
 
         [TestMethod]
@@ -224,24 +225,14 @@ namespace Enhetstest
             var stub = new StoreManagerRepositoryStub();
             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-            var inItem = new SalesItem()
-            {
-                SalesItemId = 1,
-                Price = new decimal(100.0),
-                Name = "Keyboard",
-                Description = "Fint keyboard",
-                InStock = 10,
-                GenreId = 1,
-                ImageUrl = "bilde",
-                Genre = new Genre()
-            };
+            var inItem = new SalesItem();
+            inItem.SalesItemId = 0;
 
             //Act
-            var resultat = (RedirectToRouteResult)controller.Edit(inItem);
+            var resultat = (ViewResult)controller.Edit(inItem);
 
             //Assert
-            Assert.AreEqual(resultat.RouteName, "");
-            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+            Assert.AreEqual(resultat.ViewName, "");
         }
 
         [TestMethod]
@@ -289,6 +280,7 @@ namespace Enhetstest
             Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
         }
 
+        [TestMethod]
         public void edit_item_post_error()
         {
             //Arrange
@@ -299,12 +291,62 @@ namespace Enhetstest
             inItem.Name = "";
 
             //Act
-            var resultat = (RedirectToRouteResult)controller.Edit(inItem);
+            var resultat = (ViewResult)controller.Edit(inItem);
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        public void show_delete_item_view()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var forventetResultat = new SalesItem()
+            {
+                SalesItemId = 1,
+                Price = new decimal(100.0),
+                Name = "Keyboard",
+                Description = "Fint keyboard",
+                InStock = 10,
+                GenreId = 1,
+                ImageUrl = "bilde",
+                Genre = new Genre()
+            };
+
+            //Act
+            var resultat = (ViewResult)controller.Edit(1);
+            var resultatItem = (SalesItem)resultat.Model;
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+
+            Assert.AreEqual(forventetResultat.SalesItemId, resultatItem.SalesItemId);
+            Assert.AreEqual(forventetResultat.Price, resultatItem.Price);
+            Assert.AreEqual(forventetResultat.Name, resultatItem.Name);
+            Assert.AreEqual(forventetResultat.Description, resultatItem.Description);
+            Assert.AreEqual(forventetResultat.InStock, resultatItem.InStock);
+            Assert.AreEqual(forventetResultat.GenreId, resultatItem.GenreId);
+            Assert.AreEqual(forventetResultat.ImageUrl, resultatItem.ImageUrl);
+        }
+
+        [TestMethod]
+        public void delete_item_OK()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem();
+            inItem.SalesItemId = 1;
+
+            //Act
+            var resultat = (RedirectToRouteResult)controller.DeleteConfirmed(inItem.SalesItemId);
 
             //Assert
             Assert.AreEqual(resultat.RouteName, "");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
         }
-
-
     }
 }

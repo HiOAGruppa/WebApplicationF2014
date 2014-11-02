@@ -9,11 +9,11 @@ namespace DAL
         {
             if (item.Name == "")
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
@@ -21,23 +21,23 @@ namespace DAL
         {
             if (item.Name == "")
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
         public bool editSalesItem(SalesItem item)
         {
-            if (item.Name == "")
+            if (item.SalesItemId == 0)
             {
-                return true;
+                return false;
             }
             else
             {
-                return false;
+                return true;
             }
         }
 
@@ -122,12 +122,18 @@ namespace DAL
 
         public bool editUser(int userId, User user)
         {
-            return true;
+            if (user.UserId == 0)
+                return false;
+            else
+                return true;
         }
 
         public bool removeUser(User user)
         {
-            return true;
+            if (user.UserId == 0)
+                return false;
+            else
+                return true;
         }
     }
 }
