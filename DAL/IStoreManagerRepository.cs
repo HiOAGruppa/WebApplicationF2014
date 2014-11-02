@@ -9,6 +9,7 @@ namespace DAL
         System.Collections.Generic.List<Model.Order> getOrders();
         System.Collections.Generic.List<Model.SalesItem> getSalesItemsWithGenre();
         System.Collections.Generic.List<Model.User> getUsers();
+        Model.User getUser(int id);
         bool removeSalesItem(Model.SalesItem item);
         bool removeUser(Model.User user);
         Model.SalesItem findSalesItem(int id);

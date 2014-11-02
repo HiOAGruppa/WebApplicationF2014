@@ -29,7 +29,10 @@ namespace BLL
         
         public User getUser(int userId)
         {
-            return db.getUser(userId);
+            if (test)
+                return _repository.getUser(userId);
+            else
+                return db.getUser(userId);
         }
 
         public UserLogin findUserLoginByPassword(byte[] passwordhash, String username)

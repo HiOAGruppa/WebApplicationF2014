@@ -305,6 +305,82 @@ namespace Enhetstest
             Assert.AreEqual(resultat.RouteName, "");
         }
 
+        [TestMethod]
+        public void show_alle_kunder()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
+            var forventetResultat = new List<User>();
+            var user = new User()
+            {
+                UserId = 1,
+                FirstName = "Jon",
+                LastName = "Johnsen",
+                Admin = false,
+                Address = "HeiVeien 1",
+                ZipCode = 3412,
+                DateOfBirth = new System.DateTime(1991, 1, 1)
+            };
+            forventetResultat.Add(user);
+            forventetResultat.Add(user);
+            forventetResultat.Add(user);
+
+            //Act
+
+            var resultat = (ViewResult)controller.Kunder();
+            var resultatListe = (List<User>)resultat.Model;
+
+            //Assert
+
+            Assert.AreEqual(resultat.ViewName, "");
+
+            for (var i = 0; i < resultatListe.Count; i++)
+            {
+                Assert.AreEqual(forventetResultat[i].UserId, resultatListe[i].UserId);
+                Assert.AreEqual(forventetResultat[i].FirstName, resultatListe[i].FirstName);
+                Assert.AreEqual(forventetResultat[i].LastName, resultatListe[i].LastName);
+                Assert.AreEqual(forventetResultat[i].Admin, resultatListe[i].Admin);
+                Assert.AreEqual(forventetResultat[i].Address, resultatListe[i].Address);
+                Assert.AreEqual(forventetResultat[i].ZipCode, resultatListe[i].ZipCode);
+                Assert.AreEqual(forventetResultat[i].DateOfBirth, resultatListe[i].DateOfBirth);
+            }
+        }
+
+        [TestMethod]
+        public void show_edit_user_view()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var forventetResultat = new User()
+            {
+                UserId = 1,
+                FirstName = "Jon",
+                LastName = "Johnsen",
+                Admin = false,
+                Address = "HeiVeien 1",
+                ZipCode = 3412,
+                DateOfBirth = new System.DateTime(1991, 1, 1)
+            };
+
+            //Act
+
+            var resultat = (ViewResult)controller.EditUser(1);
+            var resultatItem = (User)resultat.Model;
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+
+            Assert.AreEqual(forventetResultat.UserId, resultatItem.UserId);
+            Assert.AreEqual(forventetResultat.FirstName, resultatItem.FirstName);
+            Assert.AreEqual(forventetResultat.LastName, resultatItem.LastName);
+            //Assert.AreEqual(forventetResultat.Admin, resultatItem.Admin);
+            Assert.AreEqual(forventetResultat.Address, resultatItem.Address);
+            Assert.AreEqual(forventetResultat.ZipCode, resultatItem.ZipCode);
+            Assert.AreEqual(forventetResultat.DateOfBirth, resultatItem.DateOfBirth);
+        }
     }
 }
