@@ -140,11 +140,10 @@ namespace Enhetstest
             };
 
             //Act
-            var resultat = (RedirectToRouteResult)controller.Create(inItem);
+            var resultat = (ViewResult)controller.Create(inItem);
 
             //Assert
-            Assert.AreEqual(resultat.RouteName, "");
-            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+            Assert.AreEqual(resultat.ViewName, "");
         }
 
         [TestMethod]
@@ -217,5 +216,95 @@ namespace Enhetstest
             Assert.AreEqual(forventetResultat.GenreId, resultatItem.GenreId);
             Assert.AreEqual(forventetResultat.ImageUrl, resultatItem.ImageUrl);
         }
+
+        [TestMethod]
+        public void edit_item_not_found()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem()
+            {
+                SalesItemId = 1,
+                Price = new decimal(100.0),
+                Name = "Keyboard",
+                Description = "Fint keyboard",
+                InStock = 10,
+                GenreId = 1,
+                ImageUrl = "bilde",
+                Genre = new Genre()
+            };
+
+            //Act
+            var resultat = (RedirectToRouteResult)controller.Edit(inItem);
+
+            //Assert
+            Assert.AreEqual(resultat.RouteName, "");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+        }
+
+        [TestMethod]
+        public void edit_item_validate_error()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem();
+            controller.ViewData.ModelState.AddModelError("Error", "No Name Given");
+
+            //Act
+            var resultat = (ViewResult)controller.Edit(inItem);
+
+            //Assert
+            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1);
+            Assert.AreEqual(resultat.ViewData.ModelState["Error"].Errors[0].ErrorMessage, "No Name Given");
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        [TestMethod]
+        public void edit_item_OK()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem()
+            {
+                SalesItemId = 1,
+                Price = new decimal(100.0),
+                Name = "Keyboard",
+                Description = "Fint keyboard",
+                InStock = 10,
+                GenreId = 1,
+                ImageUrl = "bilde"
+            };
+
+            //Act
+            var resultat = (RedirectToRouteResult)controller.Edit(inItem);
+
+            //Assert
+            Assert.AreEqual(resultat.RouteName, "");
+            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+        }
+
+        public void edit_item_post_error()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem();
+            inItem.Name = "";
+
+            //Act
+            var resultat = (RedirectToRouteResult)controller.Edit(inItem);
+
+            //Assert
+            Assert.AreEqual(resultat.RouteName, "");
+        }
+
+
     }
 }

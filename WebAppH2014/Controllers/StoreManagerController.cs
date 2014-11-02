@@ -116,6 +116,8 @@ namespace WebAppH2014.Controllers
             ViewBag.GenreId = new SelectList(_genreBLL.getGenres(), "GenreId", "Name", item.GenreId);
             return View(item);
         }
+
+
         public ActionResult Delete(int id)
         {
             SalesItem item = _itemBLL.findSalesItem(id);
