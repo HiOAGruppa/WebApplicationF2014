@@ -14,6 +14,11 @@ namespace Enhetstest
     [TestClass]
     public class StoreManagerControllerTest
     {
+
+        /*
+         * Her tester vi metoder som har med storemanagercontroller (Altså Admindelen) å gjøre.
+         */
+
         /*[SetUp]
         public void SetUp()
         {
@@ -27,6 +32,8 @@ namespace Enhetstest
             HttpContext.Current = null;
         }*/
 
+        
+        //************************SALES ITEM TESTS****************************
         [TestMethod]
         public void show_alle_items()
         {
@@ -338,17 +345,45 @@ namespace Enhetstest
             var stub = new StoreManagerRepositoryStub();
             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-            var inItem = new SalesItem();
-            inItem.SalesItemId = 1;
+           var inItem = new SalesItem()
+            {
+                SalesItemId = 1,
+                Price = new decimal(100.0),
+                Name = "Keyboard",
+                Description = "Fint keyboard",
+                InStock = 10,
+                GenreId = 1,
+                ImageUrl = "bilde",
+                Genre = new Genre()
+            };
 
             //Act
-            var resultat = (RedirectToRouteResult)controller.DeleteConfirmed(inItem.SalesItemId);
+            var resultat = (RedirectToRouteResult)controller.DeleteConfirmed(inItem);
 
             //Assert
             Assert.AreEqual(resultat.RouteName, "");
             Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
         }
 
+         [TestMethod]
+        public void delete_item_not_found()
+        {
+            // Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inItem = new SalesItem();
+            inItem.Name = "";
+
+            // Act
+            var resultat = (ViewResult)controller.DeleteConfirmed(inItem);
+
+            // Assert
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+
+        //************************USER TESTS****************************
         [TestMethod]
         public void show_alle_kunder()
         {

@@ -132,11 +132,14 @@ namespace WebAppH2014.Controllers
 
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(SalesItem item)
         {
-            SalesItem item = _itemBLL.findSalesItem(id);
             var ok = _itemBLL.removeSalesItem(item);
-            return RedirectToAction("Index");
+            if (ok)
+                return RedirectToAction("Index"); 
+            else
+                return View();
+
         }
 
         public ActionResult Kunder()
