@@ -9,6 +9,6 @@ namespace BLL
         System.Collections.Generic.List<Model.Order> getOrders();
         Model.Order getOrderWithItems(int orderId);
         System.Collections.Generic.List<Model.Order> getUserOrders(int userId);
-        void removeOrder(int id);
+        bool removeOrder(int id);
     }
 }

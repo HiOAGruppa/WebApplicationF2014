@@ -12,6 +12,7 @@ namespace DAL
         Model.User getUser(int id);
         bool removeSalesItem(Model.SalesItem item);
         bool removeUser(Model.User user);
+        bool removeOrder(int id);
         Model.SalesItem findSalesItem(int id);
     }
 }

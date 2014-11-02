@@ -125,7 +125,7 @@ namespace DAL
             {
                 OrderId = 1,
                 UserId = 1,
-                ownerUser = new User()
+                ownerUser = new User() { UserId = 1 }
             };
             orders.Add(order);
             orders.Add(order);
@@ -144,6 +144,14 @@ namespace DAL
         public bool removeUser(User user)
         {
             if (user.UserId == 0)
+                return false;
+            else
+                return true;
+        }
+
+        public bool removeOrder(int id)
+        {
+            if (id == 0)
                 return false;
             else
                 return true;

@@ -206,9 +206,13 @@ namespace WebAppH2014.Controllers
         }
         public void SlettOrder(int id)
         {
-            Debug.Print("Order id: " + id);
             // denne kalles via et Ajax-kall
-            _orderBLL.removeOrder(id);
+            bool ok = _orderBLL.removeOrder(id);
+            if(ok)
+            {
+                RedirectToAction("Ordre");
+            }
+            RedirectToAction("Ordre");
             // kunne returnert en feil dersom slettingen feilet....
         }
         private Boolean isAdmin()

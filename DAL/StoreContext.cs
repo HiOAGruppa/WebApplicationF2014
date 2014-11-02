@@ -397,8 +397,9 @@ namespace DAL
             }
         }
         //remove an order.
-        public void removeOrder(int id)
+        public bool removeOrder(int id)
         {
+            var ok = true;
             try {
                 Order order = getOrder(id);
                 Orders.Remove(order);
@@ -407,7 +408,9 @@ namespace DAL
             }
             catch (Exception e) {
                 logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                ok = false;
             }
+            return ok;
         }
 
         public List<Order> getOrders()

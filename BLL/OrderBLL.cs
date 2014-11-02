@@ -53,9 +53,12 @@ namespace BLL
             return db.getOrderWithItems(orderId);
         }
 
-        public void removeOrder(int id)
+        public bool removeOrder(int id)
         {
-            db.removeOrder(id);
+            if (test)
+                return _repository.removeOrder(id);
+            else
+                return db.removeOrder(id);
         }
 
         public List<Order> getOrders()

@@ -426,5 +426,159 @@ namespace Enhetstest
             Assert.AreEqual(forventetResultat.ZipCode, resultatItem.ZipCode);
             Assert.AreEqual(forventetResultat.DateOfBirth, resultatItem.DateOfBirth);
         }
+        [TestMethod]
+        public void edit_user_not_found()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inUser = new User();
+            inUser.UserId = 0;
+
+            //Act
+            var resultat = (ViewResult)controller.EditUser(inUser.UserId);
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        [TestMethod]
+        public void edit_user_validate_error()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inUser = new User();
+            controller.ViewData.ModelState.AddModelError("Error", "No id given");
+
+            //Act
+            var resultat = (ViewResult)controller.EditUser(inUser.UserId);
+
+            //Assert
+            Assert.IsTrue(resultat.ViewData.ModelState.Count == 1);
+            Assert.AreEqual(resultat.ViewData.ModelState["Error"].Errors[0].ErrorMessage, "No id given");
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        [TestMethod]
+        public void edit_user_OK()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var forventetResultat = new User()
+            {
+                UserId = 1,
+                FirstName = "Jon",
+                LastName = "Johnsen",
+                Admin = false,
+                Address = "HeiVeien 1",
+                ZipCode = 3412,
+                DateOfBirth = new System.DateTime(1991, 1, 1)
+            }; 
+
+            //Act
+            var resultat = (ViewResult)controller.EditUser(forventetResultat.UserId);
+
+            //Assert
+            Assert.AreEqual(resultat.ViewName, "");
+        }
+
+        [TestMethod]
+        public void show_alle_ordre()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var forventetResultat = new List<Order>();
+            var order = new Order()
+            {
+                OrderId = 1,
+                UserId = 1,
+                ownerUser = new User() { UserId=1}
+            };
+            forventetResultat.Add(order);
+            forventetResultat.Add(order);
+            forventetResultat.Add(order);
+
+            //Act
+
+            var resultat = (ViewResult)controller.Ordre();
+            var resultatListe = (List<Order>)resultat.Model;
+
+            //Assert
+
+            Assert.AreEqual(resultat.ViewName, "");
+
+            for (var i = 0; i < resultatListe.Count; i++)
+            {
+                Assert.AreEqual(forventetResultat[i].OrderId, resultatListe[i].OrderId);
+                Assert.AreEqual(forventetResultat[i].UserId, resultatListe[i].UserId);
+                Assert.AreEqual(forventetResultat[i].ownerUser.UserId, resultatListe[i].ownerUser.UserId);
+            }
+        }
+
+        /* 
+         [TestMethod]
+         public void remove_order_ok()
+         {
+             //Arrange
+             var stub = new StoreManagerRepositoryStub();
+             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+             var forventetResultat = new List<Order>();
+             var order = new Order()
+             {
+                 OrderId = 1,
+                 UserId = 1,
+                 ownerUser = new User() { UserId = 1 }
+             };
+
+             //Act
+
+             var resultat = (ViewResult)controller.Ordre();
+             var resultatListe = (List<Order>)resultat.Model;
+
+             //Assert
+
+             Assert.AreEqual(resultat.ViewName, "");
+
+             for (var i = 0; i < resultatListe.Count; i++)
+             {
+                 Assert.AreEqual(forventetResultat[i].OrderId, resultatListe[i].OrderId);
+                 Assert.AreEqual(forventetResultat[i].UserId, resultatListe[i].UserId);
+                 Assert.AreEqual(forventetResultat[i].ownerUser.UserId, resultatListe[i].ownerUser.UserId);
+             }
+         }
+         
+        [TestMethod]
+         public void remove_order_not_found()
+         {
+             //Arrange
+             var stub = new StoreManagerRepositoryStub();
+             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+             var forventetResultat = new List<Order>();
+             var order = new Order()
+             {
+                 OrderId = 1,
+                 UserId = 1,
+                 ownerUser = new User() { UserId = 1 }
+             };
+
+             //Act
+
+             var resultat = (ViewResult)controller.SlettOrder(0);
+             var resultatListe = (List<Order>)resultat.Model;
+
+             //Assert
+
+             //Assert.AreEqual(resultat.ViewName, "");
+
+         }*/
     }
 }

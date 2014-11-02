@@ -159,7 +159,24 @@ namespace DAL
             }
             return ok;
         }
-
+        public bool removeOrder(int id)
+        {
+            var ok = true;
+            try
+            {
+                var order = db.getOrder(id);
+                string name = order.OrderId + "";
+                db.Orders.Remove(order);
+                db.SaveChanges();
+                logChange("Database-change: Removed User (" + name + ") from database");
+            }
+            catch (Exception e)
+            {
+                logError(DateTime.Now.ToString() + " " + e.Message + " " + e.InnerException);
+                ok = false;
+            }
+            return ok;
+        }
         private void logError(String message)
         {
             var sw = new System.IO.StreamWriter(fileError, true);
