@@ -469,7 +469,7 @@ namespace Enhetstest
             var stub = new StoreManagerRepositoryStub();
             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-            var forventetResultat = new User()
+            var inUser = new User()
             {
                 UserId = 1,
                 FirstName = "Jon",
@@ -481,12 +481,58 @@ namespace Enhetstest
             }; 
 
             //Act
-            var resultat = (ViewResult)controller.EditUser(forventetResultat.UserId);
+            var resultat = (ViewResult)controller.EditUser(inUser.UserId);
 
             //Assert
             Assert.AreEqual(resultat.ViewName, "");
         }
 
+        [TestMethod]
+        public void delete_user_OK()
+        {
+            //Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inUser = new User()
+            {
+                UserId = 1,
+                FirstName = "Jon",
+                LastName = "Johnsen",
+                Admin = false,
+                Address = "HeiVeien 1",
+                ZipCode = 3412,
+                DateOfBirth = new System.DateTime(1991, 1, 1)
+            }; 
+
+            //Act
+            var resultat = (bool)controller.SlettUser(inUser);
+
+            //Assert
+            Assert.IsTrue(resultat);
+        }
+
+        [TestMethod]
+        public void delete_user_not_found()
+        {
+            // Arrange
+            var stub = new StoreManagerRepositoryStub();
+            var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
+
+            var inUser = new User()
+            {
+                 UserId = 0
+            };
+
+            // Act
+            var resultat = (bool)controller.SlettUser(inUser);
+
+            // Assert
+            Assert.IsFalse(resultat);
+        }
+
+
+        //************************ORDER TESTS****************************
         [TestMethod]
         public void show_alle_ordre()
         {

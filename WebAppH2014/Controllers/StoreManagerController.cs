@@ -137,15 +137,13 @@ namespace WebAppH2014.Controllers
             return View(users);
         }
 
-        public void SlettUser(int id)
+        public bool SlettUser(User user)
         {
-            // denne kalles via et Ajax-kall
-            User user = _userBLL.getUser(id);
             if (user.Admin != true)
             {
-                var ok = _userBLL.removeUser(user);
+                return _userBLL.removeUser(user);
             }
-            // kunne returnert en feil dersom slettingen feilet....
+            return false;
         }
 
         public ActionResult EditUser(int id)
