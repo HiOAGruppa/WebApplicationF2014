@@ -568,7 +568,7 @@ namespace Enhetstest
             }
         }
 
-        /* 
+         
          [TestMethod]
          public void remove_order_ok()
          {
@@ -576,7 +576,6 @@ namespace Enhetstest
              var stub = new StoreManagerRepositoryStub();
              var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-             var forventetResultat = new List<Order>();
              var order = new Order()
              {
                  OrderId = 1,
@@ -586,19 +585,11 @@ namespace Enhetstest
 
              //Act
 
-             var resultat = (ViewResult)controller.Ordre();
-             var resultatListe = (List<Order>)resultat.Model;
+             var resultat = (RedirectToRouteResult)controller.SlettOrder(order.OrderId);
 
              //Assert
-
-             Assert.AreEqual(resultat.ViewName, "");
-
-             for (var i = 0; i < resultatListe.Count; i++)
-             {
-                 Assert.AreEqual(forventetResultat[i].OrderId, resultatListe[i].OrderId);
-                 Assert.AreEqual(forventetResultat[i].UserId, resultatListe[i].UserId);
-                 Assert.AreEqual(forventetResultat[i].ownerUser.UserId, resultatListe[i].ownerUser.UserId);
-             }
+             Assert.AreEqual(resultat.RouteName, "");
+             Assert.AreEqual(resultat.RouteValues.Values.First(), "Ordre");
          }
          
         [TestMethod]
@@ -608,23 +599,20 @@ namespace Enhetstest
              var stub = new StoreManagerRepositoryStub();
              var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-             var forventetResultat = new List<Order>();
              var order = new Order()
              {
-                 OrderId = 1,
-                 UserId = 1,
+                 OrderId = 0,
+                 UserId = 0,
                  ownerUser = new User() { UserId = 1 }
              };
 
              //Act
 
-             var resultat = (ViewResult)controller.SlettOrder(0);
-             var resultatListe = (List<Order>)resultat.Model;
+             var resultat = (ViewResult)controller.SlettOrder(order.OrderId);
 
              //Assert
+             Assert.AreEqual(resultat.ViewName, "Error");
 
-             //Assert.AreEqual(resultat.ViewName, "");
-
-         }*/
+         }
     }
 }
