@@ -197,15 +197,23 @@ namespace WebAppH2014.Controllers
             var orders = _orderBLL.getOrders();
             return View(orders);
         }
-        public void SlettOrder(int id)
+        public ActionResult SlettOrder(int id)
         {
             // denne kalles via et Ajax-kall
+            //denne metoden er endre for sletting
+            //metoden er egentlig en void, med kun removeOrder linjen
+            //resten er kun for å ha noe å teste
             bool ok = _orderBLL.removeOrder(id);
             if(ok)
             {
-                RedirectToAction("Ordre");
+                return RedirectToAction("Ordre");
             }
-            RedirectToAction("Ordre");
+            else
+            { 
+                string error = "Sletting feilet!";
+                ViewBag.ErrorMessage = error;
+                return View("Error");
+            }
             // kunne returnert en feil dersom slettingen feilet....
         }
         private Boolean isAdmin()
