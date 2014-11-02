@@ -122,24 +122,12 @@ namespace WebAppH2014.Controllers
         //
         // POST: /StoreManager/Delete/5
 
-        public void Slett(int id)
+        public bool Slett(int id)
         {
             // denne kalles via et Ajax-kall
             SalesItem item = _itemBLL.findSalesItem(id);
-            var ok = _itemBLL.removeSalesItem(item);
+            return _itemBLL.removeSalesItem(item);
             // kunne returnert en feil dersom slettingen feilet....
-        }
-
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(SalesItem item)
-        {
-            var ok = _itemBLL.removeSalesItem(item);
-            if (ok)
-                return RedirectToAction("Index"); 
-            else
-                return View();
-
         }
 
         public ActionResult Kunder()
@@ -202,6 +190,8 @@ namespace WebAppH2014.Controllers
             }
             return RedirectToAction("Kunder");
         }
+
+
         public ActionResult Ordre()
         {
             var orders = _orderBLL.getOrders();
@@ -216,8 +206,10 @@ namespace WebAppH2014.Controllers
         }
         private Boolean isAdmin()
         {
-            //FOR TESTING
+            //RETURN TRUE FOR TESTING 
             return true;
+
+            //Comment out for testing
             /*if (isLoggedIn())
             {
                 int userId = (int)Session["UserId"];
