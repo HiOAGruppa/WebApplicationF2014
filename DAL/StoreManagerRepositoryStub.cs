@@ -7,7 +7,7 @@ namespace DAL
     {
         public bool addSalesItem(SalesItem item)
         {
-            if (item.Name == "")
+            if (item.SalesItemId == 0)
             {
                 return false;
             }
@@ -19,7 +19,7 @@ namespace DAL
 
         public bool removeSalesItem(SalesItem item)
         {
-            if (item.Name == "")
+            if (item.SalesItemId == 0)
             {
                 return false;
             }

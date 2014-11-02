@@ -14,6 +14,11 @@ namespace Enhetstest
     [TestClass]
     public class StoreManagerControllerTest
     {
+
+        /*
+         * Her tester vi metoder som har med storemanagercontroller (Altså Admindelen) å gjøre.
+         */
+
         /*[SetUp]
         public void SetUp()
         {
@@ -27,6 +32,8 @@ namespace Enhetstest
             HttpContext.Current = null;
         }*/
 
+        
+        //************************SALES ITEM TESTS****************************
         [TestMethod]
         public void show_alle_items()
         {
@@ -297,13 +304,14 @@ namespace Enhetstest
             Assert.AreEqual(resultat.ViewName, "");
         }
 
-        public void show_delete_item_view()
+        [TestMethod]
+        public void delete_item_OK()
         {
             //Arrange
             var stub = new StoreManagerRepositoryStub();
             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-            var forventetResultat = new SalesItem()
+           var inItem = new SalesItem()
             {
                 SalesItemId = 1,
                 Price = new decimal(100.0),
@@ -316,39 +324,33 @@ namespace Enhetstest
             };
 
             //Act
-            var resultat = (ViewResult)controller.Edit(1);
-            var resultatItem = (SalesItem)resultat.Model;
+            var resultat = (bool)controller.Slett(inItem.SalesItemId);
 
             //Assert
-            Assert.AreEqual(resultat.ViewName, "");
-
-            Assert.AreEqual(forventetResultat.SalesItemId, resultatItem.SalesItemId);
-            Assert.AreEqual(forventetResultat.Price, resultatItem.Price);
-            Assert.AreEqual(forventetResultat.Name, resultatItem.Name);
-            Assert.AreEqual(forventetResultat.Description, resultatItem.Description);
-            Assert.AreEqual(forventetResultat.InStock, resultatItem.InStock);
-            Assert.AreEqual(forventetResultat.GenreId, resultatItem.GenreId);
-            Assert.AreEqual(forventetResultat.ImageUrl, resultatItem.ImageUrl);
+            Assert.IsTrue(resultat);
         }
 
-        [TestMethod]
-        public void delete_item_OK()
+         [TestMethod]
+        public void delete_item_not_found()
         {
-            //Arrange
+            // Arrange
             var stub = new StoreManagerRepositoryStub();
             var controller = new StoreManagerController(new SalesItemBLL(stub), new UserBLL(stub), new OrderBLL(stub), new GenreBLL(stub));
 
-            var inItem = new SalesItem();
-            inItem.SalesItemId = 1;
+            var inItem = new SalesItem()
+            {
+                SalesItemId = 0
+            };
 
-            //Act
-            var resultat = (RedirectToRouteResult)controller.DeleteConfirmed(inItem.SalesItemId);
+            // Act
+            var resultat = (bool)controller.Slett(inItem.SalesItemId);
 
-            //Assert
-            Assert.AreEqual(resultat.RouteName, "");
-            Assert.AreEqual(resultat.RouteValues.Values.First(), "Index");
+            // Assert
+            Assert.IsFalse(resultat);
         }
 
+
+        //************************USER TESTS****************************
         [TestMethod]
         public void show_alle_kunder()
         {
@@ -404,7 +406,6 @@ namespace Enhetstest
                 UserId = 1,
                 FirstName = "Jon",
                 LastName = "Johnsen",
-                Admin = false,
                 Address = "HeiVeien 1",
                 ZipCode = 3412,
                 DateOfBirth = new System.DateTime(1991, 1, 1)
@@ -421,7 +422,6 @@ namespace Enhetstest
             Assert.AreEqual(forventetResultat.UserId, resultatItem.UserId);
             Assert.AreEqual(forventetResultat.FirstName, resultatItem.FirstName);
             Assert.AreEqual(forventetResultat.LastName, resultatItem.LastName);
-            //Assert.AreEqual(forventetResultat.Admin, resultatItem.Admin);
             Assert.AreEqual(forventetResultat.Address, resultatItem.Address);
             Assert.AreEqual(forventetResultat.ZipCode, resultatItem.ZipCode);
             Assert.AreEqual(forventetResultat.DateOfBirth, resultatItem.DateOfBirth);
